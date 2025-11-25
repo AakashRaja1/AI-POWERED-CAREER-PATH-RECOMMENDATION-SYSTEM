@@ -1,0 +1,15 @@
+{
+  "n_rows": 10000,
+  "trained_classifier": "rf",
+  "classifier_score": 0.9991000000000001,
+  "classifier_std": 0.0007348469228349572,
+  "settings": {
+    "quick_mode": false,
+    "n_estimators": 200,
+    "cv_folds": 5,
+    "max_features": 2000
+  },
+  "trained_regressor": "gbr",
+  "regressor_mse": 0.013929746777572066,
+  "regressor_std": 0.0004080179396841271
+}
