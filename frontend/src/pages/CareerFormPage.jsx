@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import CareerForm from "../assets/components/CareerForm";
 import ResumeUploadForm from "../assets/components/ResumeUploadForm"; // Import the new component
 import ResultPage from "./ResultPage";
+import Loader from "../assets/components/Loader"; // Import the loader
 
 const CareerFormPage = ({ setResult }) => {
   const [loading, setLoading] = useState(false);
@@ -10,23 +11,27 @@ const CareerFormPage = ({ setResult }) => {
   const handleFormSubmit = async (formData) => {
     setLoading(true);
     const token = localStorage.getItem("token");
-    try {
-      const response = await fetch("http://127.0.0.1:8000/predict", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(formData),
-      });
 
+    const fetchPromise = fetch("http://127.0.0.1:8000/predict", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(formData),
+    }).then(async (response) => {
       if (!response.ok) {
         const errorText = await response.text();
         console.error("Server error details:", errorText);
         throw new Error(`Server error: ${response.status} - ${errorText}`);
       }
+      return response.json();
+    });
 
-      const data = await response.json();
+    const timeoutPromise = new Promise((resolve) => setTimeout(resolve, 5000));
+
+    try {
+      const [data] = await Promise.all([fetchPromise, timeoutPromise]);
       setResult(data);
       window.location.hash = "#/result";
     } catch (error) {
@@ -43,27 +48,32 @@ const CareerFormPage = ({ setResult }) => {
     const formData = new FormData();
     formData.append("file", file);
 
-    try {
-      const response = await fetch("http://127.0.0.1:8000/predict-resume", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      });
-
+    const fetchPromise = fetch("http://127.0.0.1:8000/predict-resume", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    }).then(async (response) => {
       if (!response.ok) {
         const errorText = await response.text();
         console.error("Server error details:", errorText);
         throw new Error(`Server error: ${response.status} - ${errorText}`);
       }
+      return response.json();
+    });
 
-      const data = await response.json();
+    const timeoutPromise = new Promise((resolve) => setTimeout(resolve, 5000));
+
+    try {
+      const [data] = await Promise.all([fetchPromise, timeoutPromise]);
       setResult(data);
       window.location.hash = "#/result";
     } catch (error) {
       console.error("Resume prediction failed:", error);
-      alert("Failed to get prediction from resume. Please check the file or backend.");
+      alert(
+        "Failed to get prediction from resume. Please check the file or backend."
+      );
     } finally {
       setLoading(false);
     }
@@ -71,6 +81,7 @@ const CareerFormPage = ({ setResult }) => {
 
   return (
     <div className="relative min-h-screen bg-linear-to-b from-neutral-950 via-neutral-900 to-black text-gray-100 font-poppins flex flex-col items-center justify-center overflow-hidden">
+      {loading && <Loader />}
       {/* Background AI Effect */}
       <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-10"></div>
       <div className="absolute inset-0 bg-linear-to-b from-black/80 via-neutral-900/70 to-black"></div>
@@ -112,12 +123,6 @@ const CareerFormPage = ({ setResult }) => {
           <CareerForm onSubmit={handleFormSubmit} loading={loading} />
         ) : (
           <ResumeUploadForm onSubmit={handleResumeSubmit} loading={loading} />
-        )}
-
-        {loading && (
-          <p className="text-blue-400 font-semibold mt-6 text-center animate-pulse">
-            ⏳ Predicting your career path...
-          </p>
         )}
       </div>
 
