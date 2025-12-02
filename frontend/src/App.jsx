@@ -9,6 +9,7 @@ import CareerFormPage from "./pages/CareerFormPage";
 import ResultPage from "./pages/ResultPage";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
+import Chatbot from "./pages/Chatbot"; // <- import chatbot page
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
@@ -16,7 +17,7 @@ const App = () => {
 
   return (
     <Router>
-      <div className="bg-neutral-950 text-gray-100 font-poppins min-h-screen">
+      <div className="bg-white text-gray-900 font-poppins min-h-screen">
         <Routes>
           {/* ===== Home Page ===== */}
           <Route path="/" element={<Home />} />
@@ -48,6 +49,16 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <ResultPage result={result} />
+              </ProtectedRoute>
+            } 
+          />
+
+          {/* ===== Chatbot Page ===== */}
+          <Route 
+            path="/chatbot" 
+            element={
+              <ProtectedRoute>
+                <Chatbot />
               </ProtectedRoute>
             } 
           />

@@ -5,6 +5,7 @@ from app.api.routers.items import router as items_router
 from app.api.routers.auth import router as auth_router
 from app.api.routers.admin import router as admin_router
 from app.database.init_db import init_db
+from chatbot.routes import router as chatbot_router
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -33,6 +34,7 @@ app.add_middleware(
 app.include_router(items_router)
 app.include_router(auth_router)
 app.include_router(admin_router)
+app.include_router(chatbot_router, prefix="/chatbot")
 
 @app.get("/")
 def root():

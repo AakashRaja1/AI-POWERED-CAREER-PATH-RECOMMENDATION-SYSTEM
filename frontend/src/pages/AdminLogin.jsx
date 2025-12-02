@@ -67,24 +67,24 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-linear-to-b from-neutral-950 via-neutral-900 to-black text-gray-100 font-poppins flex items-center justify-center overflow-hidden px-4">
+    <div className="relative min-h-screen bg-linear-to-b from-white via-gray-100 to-white text-gray-900 font-poppins flex items-center justify-center overflow-hidden px-4">
       <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-10"></div>
-      <div className="absolute inset-0 bg-linear-to-b from-black/80 via-neutral-900/70 to-black"></div>
+      <div className="absolute inset-0 bg-linear-to-b from-white/80 via-gray-100/70 to-white"></div>
 
-      <div className="relative z-10 w-full max-w-md bg-neutral-900/70 backdrop-blur-lg border border-neutral-700 rounded-2xl p-8 shadow-lg shadow-black/40">
-        <h2 className="text-4xl font-extrabold mb-2 text-center text-red-400 drop-shadow-[0_0_8px_rgba(239,68,68,0.6)]">
+      <div className="relative z-10 w-full max-w-md bg-white/90 backdrop-blur-lg border border-gray-200 rounded-2xl p-8 shadow-lg shadow-gray-400/40">
+        <h2 className="text-4xl font-extrabold mb-2 text-center text-red-500 drop-shadow-[0_0_8px_rgba(239,68,68,0.6)]">
           Admin Login
         </h2>
-        <p className="text-center text-gray-400 text-sm mb-8">
+        <p className="text-center text-gray-500 text-sm mb-8">
           Access admin dashboard
         </p>
         <form onSubmit={handleAdminLogin} className="space-y-6">
           <div>
-            <label htmlFor="email" className="block text-gray-400 font-medium mb-2">
+            <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
               Admin Email
             </label>
             <input
-              className="w-full bg-neutral-800/80 text-gray-100 p-3 rounded-xl border border-neutral-700 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/50 transition-all duration-300"
+              className="w-full bg-white text-gray-900 p-3 rounded-xl border border-gray-300 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/50 transition-all duration-300"
               type="email"
               id="email"
               value={email}
@@ -94,11 +94,11 @@ const AdminLogin = () => {
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-gray-400 font-medium mb-2">
+            <label htmlFor="password" className="block text-gray-700 font-medium mb-2">
               Password
             </label>
             <input
-              className="w-full bg-neutral-800/80 text-gray-100 p-3 rounded-xl border border-neutral-700 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/50 transition-all duration-300"
+              className="w-full bg-white text-gray-900 p-3 rounded-xl border border-gray-300 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/50 transition-all duration-300"
               type="password"
               id="password"
               value={password}
@@ -119,8 +119,8 @@ const AdminLogin = () => {
           </button>
         </form>
 
-        <p className="text-center text-gray-400 mt-6">
-          <a href="#/" className="text-blue-400 hover:text-blue-500 font-medium transition">
+        <p className="text-center text-gray-500 mt-6">
+          <a href="#/" className="text-blue-600 hover:text-blue-700 font-medium transition">
             ← Back to Home
           </a>
         </p>

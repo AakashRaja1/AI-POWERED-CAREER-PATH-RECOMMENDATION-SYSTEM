@@ -47,26 +47,26 @@ const Login = ({ setLoggedIn = () => {} }) => {
   };
 
   return (
-    <div className="relative min-h-screen bg-linear-to-b from-neutral-950 via-neutral-900 to-black text-gray-100 font-poppins flex items-center justify-center overflow-hidden px-4">
+    <div className="relative min-h-screen bg-linear-to-b from-white via-gray-100 to-white text-gray-900 font-poppins flex items-center justify-center overflow-hidden px-4">
       {/* Background AI Theme */}
       <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-10"></div>
-      <div className="absolute inset-0 bg-linear-to-b from-black/80 via-neutral-900/70 to-black"></div>
+      <div className="absolute inset-0 bg-linear-to-b from-white/80 via-gray-100/70 to-white"></div>
 
       {/* Login Box */}
-      <div className="relative z-10 w-full max-w-md bg-neutral-900/70 backdrop-blur-lg border border-neutral-700 rounded-2xl p-8 shadow-lg shadow-black/40 animate-fadeIn">
-        <h2 className="text-4xl font-extrabold mb-8 text-center text-blue-400 drop-shadow-[0_0_8px_rgba(59,130,246,0.6)]">
+      <div className="relative z-10 w-full max-w-md bg-white/90 backdrop-blur-lg border border-gray-200 rounded-2xl p-8 shadow-lg shadow-gray-400/40 animate-fadeIn">
+        <h2 className="text-4xl font-extrabold mb-8 text-center text-blue-600 drop-shadow-[0_0_8px_rgba(59,130,246,0.6)]">
           Welcome Back
         </h2>
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
             <label
               htmlFor="email"
-              className="block text-gray-400 font-medium mb-2"
+              className="block text-gray-700 font-medium mb-2"
             >
               Email
             </label>
             <input
-              className="w-full bg-neutral-800/80 text-gray-100 p-3 rounded-xl border border-neutral-700 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 transition-all duration-300"
+              className="w-full bg-white text-gray-900 p-3 rounded-xl border border-gray-300 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 transition-all duration-300"
               type="email"
               id="email"
               value={email}
@@ -78,12 +78,12 @@ const Login = ({ setLoggedIn = () => {} }) => {
           <div>
             <label
               htmlFor="password"
-              className="block text-gray-400 font-medium mb-2"
+              className="block text-gray-700 font-medium mb-2"
             >
               Password
             </label>
             <input
-              className="w-full bg-neutral-800/80 text-gray-100 p-3 rounded-xl border border-neutral-700 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 transition-all duration-300"
+              className="w-full bg-white text-gray-900 p-3 rounded-xl border border-gray-300 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 transition-all duration-300"
               type="password"
               id="password"
               value={password}
@@ -100,22 +100,20 @@ const Login = ({ setLoggedIn = () => {} }) => {
             🔐 Login
           </button>
         </form>
-
-        <p className="text-center text-gray-400 mt-6">
+        <p className="text-center text-gray-500 mt-6">
           Don’t have an account?{" "}
           <a
             href="#/register"
-            className="text-blue-400 hover:text-blue-500 font-medium transition"
+            className="text-blue-600 hover:text-blue-700 font-medium transition"
           >
             Register
           </a>
         </p>
       </div>
-
       {/* Footer */}
       <div className="absolute bottom-4 text-gray-500 text-sm tracking-wide">
         Secured by{" "}
-        <span className="text-blue-400 font-semibold">AI CareerPath</span>
+        <span className="text-blue-600 font-semibold">AI CareerPath</span>
       </div>
     </div>
   );

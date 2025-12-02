@@ -138,27 +138,27 @@ const AdminDashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-neutral-900 text-gray-100 flex items-center justify-center">
+      <div className="min-h-screen bg-white text-gray-900 flex items-center justify-center">
         <p className="text-xl">Loading...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-neutral-900 text-gray-100 font-poppins">
+    <div className="min-h-screen bg-white text-gray-900 font-poppins">
       {/* Navbar */}
-      <nav className="bg-neutral-800 border-b border-neutral-700 px-8 py-4 flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-red-400">🔐 Admin Dashboard</h1>
+      <nav className="bg-gray-100 border-b border-gray-200 px-8 py-4 flex justify-between items-center">
+        <h1 className="text-2xl font-bold text-red-500">🔐 Admin Dashboard</h1>
         <div className="flex gap-4">
           <button
             onClick={fetchData}
-            className="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-lg"
+            className="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-lg text-white"
           >
             Refresh
           </button>
           <button
             onClick={handleLogout}
-            className="bg-neutral-700 hover:bg-neutral-600 px-4 py-2 rounded-lg"
+            className="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg text-gray-900"
           >
             Logout
           </button>
@@ -166,13 +166,13 @@ const AdminDashboard = () => {
       </nav>
 
       {/* Tabs */}
-      <div className="flex border-b border-neutral-700">
+      <div className="flex border-b border-gray-200">
         <button
           onClick={() => setActiveTab("users")}
           className={`px-8 py-4 font-semibold ${
             activeTab === "users"
-              ? "bg-neutral-800 text-blue-400 border-b-2 border-blue-400"
-              : "text-gray-400 hover:text-gray-200"
+              ? "bg-gray-100 text-blue-600 border-b-2 border-blue-600"
+              : "text-gray-500 hover:text-gray-900"
           }`}
         >
           Users ({users.length})
@@ -181,8 +181,8 @@ const AdminDashboard = () => {
           onClick={() => setActiveTab("predictions")}
           className={`px-8 py-4 font-semibold ${
             activeTab === "predictions"
-              ? "bg-neutral-800 text-blue-400 border-b-2 border-blue-400"
-              : "text-gray-400 hover:text-gray-200"
+              ? "bg-gray-100 text-blue-600 border-b-2 border-blue-600"
+              : "text-gray-500 hover:text-gray-900"
           }`}
         >
           Predictions ({predictions.length})
@@ -192,12 +192,12 @@ const AdminDashboard = () => {
       {/* Content */}
       <div className="p-8">
         {activeTab === "users" && (
-          <div className="bg-neutral-800 rounded-lg p-6">
+          <div className="bg-gray-100 rounded-lg p-6">
             <h2 className="text-2xl font-bold mb-4">All Users</h2>
             <div className="overflow-x-auto">
               <table className="w-full text-left">
                 <thead>
-                  <tr className="border-b border-neutral-700">
+                  <tr className="border-b border-gray-200">
                     <th className="p-3">ID</th>
                     <th className="p-3">Full Name</th>
                     <th className="p-3">Email</th>
@@ -207,7 +207,7 @@ const AdminDashboard = () => {
                 </thead>
                 <tbody>
                   {users.map((user) => (
-                    <tr key={user.id} className="border-b border-neutral-700">
+                    <tr key={user.id} className="border-b border-gray-200">
                       <td className="p-3">{user.id}</td>
                       <td className="p-3">
                         {editingUser?.id === user.id ? (
@@ -217,7 +217,7 @@ const AdminDashboard = () => {
                             onBlur={(e) => {
                               handleUpdateUser(user.id, e.target.value, user.email);
                             }}
-                            className="bg-neutral-700 px-2 py-1 rounded"
+                            className="bg-white px-2 py-1 rounded border border-gray-300"
                           />
                         ) : (
                           user.full_name
@@ -231,7 +231,7 @@ const AdminDashboard = () => {
                             onBlur={(e) => {
                               handleUpdateUser(user.id, user.full_name, e.target.value);
                             }}
-                            className="bg-neutral-700 px-2 py-1 rounded"
+                            className="bg-white px-2 py-1 rounded border border-gray-300"
                           />
                         ) : (
                           user.email
@@ -244,13 +244,13 @@ const AdminDashboard = () => {
                             onClick={() =>
                               setEditingUser(editingUser?.id === user.id ? null : user)
                             }
-                            className="bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded text-sm"
+                            className="bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded text-sm text-white"
                           >
                             {editingUser?.id === user.id ? "Cancel" : "Edit"}
                           </button>
                           <button
                             onClick={() => handleDeleteUser(user.id)}
-                            className="bg-red-500 hover:bg-red-600 px-3 py-1 rounded text-sm"
+                            className="bg-red-500 hover:bg-red-600 px-3 py-1 rounded text-sm text-white"
                           >
                             Delete
                           </button>
@@ -265,12 +265,12 @@ const AdminDashboard = () => {
         )}
 
         {activeTab === "predictions" && (
-          <div className="bg-neutral-800 rounded-lg p-6">
+          <div className="bg-gray-100 rounded-lg p-6">
             <h2 className="text-2xl font-bold mb-4">All Predictions</h2>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm">
                 <thead>
-                  <tr className="border-b border-neutral-700">
+                  <tr className="border-b border-gray-200">
                     <th className="p-3">ID</th>
                     <th className="p-3">User ID</th>
                     <th className="p-3">Career Domain</th>
@@ -280,7 +280,7 @@ const AdminDashboard = () => {
                 </thead>
                 <tbody>
                   {predictions.map((pred) => (
-                    <tr key={pred.id} className="border-b border-neutral-700">
+                    <tr key={pred.id} className="border-b border-gray-200">
                       <td className="p-3">{pred.id}</td>
                       <td className="p-3">{pred.user_id}</td>
                       <td className="p-3">{pred.best_fit_career_domain}</td>
@@ -289,19 +289,19 @@ const AdminDashboard = () => {
                         <div className="flex gap-2">
                           <button
                             onClick={() => setShowPredictionDetails(showPredictionDetails === pred.id ? null : pred.id)}
-                            className="bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded text-sm"
+                            className="bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded text-sm text-white"
                           >
                             {showPredictionDetails === pred.id ? "Hide" : "View"}
                           </button>
                           <button
                             onClick={() => setEditingPrediction(editingPrediction?.id === pred.id ? null : pred)}
-                            className="bg-yellow-500 hover:bg-yellow-600 px-3 py-1 rounded text-sm"
+                            className="bg-yellow-500 hover:bg-yellow-600 px-3 py-1 rounded text-sm text-white"
                           >
                             {editingPrediction?.id === pred.id ? "Cancel" : "Edit"}
                           </button>
                           <button
                             onClick={() => handleDeletePrediction(pred.id)}
-                            className="bg-red-500 hover:bg-red-600 px-3 py-1 rounded text-sm"
+                            className="bg-red-500 hover:bg-red-600 px-3 py-1 rounded text-sm text-white"
                           >
                             Delete
                           </button>
@@ -315,7 +315,7 @@ const AdminDashboard = () => {
               {/* Prediction Details Modal */}
               {showPredictionDetails && predictions.find(p => p.id === showPredictionDetails) && (
                 <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-                  <div className="bg-neutral-800 rounded-lg p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+                  <div className="bg-white rounded-lg p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto">
                     <h3 className="text-xl font-bold mb-4">Prediction Details</h3>
                     {(() => {
                       const pred = predictions.find(p => p.id === showPredictionDetails);
@@ -336,7 +336,7 @@ const AdminDashboard = () => {
                     })()}
                     <button
                       onClick={() => setShowPredictionDetails(null)}
-                      className="mt-4 bg-neutral-700 hover:bg-neutral-600 px-4 py-2 rounded"
+                      className="mt-4 bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded text-gray-900"
                     >
                       Close
                     </button>

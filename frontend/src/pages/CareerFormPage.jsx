@@ -80,28 +80,28 @@ const CareerFormPage = ({ setResult }) => {
   };
 
   return (
-    <div className="relative min-h-screen bg-linear-to-b from-neutral-950 via-neutral-900 to-black text-gray-100 font-poppins flex flex-col items-center justify-center overflow-hidden">
+    <div className="relative min-h-screen bg-linear-to-b from-white via-gray-100 to-white text-gray-900 font-poppins flex flex-col items-center justify-center overflow-hidden">
       {loading && <Loader />}
       {/* Background AI Effect */}
       <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-10"></div>
-      <div className="absolute inset-0 bg-linear-to-b from-black/80 via-neutral-900/70 to-black"></div>
+      <div className="absolute inset-0 bg-linear-to-b from-white/80 via-gray-100/70 to-white"></div>
 
       {/* Page Title */}
-      <h1 className="relative z-10 text-4xl sm:text-5xl font-extrabold mb-8 text-center text-blue-400 drop-shadow-[0_0_8px_rgba(59,130,246,0.6)] animate-fadeIn">
+      <h1 className="relative z-10 text-4xl sm:text-5xl font-extrabold mb-8 text-center text-blue-600 drop-shadow-[0_0_8px_rgba(59,130,246,0.6)] animate-fadeIn">
         AI Career Path Finder
       </h1>
 
       {/* Form Section */}
-      <div className="relative z-10 w-full max-w-3xl bg-neutral-900/70 backdrop-blur-md border border-neutral-700 rounded-2xl p-8 shadow-xl shadow-black/40 animate-slideUp">
+      <div className="relative z-10 w-full max-w-3xl bg-white/90 backdrop-blur-md border border-gray-200 rounded-2xl p-8 shadow-xl shadow-gray-400/40 animate-slideUp">
         {/* Toggle Switch */}
         <div className="flex justify-center mb-6">
-          <div className="flex items-center bg-neutral-800 rounded-full p-1">
+          <div className="flex items-center bg-gray-100 rounded-full p-1">
             <button
               onClick={() => setFormType("form")}
               className={`px-4 py-2 text-sm font-semibold rounded-full transition-colors ${
                 formType === "form"
                   ? "bg-blue-600 text-white"
-                  : "bg-transparent text-gray-400 hover:bg-neutral-700"
+                  : "bg-transparent text-gray-600 hover:bg-gray-200"
               }`}
             >
               Fill Form
@@ -111,7 +111,7 @@ const CareerFormPage = ({ setResult }) => {
               className={`px-4 py-2 text-sm font-semibold rounded-full transition-colors ${
                 formType === "resume"
                   ? "bg-blue-600 text-white"
-                  : "bg-transparent text-gray-400 hover:bg-neutral-700"
+                  : "bg-transparent text-gray-600 hover:bg-gray-200"
               }`}
             >
               Upload Resume
@@ -129,7 +129,7 @@ const CareerFormPage = ({ setResult }) => {
       {/* Footer or Background Detail */}
       <div className="absolute bottom-4 text-gray-500 text-sm tracking-wide">
         Empowered by{" "}
-        <span className="text-blue-400 font-semibold">AI Intelligence</span>
+        <span className="text-blue-600 font-semibold">AI Intelligence</span>
       </div>
     </div>
   );
