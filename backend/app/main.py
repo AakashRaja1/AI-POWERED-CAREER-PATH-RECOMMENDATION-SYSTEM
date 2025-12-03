@@ -25,12 +25,13 @@ def on_startup():
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Adjust as needed for your frontend URL
+    allow_origins=["http://localhost:5173","http://localhost:5174"],  # Adjust as needed for your frontend URL
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# Include routers
 app.include_router(items_router)
 app.include_router(auth_router)
 app.include_router(admin_router)
