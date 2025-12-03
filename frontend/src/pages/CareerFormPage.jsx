@@ -627,7 +627,7 @@ const MultiPageCareerForm = ({ onSubmit, loading }) => {
       {/* Progress Bar */}
       <div className="w-full bg-gray-200 rounded-full h-2 mb-8">
         <div
-          className="bg-gradient-to-r from-blue-600 to-purple-600 h-2 rounded-full transition-all duration-500"
+          className="bg-linear-to-r from-blue-600 to-purple-600 h-2 rounded-full transition-all duration-500"
           style={{ width: `${(currentPage / 4) * 100}%` }}
         ></div>
       </div>
@@ -1039,7 +1039,7 @@ const MultiPageCareerForm = ({ onSubmit, loading }) => {
           <button
             type="button"
             onClick={handleNext}
-            className="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold hover:shadow-lg transition"
+            className="px-6 py-3 rounded-xl bg-linear-to-r from-blue-600 to-purple-600 text-white font-semibold hover:shadow-lg transition"
           >
             Next →
           </button>
@@ -1047,7 +1047,7 @@ const MultiPageCareerForm = ({ onSubmit, loading }) => {
           <button
             type="submit"
             disabled={loading || formData.interestsSelected.size === 0}
-            className="px-6 py-3 rounded-xl bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition"
+            className="px-6 py-3 rounded-xl bg-linear-to-r from-green-600 to-emerald-600 text-white font-semibold hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition"
           >
             {loading ? "Submitting..." : "Get Recommendation"}
           </button>
@@ -1158,26 +1158,23 @@ const CareerFormPage = ({ setResult }) => {
   };
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 overflow-hidden">
+    <div className="relative min-h-screen bg-linear-to-br from-blue-50 via-purple-50 to-pink-50 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 -left-20 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-20 -right-20 w-96 h-96 bg-purple-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
-
       {loading && <Loader />}
-
       <div className="relative z-10 px-4 py-8 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="max-w-3xl mx-auto mb-8 text-center">
-          <h1 className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
+          <h1 className="text-4xl sm:text-5xl font-extrabold bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
             Discover Your Career Path
           </h1>
           <p className="text-gray-600 text-lg">
             Interactive questionnaire powered by AI
           </p>
         </div>
-
         {/* Toggle */}
         <div className="max-w-3xl mx-auto mb-8 flex justify-center">
           <div className="flex items-center bg-white rounded-full p-1 shadow-lg border border-gray-200">

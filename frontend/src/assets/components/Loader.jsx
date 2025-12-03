@@ -2,7 +2,7 @@ import React from "react";
 
 const Loader = () => {
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-linear-to-br from-blue-50 via-purple-50 to-pink-50 flex items-center justify-center z-50">
       {/* Background blur */}
       <div className="absolute inset-0 backdrop-blur-sm"></div>
 
@@ -18,7 +18,7 @@ const Loader = () => {
             <div className="absolute inset-2 rounded-full border-4 border-transparent border-t-purple-600 border-r-pink-600 animate-spin" style={{ animationDirection: "reverse", animationDuration: "2s" }}></div>
             
             {/* Center circle with gradient */}
-            <div className="absolute inset-4 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center">
+            <div className="absolute inset-4 rounded-full bg-linear-to-r from-blue-600 to-purple-600 flex items-center justify-center">
               <div className="text-white text-2xl sm:text-3xl animate-bounce">🚀</div>
             </div>
           </div>
@@ -26,7 +26,7 @@ const Loader = () => {
 
         {/* Loading text */}
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">
-          <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
             Analyzing Your Profile
           </span>
         </h2>
@@ -43,7 +43,7 @@ const Loader = () => {
 
         {/* Progress bar */}
         <div className="mt-8 w-64 sm:w-80 h-1 bg-gray-200 rounded-full overflow-hidden">
-          <div className="h-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 animate-pulse" style={{ width: "100%", animation: "pulse 2s ease-in-out infinite" }}></div>
+          <div className="h-full bg-linear-to-r from-blue-600 via-purple-600 to-pink-600 animate-pulse" style={{ width: "100%", animation: "pulse 2s ease-in-out infinite" }}></div>
         </div>
 
         {/* Loading message */}

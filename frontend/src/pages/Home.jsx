@@ -23,7 +23,7 @@ const Home = () => {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen bg-linear-to-br from-blue-50 via-purple-50 to-pink-50 overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img
@@ -32,18 +32,18 @@ const Home = () => {
           className="w-full h-full object-cover"
         />
         {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/80 via-purple-900/70 to-pink-900/80"></div>
+        <div className="absolute inset-0 bg-linear-to-br from-blue-900/80 via-purple-900/70 to-pink-900/80"></div>
         {/* Animated gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+        <div className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent"></div>
       </div>
 
       {/* Content */}
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-16 sm:px-6 lg:px-8">
         {/* Hero Section */}
         <div className="text-center max-w-4xl mx-auto animate-fadeIn">
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white mb-6 drop-shadow-2xl">
+          <h1 className="text-4xl sm:text-5xl font-extrabold bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6 drop-shadow-2xl">
             Discover Your Perfect
-            <span className="block text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text mt-2">
+            <span className="block text-transparent bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text mt-2">
               Career Path
             </span>
           </h1>
@@ -56,12 +56,12 @@ const Home = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12">
             <a
               href="#/register"
-              className="group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-10 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-blue-500/50 w-full sm:w-auto"
+              className="group bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-10 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-blue-500/50 w-full sm:w-auto"
             >
               <span className="flex items-center justify-center gap-2">
-                Get Started 
+                Get Started
                 <span className="group-hover:translate-x-1 transition-transform">
-                  →
+                  &rarr;
                 </span>
               </span>
             </a>

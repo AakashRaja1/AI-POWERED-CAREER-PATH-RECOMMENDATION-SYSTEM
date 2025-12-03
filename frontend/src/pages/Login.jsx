@@ -60,7 +60,7 @@ const Login = ({ setLoggedIn = () => {} }) => {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen bg-linear-to-br from-blue-50 via-purple-50 to-pink-50 overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img
@@ -68,14 +68,14 @@ const Login = ({ setLoggedIn = () => {} }) => {
           alt="Career Success"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/80 via-purple-900/70 to-pink-900/80"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+        <div className="absolute inset-0 bg-linear-to-br from-blue-900/80 via-purple-900/70 to-pink-900/80"></div>
+        <div className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent"></div>
       </div>
 
       {/* Content */}
       <div className="relative z-10 min-h-screen flex items-center justify-center px-4 py-16">
         <form onSubmit={handleLogin} className="bg-white/90 backdrop-blur-md p-8 rounded-2xl shadow-2xl w-full max-w-md space-y-4 animate-slideUp">
-          <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-3xl sm:text-4xl font-extrabold bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
             Welcome Back
           </h2>
 
@@ -115,7 +115,7 @@ const Login = ({ setLoggedIn = () => {} }) => {
 
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-3 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-[1.02] shadow-lg"
+            className="w-full py-3 rounded-lg bg-linear-to-r from-blue-600 to-purple-600 text-white font-semibold hover:shadow-lg transition"
           >
             Login
           </button>
