@@ -59,7 +59,7 @@ const Home = () => {
               className="group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-10 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-blue-500/50 w-full sm:w-auto"
             >
               <span className="flex items-center justify-center gap-2">
-                Get Started Free
+                Get Started 
                 <span className="group-hover:translate-x-1 transition-transform">
                   →
                 </span>

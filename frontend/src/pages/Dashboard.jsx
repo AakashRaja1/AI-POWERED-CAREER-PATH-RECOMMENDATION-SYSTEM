@@ -47,18 +47,36 @@ const Dashboard = () => {
       </div>
 
       <div className="relative z-10 px-4 py-8 sm:px-6 lg:px-8">
-        {/* Main Heading - NEW */}
-        <div className="max-w-7xl mx-auto mb-6 text-center">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
-            Right Career Bright Future
-          </h1>
-          <p className="text-gray-600 text-lg">Your personalized career guidance dashboard</p>
+        {/* Project Banner Section */}
+        <div className="max-w-7xl mx-auto mb-8">
+          <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-2xl p-8 shadow-2xl">
+            <div className="text-center">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-3">
+                AI-Powered Career Path Recommendation System
+              </h1>
+              <p className="text-white/90 text-lg sm:text-xl max-w-3xl mx-auto">
+                Discover your ideal career through advanced AI analysis of your skills, interests, and personality traits
+              </p>
+              <div className="flex flex-wrap justify-center gap-4 mt-6">
+                <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
+                  <span className="text-white text-sm font-semibold">Smart Career Matching</span>
+                </div>
+                <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
+                  <span className="text-white text-sm font-semibold">Data-Driven Insights</span>
+                </div>
+                <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
+                  <span className="text-white text-sm font-semibold">5-Year Roadmap</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Header with Welcome Message */}
         <div className="max-w-7xl mx-auto mb-8">
           <div className="bg-white/80 backdrop-blur-md rounded-2xl p-6 shadow-lg border border-gray-200">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+              {/* Left: Welcome */}
               <div className="flex items-center gap-4">
                 <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg">
                   {userName.charAt(0) || "U"}
@@ -70,44 +88,37 @@ const Dashboard = () => {
                   <p className="text-gray-600 text-sm mt-1">{userEmail}</p>
                 </div>
               </div>
-              <button
-                onClick={handleLogout}
-                className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-md"
-              >
-                Logout
-              </button>
+
+              {/* Right: Profile summary moved to top-right */}
+              <div className="w-full sm:w-auto">
+                <div className="bg-white/90 border border-gray-200 rounded-xl p-4 shadow flex flex-col gap-2 min-w-[280px]">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-600">Name</span>
+                    <span className="font-semibold text-gray-800">{userName}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-600">Email</span>
+                    <span className="font-semibold text-gray-800 text-xs truncate max-w-[160px]">{userEmail}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-600">Status</span>
+                    <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">Active</span>
+                  </div>
+                  <button
+                    onClick={handleLogout}
+                    className="mt-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-semibold transition-all duration-300 w-full"
+                  >
+                    Logout
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Profile & Quick Actions */}
+        {/* Quick Actions */}
         <div className="max-w-7xl mx-auto mb-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Profile Card */}
-            <div className="bg-white/80 backdrop-blur-md rounded-2xl p-6 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-3xl">👤</span>
-                <h3 className="text-xl font-bold text-gray-800">Your Profile</h3>
-              </div>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600 text-sm">Name:</span>
-                  <span className="font-semibold text-gray-800">{userName || "Not set"}</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600 text-sm">Email:</span>
-                  <span className="font-semibold text-gray-800 text-sm truncate max-w-[180px]">{userEmail}</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600 text-sm">Status:</span>
-                  <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">Active</span>
-                </div>
-              </div>
-              <button className="mt-4 w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-2 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300">
-                Edit Profile
-              </button>
-            </div>
-
             {/* Career Assessment Card */}
             <div className="bg-white/80 backdrop-blur-md rounded-2xl p-6 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300">
               <div className="flex items-center gap-3 mb-4">
@@ -144,30 +155,22 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Recent Activity / Statistics */}
-        <div className="max-w-7xl mx-auto">
-          <div className="bg-white/80 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-gray-200">
-            <h3 className="text-2xl font-bold text-gray-800 mb-6">📊 Your Career Journey</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl">
-                <div className="text-4xl mb-2">🎓</div>
-                <div className="text-3xl font-bold text-blue-600">0</div>
-                <div className="text-sm text-gray-600 mt-1">Assessments Taken</div>
-              </div>
-              <div className="text-center p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl">
-                <div className="text-4xl mb-2">💬</div>
-                <div className="text-3xl font-bold text-purple-600">0</div>
-                <div className="text-sm text-gray-600 mt-1">AI Chats</div>
-              </div>
-              <div className="text-center p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-xl">
-                <div className="text-4xl mb-2">📚</div>
-                <div className="text-3xl font-bold text-green-600">0</div>
-                <div className="text-sm text-gray-600 mt-1">Courses Recommended</div>
-              </div>
-              <div className="text-center p-6 bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl">
-                <div className="text-4xl mb-2">⭐</div>
-                <div className="text-3xl font-bold text-pink-600">0</div>
-                <div className="text-sm text-gray-600 mt-1">Skills Identified</div>
+        {/* Footer */}
+        <div className="max-w-7xl mx-auto mt-12">
+          <div className="bg-white/80 backdrop-blur-md rounded-2xl p-6 shadow-lg border border-gray-200">
+            <div className="text-center">
+              <p className="text-gray-600 text-sm mb-2">
+                Powered by <span className="font-semibold text-transparent bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text">AI Intelligence</span>
+              </p>
+              <p className="text-gray-500 text-xs">
+                © 2025 Final Year Project: Career Path Recommendation System. All rights reserved.
+              </p>
+              <div className="mt-3 flex justify-center gap-4 text-xs text-gray-500">
+                <a href="#" className="hover:text-blue-600 transition">Privacy Policy</a>
+                <span>•</span>
+                <a href="#" className="hover:text-blue-600 transition">Terms of Service</a>
+                <span>•</span>
+                <a href="#" className="hover:text-blue-600 transition">Contact Us</a>
               </div>
             </div>
           </div>
