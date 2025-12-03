@@ -1,5 +1,60 @@
 import React, { useState, useEffect } from "react";
 
+// SVG string for favicon (same visual as Logo component, without <text> for clarity at small sizes)
+const LOGO_SVG = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="grad" x1="0" y1="64" x2="64" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2563EB" />
+      <stop offset="0.5" stop-color="#7C3AED" />
+      <stop offset="1" stop-color="#EC4899" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="black" opacity="0.6"/>
+  <circle cx="32" cy="32" r="28" stroke="url(#grad)" stroke-width="3" fill="none" opacity="0.5" />
+  <circle cx="16" cy="40" r="3" fill="#ffffff" />
+  <circle cx="28" cy="28" r="3" fill="#ffffff" />
+  <circle cx="40" cy="20" r="3" fill="#ffffff" />
+  <circle cx="48" cy="12" r="2.5" fill="#ffffff" />
+  <path d="M16 40 L28 28 L40 20 L48 12" stroke="url(#grad)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M22 44 C30 36, 36 30, 48 24" stroke="url(#grad)" stroke-width="3" stroke-linecap="round" fill="none" />
+  <path d="M46 20 L52 22 L48 24" fill="url(#grad)" />
+</svg>
+`;
+
+const Logo = ({ className = "w-16 h-16" }) => (
+  <svg
+    className={className}
+    viewBox="0 0 64 64"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-label="AI Career Path Logo"
+  >
+    <defs>
+      <linearGradient id="grad" x1="0" y1="64" x2="64" y2="0" gradientUnits="userSpaceOnUse">
+        <stop stopColor="#2563EB" />
+        <stop offset="0.5" stopColor="#7C3AED" />
+        <stop offset="1" stopColor="#EC4899" />
+      </linearGradient>
+    </defs>
+    <circle cx="32" cy="32" r="30" stroke="url(#grad)" strokeWidth="3" opacity="0.35" />
+    {/* Nodes */}
+    <circle cx="16" cy="40" r="3" fill="#fff" opacity="0.9" />
+    <circle cx="28" cy="28" r="3" fill="#fff" opacity="0.9" />
+    <circle cx="40" cy="20" r="3" fill="#fff" opacity="0.9" />
+    <circle cx="48" cy="12" r="2.5" fill="#fff" opacity="0.9" />
+    {/* Connections */}
+    <path d="M16 40 L28 28 L40 20 L48 12" stroke="url(#grad)" strokeWidth="2.5" strokeLinecap="round" />
+    {/* Upward arrow representing growth */}
+    <path d="M22 44 C30 36, 36 30, 48 24" stroke="url(#grad)" strokeWidth="3" strokeLinecap="round" fill="none" />
+    <path d="M46 20 L52 22 L48 24" fill="url(#grad)" />
+    {/* Subtext mark */}
+    <text x="32" y="54" textAnchor="middle" fontSize="8" fill="#ffffff" opacity="0.9">
+      AI Career
+    </text>
+  </svg>
+);
+
 const Home = () => {
   const [userName, setUserName] = useState("");
 
@@ -12,6 +67,28 @@ const Home = () => {
     } else {
       setUserName("");
     }
+  }, []);
+
+  // Add favicon with our logo (replaces React/Vite icon in the tab)
+  useEffect(() => {
+    const svgDataUrl = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(LOGO_SVG);
+    let link = document.querySelector("link[rel='icon']");
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = "icon";
+      document.head.appendChild(link);
+    }
+    link.type = "image/svg+xml";
+    link.href = svgDataUrl;
+
+    // Optional: touch icon for mobile
+    let apple = document.querySelector("link[rel='apple-touch-icon']");
+    if (!apple) {
+      apple = document.createElement("link");
+      apple.rel = "apple-touch-icon";
+      document.head.appendChild(apple);
+    }
+    apple.href = svgDataUrl;
   }, []);
 
   const handleLogout = () => {
@@ -41,6 +118,10 @@ const Home = () => {
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-16 sm:px-6 lg:px-8">
         {/* Hero Section */}
         <div className="text-center max-w-4xl mx-auto animate-fadeIn">
+          {/* Project Logo */}
+          <div className="flex items-center justify-center mb-6">
+            <Logo className="w-20 h-20 drop-shadow-2xl" />
+          </div>
           <h1 className="text-4xl sm:text-5xl font-extrabold bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6 drop-shadow-2xl">
             Discover Your Perfect
             <span className="block text-transparent bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text mt-2">
