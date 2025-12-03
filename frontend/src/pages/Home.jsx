@@ -23,169 +23,127 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 font-poppins">
-      {/* ===== NAVBAR ===== */}
-      <nav className="flex justify-between items-center px-8 py-5 bg-white border-b border-gray-200 shadow-md fixed top-0 left-0 w-full z-50">
-        <a href="#/" className="text-2xl font-extrabold text-blue-600 drop-shadow-sm">
-          AI CareerPath
-        </a>
-        <div className="flex items-center gap-3">
-          {userName ? (
-            <>
-              <span className="hidden sm:block text-gray-600 text-sm">
-                Hi, <span className="text-blue-600 font-semibold">{userName}</span>
-              </span>
-              {localStorage.getItem("isAdmin") === "true" && (
-                <a
-                  href="#/admin"
-                  className="bg-red-500 hover:bg-red-600 text-white font-medium px-5 py-2 rounded-lg transition-all duration-300 hover:scale-[1.03] shadow-md hover:shadow-red-500/20"
-                >
-                  Admin
-                </a>
-              )}
-              <button
-                onClick={handleLogout}
-                className="bg-gray-200 hover:bg-gray-300 text-gray-900 font-medium px-5 py-2 rounded-lg transition-all duration-300 hover:scale-[1.03] shadow-md hover:shadow-gray-400/20"
-              >
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <a
-                href="#/login"
-                className="bg-gray-200 hover:bg-gray-300 text-gray-900 font-medium px-5 py-2 rounded-lg transition-all duration-300 hover:scale-[1.03] shadow-md hover:shadow-gray-400/20"
-              >
-                Login
-              </a>
-              <a
-                href="#/register"
-                className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-5 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/30"
-              >
-                Register
-              </a>
-              <a
-                href="#/admin-login"
-                className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-5 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-red-500/30"
-              >
-                Admin
-              </a>
-            </>
-          )}
-        </div>
-      </nav>
-
-      {/* ===== HERO SECTION ===== */}
-      <section className="relative flex flex-col items-center justify-center text-center min-h-screen px-6 pt-24">
+    <div className="relative min-h-screen overflow-hidden">
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0 z-0">
         <img
-          src="https://images.unsplash.com/photo-1555949963-aa79dcee981d?auto=format&fit=crop&w=1920&q=80"
-          alt="AI Career Background"
-          className="absolute inset-0 w-full h-full object-cover opacity-10"
+          src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1920&q=80"
+          alt="Career Success"
+          className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-linear-to-b from-white/80 via-white/70 to-white"></div>
+        {/* Dark overlay for better text readability */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/80 via-purple-900/70 to-pink-900/80"></div>
+        {/* Animated gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+      </div>
 
-        <div className="relative z-10 max-w-2xl animate-fadeIn">
-          <h2 className="text-4xl sm:text-5xl font-extrabold mb-6 leading-tight drop-shadow-md">
-            Discover Your Future with{" "}
-            <span className="text-blue-600">AI Precision</span>
-          </h2>
-          <p className="text-gray-600 text-lg sm:text-xl mb-10 leading-relaxed">
-            Our AI-powered system analyzes your skills, education, and interests
-            to recommend the most suitable career paths — personalized just for
-            you.
+      {/* Content */}
+      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-16 sm:px-6 lg:px-8">
+        {/* Hero Section */}
+        <div className="text-center max-w-4xl mx-auto animate-fadeIn">
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white mb-6 drop-shadow-2xl">
+            Discover Your Perfect
+            <span className="block text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text mt-2">
+              Career Path
+            </span>
+          </h1>
+          <p className="text-xl sm:text-2xl text-gray-200 mb-8 drop-shadow-lg leading-relaxed">
+            AI-powered career guidance tailored to your unique skills, interests,
+            and personality
           </p>
 
-          {userName ? (
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="#/form"
-                className="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-xl text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/30"
-              >
-                🚀 Start Career Test
-              </a>
-              <a
-                href="#/chatbot"
-                className="inline-block bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-8 rounded-xl text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-green-500/30"
-              >
-                💬 Chat with CareerBot
-              </a>
-            </div>
-          ) : (
-            <div className="space-y-4">
-              <p className="text-gray-500 text-sm mb-4">
-                Please register and login to access the Career Quiz
-              </p>
-              <div className="flex gap-4 justify-center">
-                <a
-                  href="#/register"
-                  className="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-xl text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/30"
-                >
-                   Register First
-                </a>
-                <a
-                  href="#/login"
-                  className="inline-block bg-gray-200 hover:bg-gray-300 text-gray-900 font-semibold py-3 px-8 rounded-xl text-lg transition-all duration-300 transform hover:scale-105"
-                >
-                   Login
-                </a>
-              </div>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* ===== FEATURES SECTION ===== */}
-      <section className="py-20 px-6 bg-linear-to-b from-white to-gray-100 text-center">
-        <h3 className="text-3xl sm:text-4xl font-bold mb-6 text-gray-900 drop-shadow-sm">
-          How It Works
-        </h3>
-        <p className="max-w-3xl mx-auto text-gray-600 text-lg mb-12">
-          AI CareerPath is your personal career advisor powered by artificial
-          intelligence. It studies your education, strengths, and interests to
-          help you make smarter career decisions — guiding you toward success
-          with precision and confidence.
-        </p>
-
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {[
-            {
-              title: "Smart Recommendations",
-              desc: "Our AI learns from your input and suggests the most relevant career paths tailored to you.",
-              icon: "🤖",
-            },
-            {
-              title: "Skill-Based Analysis",
-              desc: "We evaluate your education, interests, and talents to align them with your future goals.",
-              icon: "🎯",
-            },
-            {
-              title: "Accurate & Personalized",
-              desc: "Every recommendation is unique — because your career journey deserves precision.",
-              icon: "🌟",
-            },
-          ].map((item, i) => (
-            <div
-              key={i}
-              className="bg-gray-100 border border-gray-200 rounded-2xl p-8 shadow-lg hover:shadow-blue-500/20 transition-all duration-300 hover:scale-[1.03]"
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12">
+            <a
+              href="#/register"
+              className="group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-10 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-blue-500/50 w-full sm:w-auto"
             >
-              <div className="text-4xl mb-4">{item.icon}</div>
-              <h4 className="text-xl font-semibold mb-3 text-gray-900">
-                {item.title}
-              </h4>
-              <p className="text-gray-600">{item.desc}</p>
-            </div>
-          ))}
+              <span className="flex items-center justify-center gap-2">
+                Get Started Free
+                <span className="group-hover:translate-x-1 transition-transform">
+                  →
+                </span>
+              </span>
+            </a>
+            <a
+              href="#/login"
+              className="bg-white/10 backdrop-blur-md hover:bg-white/20 text-white font-bold py-4 px-10 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl border-2 border-white/30 hover:border-white/50 w-full sm:w-auto"
+            >
+              Sign In
+            </a>
+          </div>
         </div>
-      </section>
 
-      {/* ===== FOOTER ===== */}
-      <footer className="py-6 text-center text-gray-500 border-t border-gray-200 bg-white">
-        <p>
-          © {new Date().getFullYear()} AI CareerPath — Powered by{" "}
-          <span className="text-blue-600 font-semibold">Artificial Intelligence</span>
-        </p>
-      </footer>
+        {/* Feature Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto mt-20 animate-slideUp">
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl">
+            <div className="text-5xl mb-4">🎯</div>
+            <h3 className="text-xl font-bold text-white mb-2">
+              AI-Powered Insights
+            </h3>
+            <p className="text-gray-300 text-sm">
+              Advanced algorithms analyze your profile to recommend the best
+              career matches
+            </p>
+          </div>
+
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl">
+            <div className="text-5xl mb-4">📊</div>
+            <h3 className="text-xl font-bold text-white mb-2">
+              Personalized Roadmap
+            </h3>
+            <p className="text-gray-300 text-sm">
+              Get a detailed 5-year career growth plan tailored to your goals
+            </p>
+          </div>
+
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl">
+            <div className="text-5xl mb-4">🤖</div>
+            <h3 className="text-xl font-bold text-white mb-2">
+              24/7 AI Assistant
+            </h3>
+            <p className="text-gray-300 text-sm">
+              Chat with our AI career advisor anytime for instant guidance
+            </p>
+          </div>
+        </div>
+
+        {/* Stats Section */}
+        {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mt-16">
+          <div className="text-center">
+            <div className="text-4xl font-bold text-white mb-2">10K+</div>
+            <div className="text-gray-300 text-sm">Career Assessments</div>
+          </div>
+          <div className="text-center">
+            <div className="text-4xl font-bold text-white mb-2">95%</div>
+            <div className="text-gray-300 text-sm">Satisfaction Rate</div>
+          </div>
+          <div className="text-center">
+            <div className="text-4xl font-bold text-white mb-2">50+</div>
+            <div className="text-gray-300 text-sm">Career Paths</div>
+          </div>
+          <div className="text-center">
+            <div className="text-4xl font-bold text-white mb-2">24/7</div>
+            <div className="text-gray-300 text-sm">AI Support</div>
+          </div>
+        </div> */}
+      </div>
+
+      {/* Floating Particles Effect */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        <div
+          className="absolute w-2 h-2 bg-white/30 rounded-full top-1/4 left-1/4 animate-ping"
+          style={{ animationDuration: "3s" }}
+        ></div>
+        <div
+          className="absolute w-2 h-2 bg-blue-400/30 rounded-full top-1/3 right-1/4 animate-ping"
+          style={{ animationDuration: "4s", animationDelay: "1s" }}
+        ></div>
+        <div
+          className="absolute w-2 h-2 bg-purple-400/30 rounded-full bottom-1/4 left-1/3 animate-ping"
+          style={{ animationDuration: "5s", animationDelay: "2s" }}
+        ></div>
+      </div>
     </div>
   );
 };

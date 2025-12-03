@@ -3,9 +3,22 @@ import React, { useState } from "react";
 const Login = ({ setLoggedIn = () => {} }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setError("");
+
+    if (!isValidEmail(email)) {
+      setError("Please enter a valid email address");
+      return;
+    }
+
     try {
       const response = await fetch("http://localhost:8000/login", {
         method: "POST",
@@ -28,7 +41,7 @@ const Login = ({ setLoggedIn = () => {} }) => {
           localStorage.removeItem("isAdmin");
         }
         setLoggedIn(true);
-        window.location.hash = "#/";
+        window.location.hash = "#/dashboard"; // Changed from #/form to #/dashboard
       } else {
         let errorMessage = "Invalid credentials. Please try again.";
         try {
@@ -47,73 +60,73 @@ const Login = ({ setLoggedIn = () => {} }) => {
   };
 
   return (
-    <div className="relative min-h-screen bg-linear-to-b from-white via-gray-100 to-white text-gray-900 font-poppins flex items-center justify-center overflow-hidden px-4">
-      {/* Background AI Theme */}
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-10"></div>
-      <div className="absolute inset-0 bg-linear-to-b from-white/80 via-gray-100/70 to-white"></div>
+    <div className="relative min-h-screen overflow-hidden">
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1920&q=80"
+          alt="Career Success"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/80 via-purple-900/70 to-pink-900/80"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+      </div>
 
-      {/* Login Box */}
-      <div className="relative z-10 w-full max-w-md bg-white/90 backdrop-blur-lg border border-gray-200 rounded-2xl p-8 shadow-lg shadow-gray-400/40 animate-fadeIn">
-        <h2 className="text-4xl font-extrabold mb-8 text-center text-blue-600 drop-shadow-[0_0_8px_rgba(59,130,246,0.6)]">
-          Welcome Back
-        </h2>
-        <form onSubmit={handleLogin} className="space-y-6">
+      {/* Content */}
+      <div className="relative z-10 min-h-screen flex items-center justify-center px-4 py-16">
+        <form onSubmit={handleLogin} className="bg-white/90 backdrop-blur-md p-8 rounded-2xl shadow-2xl w-full max-w-md space-y-4 animate-slideUp">
+          <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            Welcome Back
+          </h2>
+
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+              {error}
+            </div>
+          )}
+
           <div>
-            <label
-              htmlFor="email"
-              className="block text-gray-700 font-medium mb-2"
-            >
-              Email
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Email Address
             </label>
             <input
-              className="w-full bg-white text-gray-900 p-3 rounded-xl border border-gray-300 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 transition-all duration-300"
               type="email"
-              id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="user@example.com"
+              className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
-              placeholder="Enter your email"
             />
           </div>
+
           <div>
-            <label
-              htmlFor="password"
-              className="block text-gray-700 font-medium mb-2"
-            >
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
               Password
             </label>
             <input
-              className="w-full bg-white text-gray-900 p-3 rounded-xl border border-gray-300 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 transition-all duration-300"
               type="password"
-              id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
+              className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
-              placeholder="Enter your password"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-xl text-lg transition-all duration-300 transform hover:scale-[1.03] hover:shadow-lg hover:shadow-blue-500/30"
+            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-3 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-[1.02] shadow-lg"
           >
-            🔐 Login
+            Login
           </button>
+
+          <p className="text-center text-sm text-gray-600">
+            Don't have an account?{" "}
+            <a href="#/register" className="text-blue-600 hover:text-blue-700 font-semibold">
+              Register
+            </a>
+          </p>
         </form>
-        <p className="text-center text-gray-500 mt-6">
-          Don’t have an account?{" "}
-          <a
-            href="#/register"
-            className="text-blue-600 hover:text-blue-700 font-medium transition"
-          >
-            Register
-          </a>
-        </p>
-      </div>
-      {/* Footer */}
-      <div className="absolute bottom-4 text-gray-500 text-sm tracking-wide">
-        Secured by{" "}
-        <span className="text-blue-600 font-semibold">AI CareerPath</span>
       </div>
     </div>
   );

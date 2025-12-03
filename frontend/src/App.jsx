@@ -10,6 +10,7 @@ import ResultPage from "./pages/ResultPage";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import Chatbot from "./pages/Chatbot"; // <- import chatbot page
+import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
@@ -21,6 +22,16 @@ const App = () => {
         <Routes>
           {/* ===== Home Page ===== */}
           <Route path="/" element={<Home />} />
+
+          {/* ===== Dashboard ===== */}
+          <Route 
+            path="/dashboard" 
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            } 
+          />
 
           {/* ===== Authentication ===== */}
           <Route path="/register" element={<Register />} />
