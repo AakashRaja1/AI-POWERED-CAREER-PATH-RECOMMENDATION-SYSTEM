@@ -1186,7 +1186,7 @@ const CareerFormPage = ({ setResult }) => {
                   : "bg-transparent text-gray-600 hover:bg-gray-100"
               }`}
             >
-              Form (4 Pages)
+              Form (Pages)
             </button>
             <button
               onClick={() => setFormType("resume")}
