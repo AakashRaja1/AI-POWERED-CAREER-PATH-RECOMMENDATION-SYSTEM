@@ -1,6 +1,8 @@
 {
   // Python Configuration
-  "python.defaultInterpreterPath": "${workspaceFolder}/venv/bin/python",
+  // On Windows, this will automatically resolve to venv/Scripts/python.exe
+  // On Unix/Mac, it will resolve to venv/bin/python
+  "python.defaultInterpreterPath": "${workspaceFolder}/venv",
   
   // GitHub Copilot Configuration
   "github.copilot.enable": {
