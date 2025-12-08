@@ -1,7 +1,34 @@
 {
-  "python.defaultInterpreterPath": "C:/Users/aakas/OneDrive/Desktop/New folder/AI POWERED CAREER PATH RECOMMENDATION SYSTEM/venv/Scripts/python.exe",
-  "terminal.integrated.env.windows": {
-    "VIRTUAL_ENV": "C:/Users/aakas/OneDrive/Desktop/New folder/AI POWERED CAREER PATH RECOMMENDATION SYSTEM/venv",
-    "PATH": "C:/Users/aakas/OneDrive/Desktop/New folder/AI POWERED CAREER PATH RECOMMENDATION SYSTEM/venv/Scripts;${env:PATH}"
+  // Python Configuration
+  // On Windows, this will automatically resolve to venv/Scripts/python.exe
+  // On Unix/Mac, it will resolve to venv/bin/python
+  "python.defaultInterpreterPath": "${workspaceFolder}/venv",
+  
+  // GitHub Copilot Configuration
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": true,
+    "markdown": true,
+    "python": true,
+    "javascript": true,
+    "typescript": true,
+    "javascriptreact": true,
+    "typescriptreact": true
+  },
+  "github.copilot.editor.enableAutoCompletions": true,
+  "chat.experimental.detectParticipant.enabled": true,
+  
+  // Editor Configuration
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
+  
+  // Files Configuration
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/*.pyc": true,
+    "**/node_modules": true,
+    "**/.pytest_cache": true
   }
 }
