@@ -19,13 +19,15 @@ FRONTEND: VITE(REACT)/JSX
 ## Development Setup
 
 ### GitHub Copilot Setup
-If you're using GitHub Copilot (included in the GitHub Student Developer Pack) and can't see the agent option in VS Code, please refer to our comprehensive setup guide:
+If you're using GitHub Copilot (included in the GitHub Student Developer Pack) and **can't see agents** or only see "Edit" and "Ask" options, please refer to our comprehensive setup guide:
 
 📖 **[GitHub Copilot Setup Guide](COPILOT_SETUP.md)**
 
+**Important:** Agents are accessed by typing `@` in the chat input, not through menu buttons! See the setup guide for details.
+
 This guide includes:
 - Step-by-step installation instructions
-- How to enable and access GitHub Copilot agents
-- Troubleshooting common issues
+- How to enable and access GitHub Copilot agents (@workspace, @vscode, @terminal)
+- Troubleshooting for "I only see Edit and Ask, not Agent"
 - Tips for using Copilot with this project
 
