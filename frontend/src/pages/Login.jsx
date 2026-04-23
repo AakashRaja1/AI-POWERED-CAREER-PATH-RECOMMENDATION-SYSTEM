@@ -126,6 +126,13 @@ const Login = ({ setLoggedIn = () => {} }) => {
               Register
             </a>
           </p>
+
+          <p className="text-center text-sm text-gray-600">
+            Admin access?{" "}
+            <a href="#/admin-login" className="text-purple-700 hover:text-purple-800 font-semibold">
+              Login as Admin
+            </a>
+          </p>
         </form>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { postWithFallback } from "../api/client";
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([
@@ -34,16 +35,10 @@ const Chatbot = () => {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:8000/chatbot/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
-          user_id: "user_" + Date.now(),
-          message: input 
-        })
+      const data = await postWithFallback("/chatbot/chat", {
+        user_id: "user_" + Date.now(),
+        message: input,
       });
-
-      const data = await res.json();
 
       const botMessage = { 
         sender: "bot", 

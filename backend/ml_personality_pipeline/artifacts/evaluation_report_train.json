@@ -1,0 +1,79 @@
+{
+  "summary": {
+    "split": "train",
+    "num_samples": 120,
+    "num_traits": 9,
+    "overall_mae": 0.1787959635257721,
+    "overall_rmse": 0.22231827676296234,
+    "model_path": "C:\\Users\\aakas\\OneDrive\\Desktop\\ALL Files\\projects\\New folder\\AI POWERED CAREER PATH RECOMMENDATION SYSTEM\\backend\\ml_personality_pipeline\\artifacts\\personality_model.pth",
+    "checkpoint_trait_order": [
+      "openness",
+      "conscientiousness",
+      "extraversion",
+      "agreeableness",
+      "neuroticism",
+      "confidence_score",
+      "professionalism_score",
+      "communication_score",
+      "leadership_potential"
+    ],
+    "evaluated_trait_order": [
+      "openness",
+      "conscientiousness",
+      "extraversion",
+      "agreeableness",
+      "neuroticism",
+      "confidence_score",
+      "professionalism_score",
+      "communication_score",
+      "leadership_potential"
+    ]
+  },
+  "traits": {
+    "openness": {
+      "mae": 0.11363658308982849,
+      "rmse": 0.14012667536735535,
+      "pearson": 0.5981447696685791
+    },
+    "conscientiousness": {
+      "mae": 0.13464052975177765,
+      "rmse": 0.1575106382369995,
+      "pearson": 0.5365245938301086
+    },
+    "extraversion": {
+      "mae": 0.10935669392347336,
+      "rmse": 0.13860243558883667,
+      "pearson": 0.5819236636161804
+    },
+    "agreeableness": {
+      "mae": 0.12292669713497162,
+      "rmse": 0.15142636001110077,
+      "pearson": 0.4532255232334137
+    },
+    "neuroticism": {
+      "mae": 0.12432349473237991,
+      "rmse": 0.15244200825691223,
+      "pearson": 0.5199368596076965
+    },
+    "confidence_score": {
+      "mae": 0.24916425347328186,
+      "rmse": 0.2867042124271393,
+      "pearson": 0.25099217891693115
+    },
+    "professionalism_score": {
+      "mae": 0.23690827190876007,
+      "rmse": 0.2771194577217102,
+      "pearson": 0.29357588291168213
+    },
+    "communication_score": {
+      "mae": 0.2680639922618866,
+      "rmse": 0.305433452129364,
+      "pearson": 0.26361459493637085
+    },
+    "leadership_potential": {
+      "mae": 0.2501431405544281,
+      "rmse": 0.28761157393455505,
+      "pearson": 0.16965104639530182
+    }
+  }
+}

@@ -1,0 +1,6 @@
+torch
+torchvision
+pillow
+imageio
+imageio-ffmpeg
+flask

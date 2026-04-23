@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Optional
 from sqlmodel import Field, SQLModel
 
@@ -8,6 +9,7 @@ class User(SQLModel, table=True):
     email: str = Field(unique=True, index=True)
     password: str
     is_admin: bool = Field(default=False)
+    last_login: Optional[datetime] = Field(default=None)
 
 
 class Prediction(SQLModel, table=True):

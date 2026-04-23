@@ -4,7 +4,7 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 from sqlmodel import Session
 from pydantic import BaseModel
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import os
 from dotenv import load_dotenv
 
@@ -23,6 +23,7 @@ router = APIRouter()
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
+oauth2_scheme_optional = OAuth2PasswordBearer(tokenUrl="login", auto_error=False)
 
 # Pydantic models for request/response
 class UserRegister(BaseModel):
@@ -87,6 +88,10 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), session: Session = D
             detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
+    user.last_login = datetime.now(timezone.utc)
+    session.add(user)
+    session.commit()
+    session.refresh(user)
     access_token = create_access_token(data={"sub": user.email, "is_admin": user.is_admin})
     return {"access_token": access_token, "token_type": "bearer", "is_admin": user.is_admin}
 
@@ -109,8 +114,10 @@ def get_current_user(token: str = Depends(oauth2_scheme), session: Session = Dep
         raise credentials_exception
     return user
 
-def get_current_user_optional(token: str = Depends(oauth2_scheme), session: Session = Depends(get_session)):
+def get_current_user_optional(token: str | None = Depends(oauth2_scheme_optional), session: Session = Depends(get_session)):
     """Get the current user if a valid token is provided, otherwise return None."""
+    if not token:
+        return None
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         email: str = payload.get("sub")

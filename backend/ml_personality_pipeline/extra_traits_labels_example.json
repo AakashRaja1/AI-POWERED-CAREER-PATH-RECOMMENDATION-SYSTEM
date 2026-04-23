@@ -1,0 +1,14 @@
+{
+  "sample_001.jpg": {
+    "confidence_score": 0.72,
+    "professionalism_score": 0.68,
+    "communication_score": 0.75,
+    "leadership_potential": 0.63
+  },
+  "sample_002.mp4": {
+    "confidence_score": 0.40,
+    "professionalism_score": 0.55,
+    "communication_score": 0.48,
+    "leadership_potential": 0.45
+  }
+}

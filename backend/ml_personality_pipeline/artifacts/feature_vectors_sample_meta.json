@@ -1,0 +1,7 @@
+{
+  "media_dir": "..\\ml_personality\\first-impressions\\train",
+  "num_files": 50,
+  "feature_dim": 512,
+  "frames_per_video": 3,
+  "output_tensor": "artifacts\\feature_vectors_sample.pt"
+}

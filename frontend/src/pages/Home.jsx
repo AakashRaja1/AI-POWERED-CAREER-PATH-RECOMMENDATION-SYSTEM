@@ -1,58 +1,15 @@
 import React, { useState, useEffect } from "react";
 
-// SVG string for favicon (same visual as Logo component, without <text> for clarity at small sizes)
-const LOGO_SVG = `
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <defs>
-    <linearGradient id="grad" x1="0" y1="64" x2="64" y2="0" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#2563EB" />
-      <stop offset="0.5" stop-color="#7C3AED" />
-      <stop offset="1" stop-color="#EC4899" />
-    </linearGradient>
-  </defs>
-  <rect width="64" height="64" rx="14" fill="black" opacity="0.6"/>
-  <circle cx="32" cy="32" r="28" stroke="url(#grad)" stroke-width="3" fill="none" opacity="0.5" />
-  <circle cx="16" cy="40" r="3" fill="#ffffff" />
-  <circle cx="28" cy="28" r="3" fill="#ffffff" />
-  <circle cx="40" cy="20" r="3" fill="#ffffff" />
-  <circle cx="48" cy="12" r="2.5" fill="#ffffff" />
-  <path d="M16 40 L28 28 L40 20 L48 12" stroke="url(#grad)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-  <path d="M22 44 C30 36, 36 30, 48 24" stroke="url(#grad)" stroke-width="3" stroke-linecap="round" fill="none" />
-  <path d="M46 20 L52 22 L48 24" fill="url(#grad)" />
-</svg>
-`;
+const BRAND_LOGO_SRC = "/brand-logo.svg";
 
 const Logo = ({ className = "w-16 h-16" }) => (
-  <svg
+  <img
+    src={BRAND_LOGO_SRC}
+    alt="AI Career Path Logo"
     className={className}
-    viewBox="0 0 64 64"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-label="AI Career Path Logo"
-  >
-    <defs>
-      <linearGradient id="grad" x1="0" y1="64" x2="64" y2="0" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#2563EB" />
-        <stop offset="0.5" stopColor="#7C3AED" />
-        <stop offset="1" stopColor="#EC4899" />
-      </linearGradient>
-    </defs>
-    <circle cx="32" cy="32" r="30" stroke="url(#grad)" strokeWidth="3" opacity="0.35" />
-    {/* Nodes */}
-    <circle cx="16" cy="40" r="3" fill="#fff" opacity="0.9" />
-    <circle cx="28" cy="28" r="3" fill="#fff" opacity="0.9" />
-    <circle cx="40" cy="20" r="3" fill="#fff" opacity="0.9" />
-    <circle cx="48" cy="12" r="2.5" fill="#fff" opacity="0.9" />
-    {/* Connections */}
-    <path d="M16 40 L28 28 L40 20 L48 12" stroke="url(#grad)" strokeWidth="2.5" strokeLinecap="round" />
-    {/* Upward arrow representing growth */}
-    <path d="M22 44 C30 36, 36 30, 48 24" stroke="url(#grad)" strokeWidth="3" strokeLinecap="round" fill="none" />
-    <path d="M46 20 L52 22 L48 24" fill="url(#grad)" />
-    {/* Subtext mark */}
-    <text x="32" y="54" textAnchor="middle" fontSize="8" fill="#ffffff" opacity="0.9">
-      AI Career
-    </text>
-  </svg>
+    loading="eager"
+    decoding="async"
+  />
 );
 
 const Home = () => {
@@ -69,9 +26,8 @@ const Home = () => {
     }
   }, []);
 
-  // Add favicon with our logo (replaces React/Vite icon in the tab)
+  // Add favicon with the shared brand logo asset.
   useEffect(() => {
-    const svgDataUrl = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(LOGO_SVG);
     let link = document.querySelector("link[rel='icon']");
     if (!link) {
       link = document.createElement("link");
@@ -79,7 +35,7 @@ const Home = () => {
       document.head.appendChild(link);
     }
     link.type = "image/svg+xml";
-    link.href = svgDataUrl;
+    link.href = BRAND_LOGO_SRC;
 
     // Optional: touch icon for mobile
     let apple = document.querySelector("link[rel='apple-touch-icon']");
@@ -88,7 +44,7 @@ const Home = () => {
       apple.rel = "apple-touch-icon";
       document.head.appendChild(apple);
     }
-    apple.href = svgDataUrl;
+    apple.href = BRAND_LOGO_SRC;
   }, []);
 
   const handleLogout = () => {
@@ -151,6 +107,12 @@ const Home = () => {
               className="bg-white/10 backdrop-blur-md hover:bg-white/20 text-white font-bold py-4 px-10 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl border-2 border-white/30 hover:border-white/50 w-full sm:w-auto"
             >
               Sign In
+            </a>
+            <a
+              href="#/admin-login"
+              className="bg-black/30 backdrop-blur-md hover:bg-black/45 text-white font-bold py-4 px-10 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl border-2 border-amber-300/40 hover:border-amber-200/70 w-full sm:w-auto"
+            >
+              Admin Login
             </a>
           </div>
         </div>

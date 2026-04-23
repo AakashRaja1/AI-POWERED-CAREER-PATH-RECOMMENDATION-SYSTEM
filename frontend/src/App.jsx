@@ -11,6 +11,9 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import Chatbot from "./pages/Chatbot"; // <- import chatbot page
 import Dashboard from "./pages/Dashboard";
+import ScholarshipFinder from "./pages/ScholarshipFinder";
+import BehaviorAnalysis from "./pages/BehaviorAnalysis";
+import BehaviorCareerResult from "./pages/BehaviorCareerResult";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
@@ -72,6 +75,33 @@ const App = () => {
                 <Chatbot />
               </ProtectedRoute>
             } 
+          />
+
+          <Route 
+            path="/scholarships" 
+            element={
+              <ProtectedRoute>
+                <ScholarshipFinder />
+              </ProtectedRoute>
+            } 
+          />
+
+          <Route 
+            path="/behavior" 
+            element={
+              <ProtectedRoute>
+                <BehaviorAnalysis />
+              </ProtectedRoute>
+            } 
+          />
+
+          <Route
+            path="/behavior-career-result"
+            element={
+              <ProtectedRoute>
+                <BehaviorCareerResult />
+              </ProtectedRoute>
+            }
           />
         </Routes>
       </div>

@@ -56,6 +56,8 @@ logs/
 *.db
 *.sqlite
 *.sqlite3
+first-impressions
+backend/datasets/first_impressions_download/*.zip
 
 # Model artifacts (keep in repo but ignore large files if needed)
 # *.joblib

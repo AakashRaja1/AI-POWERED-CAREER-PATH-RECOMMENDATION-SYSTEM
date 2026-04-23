@@ -1,5 +1,25 @@
 import React, { useState } from "react";
 
+const API_CANDIDATES = ["/api", "http://127.0.0.1:8000", "http://localhost:8000"];
+
+const postLoginWithFallback = async (body) => {
+  let lastError;
+  for (const base of API_CANDIDATES) {
+    try {
+      return await fetch(`${base}/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body,
+      });
+    } catch (error) {
+      lastError = error;
+    }
+  }
+  throw lastError || new Error("Failed to reach backend API");
+};
+
 const AdminLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,16 +40,12 @@ const AdminLogin = () => {
     
     try {
       console.log("Sending login request...");
-      const response = await fetch("http://localhost:8000/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams({
+      const response = await postLoginWithFallback(
+        new URLSearchParams({
           username: email,
           password: password,
-        }),
-      });
+        })
+      );
       
       console.log("Response status:", response.status);
       

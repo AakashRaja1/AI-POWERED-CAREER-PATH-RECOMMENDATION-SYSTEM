@@ -1,6 +1,8 @@
 from fastapi import APIRouter, HTTPException
+from fastapi.concurrency import run_in_threadpool
 from pydantic import BaseModel
 from .pipeline import chatbot_answer
+from .scholarship_finder import find_scholarships
 import logging
 
 router = APIRouter()
@@ -10,13 +12,45 @@ class ChatRequest(BaseModel):
     user_id: str
     message: str
 
+
+class ScholarshipSearchRequest(BaseModel):
+    degree_level: str
+    field_of_study: str
+    country: str
+    university_type: str
+    funding_type: str
+    max_results: int = 10
+
 @router.post("/chat")
 async def chat(req: ChatRequest):
     try:
         logger.info(f"Received chat request from user {req.user_id}: {req.message}")
-        reply = chatbot_answer(req.user_id, req.message)
+        reply = await run_in_threadpool(chatbot_answer, req.user_id, req.message)
         logger.info(f"Generated reply for user {req.user_id}")
         return {"reply": reply}
+    except RuntimeError as e:
+        logger.error(f"Chatbot configuration error: {str(e)}")
+        raise HTTPException(status_code=503, detail=str(e))
     except Exception as e:
         logger.error(f"Error in chatbot: {str(e)}", exc_info=True)
         raise HTTPException(status_code=500, detail=f"Chatbot error: {str(e)}")
+
+
+@router.post("/scholarships/search")
+async def scholarships_search(req: ScholarshipSearchRequest):
+    try:
+        result = find_scholarships(
+            degree_level=req.degree_level,
+            field_of_study=req.field_of_study,
+            country=req.country,
+            university_type=req.university_type,
+            funding_type=req.funding_type,
+            max_results=max(10, min(req.max_results, 20)),
+        )
+        return result
+    except RuntimeError as e:
+        logger.error(f"Scholarship search configuration error: {str(e)}")
+        raise HTTPException(status_code=503, detail=str(e))
+    except Exception as e:
+        logger.error(f"Scholarship search failed: {str(e)}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Scholarship search failed: {str(e)}")

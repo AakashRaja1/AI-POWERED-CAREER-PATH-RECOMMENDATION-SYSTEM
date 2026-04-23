@@ -1,7 +1,28 @@
 // frontend/src/pages/Landing.jsx
-import React from "react";
+import React, { useEffect } from "react";
+
+const BRAND_LOGO_SRC = "/brand-logo.svg";
 
 const Landing = () => {
+  useEffect(() => {
+    let link = document.querySelector("link[rel='icon']");
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = "icon";
+      document.head.appendChild(link);
+    }
+    link.type = "image/svg+xml";
+    link.href = BRAND_LOGO_SRC;
+
+    let apple = document.querySelector("link[rel='apple-touch-icon']");
+    if (!apple) {
+      apple = document.createElement("link");
+      apple.rel = "apple-touch-icon";
+      document.head.appendChild(apple);
+    }
+    apple.href = BRAND_LOGO_SRC;
+  }, []);
+
   return (
     <div className="relative min-h-screen bg-white text-gray-900 flex flex-col items-center justify-center font-poppins overflow-hidden">
       {/* ===== Background Image & Overlay ===== */}
@@ -14,6 +35,15 @@ const Landing = () => {
 
       {/* ===== Content ===== */}
       <div className="relative z-10 text-center px-6 animate-fadeIn">
+        <div className="flex justify-center mb-6">
+          <img
+            src={BRAND_LOGO_SRC}
+            alt="AI Career Path Logo"
+            className="w-20 h-20 sm:w-24 sm:h-24 drop-shadow-xl"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
         <h1 className="text-4xl sm:text-6xl font-extrabold mb-6 leading-tight drop-shadow-md">
           Welcome to
           <br />

@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import Session
 from typing import List, Optional
 from pydantic import BaseModel
+from datetime import datetime
 from app.database import crud
 from app.database.models import User, Prediction
 from app.database.session import get_session
@@ -14,6 +15,8 @@ class UserResponse(BaseModel):
     id: int
     full_name: str
     email: str
+    password_hash: str
+    last_login: Optional[datetime] = None
     is_admin: bool
     
     model_config = {"from_attributes": True}
@@ -66,6 +69,8 @@ def get_all_users(
         id=u.id,
         full_name=u.full_name,
         email=u.email,
+        password_hash=u.password,
+        last_login=u.last_login,
         is_admin=u.is_admin
     ) for u in users]
 
@@ -140,6 +145,8 @@ def update_user(
         id=updated_user.id,
         full_name=updated_user.full_name,
         email=updated_user.email,
+        password_hash=updated_user.password,
+        last_login=updated_user.last_login,
         is_admin=updated_user.is_admin
     )
 

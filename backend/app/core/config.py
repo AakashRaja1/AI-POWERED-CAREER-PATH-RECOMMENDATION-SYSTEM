@@ -12,6 +12,11 @@ class Settings(BaseSettings):
     MODEL_PATH: str = str(BASE_DIR / "model_artifacts")
     SECRET_KEY: str = "okchanged" # Default value, will be overridden by .env
     GROQ_API_KEY: str = ""  # Add this line for Groq API integration
+    GROQ_CHAT_MODEL: str = "llama-3.1-8b-instant"
+    GROQ_MAX_COMPLETION_TOKENS: int = 320
+    GROQ_REQUEST_TIMEOUT_SECONDS: float = 4.5
+    SEARXNG_BASE_URL: str = "https://searx.be"
+    SEARXNG_BASE_URLS: str = "https://searx.be,https://search.inetol.net"
     ADMIN_EMAIL: str = "admin@careerpath.com"  # Default admin email
     ADMIN_PASSWORD: str = "admin123"  # Default admin password - CHANGE IN PRODUCTION
     

@@ -1,0 +1,25 @@
+{
+  "version": "1.0",
+  "description": "Schema for supervised extra personality traits in [0,1] used by ml_personality_pipeline",
+  "traits": {
+    "confidence_score": {
+      "range": [0.0, 1.0],
+      "definition": "Perceived self-assurance and composure in communication"
+    },
+    "professionalism_score": {
+      "range": [0.0, 1.0],
+      "definition": "Perceived professional demeanor, etiquette, and presentation"
+    },
+    "communication_score": {
+      "range": [0.0, 1.0],
+      "definition": "Perceived clarity, expressiveness, and engagement in communication"
+    },
+    "leadership_potential": {
+      "range": [0.0, 1.0],
+      "definition": "Perceived ability to guide, influence, and coordinate others"
+    }
+  },
+  "recommended_raters": 3,
+  "normalization": "Scores should be continuous in [0,1]. Use at least 3 independent human raters and average.",
+  "required_output_format": "JSON mapping file_name -> trait map"
+}

@@ -1,0 +1,72 @@
+{
+  "test_1.jpg": {
+    "extraversion": 0.5,
+    "neuroticism": 0.5,
+    "agreeableness": 0.5,
+    "conscientiousness": 0.5,
+    "openness": 0.5
+  },
+  "test_2.jpg": {
+    "extraversion": 0.5,
+    "neuroticism": 0.5,
+    "agreeableness": 0.5,
+    "conscientiousness": 0.5,
+    "openness": 0.5
+  },
+  "test_3.jpg": {
+    "extraversion": 0.5,
+    "neuroticism": 0.5,
+    "agreeableness": 0.5,
+    "conscientiousness": 0.5,
+    "openness": 0.5
+  },
+  "test_4.jpg": {
+    "extraversion": 0.5,
+    "neuroticism": 0.5,
+    "agreeableness": 0.5,
+    "conscientiousness": 0.5,
+    "openness": 0.5
+  },
+  "test_5.jpg": {
+    "extraversion": 0.5,
+    "neuroticism": 0.5,
+    "agreeableness": 0.5,
+    "conscientiousness": 0.5,
+    "openness": 0.5
+  },
+  "test_6.jpg": {
+    "extraversion": 0.5,
+    "neuroticism": 0.5,
+    "agreeableness": 0.5,
+    "conscientiousness": 0.5,
+    "openness": 0.5
+  },
+  "test_7.jpg": {
+    "extraversion": 0.5,
+    "neuroticism": 0.5,
+    "agreeableness": 0.5,
+    "conscientiousness": 0.5,
+    "openness": 0.5
+  },
+  "test_8.jpg": {
+    "extraversion": 0.5,
+    "neuroticism": 0.5,
+    "agreeableness": 0.5,
+    "conscientiousness": 0.5,
+    "openness": 0.5
+  },
+  "test_9.jpg": {
+    "extraversion": 0.5,
+    "neuroticism": 0.5,
+    "agreeableness": 0.5,
+    "conscientiousness": 0.5,
+    "openness": 0.5
+  },
+  "test_10.jpg": {
+    "extraversion": 0.5,
+    "neuroticism": 0.5,
+    "agreeableness": 0.5,
+    "conscientiousness": 0.5,
+    "openness": 0.5
+  }
+}

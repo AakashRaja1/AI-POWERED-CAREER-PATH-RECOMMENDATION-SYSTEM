@@ -1,0 +1,10 @@
+{
+  "summary": {
+    "total_rows": 6000,
+    "used_rows": 0,
+    "skipped_rows": 6000,
+    "min_raters_required": 2,
+    "coverage": 0.0
+  },
+  "per_item_trait_stats": {}
+}

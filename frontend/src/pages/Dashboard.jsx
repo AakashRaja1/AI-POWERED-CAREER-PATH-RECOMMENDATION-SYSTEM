@@ -152,6 +152,40 @@ const Dashboard = () => {
                 Chat Now
               </button>
             </div>
+
+            {/* Scholarship Finder Card */}
+            <div className="bg-white/80 backdrop-blur-md rounded-2xl p-6 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-3xl">🎓</span>
+                <h3 className="text-xl font-bold text-gray-800">Find Scholarships</h3>
+              </div>
+              <p className="text-gray-600 text-sm mb-4">
+                Search scholarships by degree, field, country, university type, and funding level.
+              </p>
+              <button
+                onClick={() => window.location.hash = "#/scholarships"}
+                className="w-full bg-linear-to-r from-emerald-500 to-cyan-500 text-white py-2 rounded-lg font-semibold hover:from-emerald-600 hover:to-cyan-600 transition-all duration-300"
+              >
+                Explore Scholarships
+              </button>
+            </div>
+
+            {/* Behavior Analysis Card */}
+            <div className="bg-white/80 backdrop-blur-md rounded-2xl p-6 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-3xl">👤</span>
+                <h3 className="text-xl font-bold text-gray-800">Behavior Analysis</h3>
+              </div>
+              <p className="text-gray-600 text-sm mb-4">
+                Upload images or videos to analyze personality traits and behavioral patterns.
+              </p>
+              <button
+                onClick={() => window.location.hash = "#/behavior"}
+                className="w-full bg-linear-to-r from-orange-500 to-red-500 text-white py-2 rounded-lg font-semibold hover:from-orange-600 hover:to-red-600 transition-all duration-300"
+              >
+                Analyze Behavior
+              </button>
+            </div>
           </div>
         </div>
 
