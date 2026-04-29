@@ -1,4 +1,4 @@
-// frontend/src/pages/Register.jsx
+﻿// frontend/src/pages/Register.jsx
 import React, { useState } from "react";
 
 const Register = ({ setLoggedIn }) => {
