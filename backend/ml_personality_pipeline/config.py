@@ -45,8 +45,8 @@ class PersonalityConfig:
     torch_threads: int = 2
     hidden_dims: Tuple[int, int] = (256, 128)
     dropout: float = 0.2
-    # Heavier inference profile: sample more frames per video for stable estimates.
-    inference_video_frames: int = 12
+    # Detailed inference profile: sample more frames per video for steadier behavior estimates.
+    inference_video_frames: int = 36
     extra_trait_order: Tuple[str, ...] = ()
     extra_labels_json: Optional[Path] = None
 

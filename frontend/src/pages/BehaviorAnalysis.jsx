@@ -389,7 +389,10 @@ const BehaviorAnalysis = () => {
       });
 
       if (!response.ok) {
-        const message = await response.text();
+        const contentType = response.headers.get("content-type") || "";
+        const message = contentType.includes("application/json")
+          ? (await response.json())?.detail
+          : await response.text();
         throw new Error(message || "Behavior prediction failed.");
       }
 
@@ -486,7 +489,7 @@ const BehaviorAnalysis = () => {
             Upload an image or video and get rich personality insights.
           </h1>
           <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-300 sm:text-base">
-            This page calls the integrated FastAPI personality module backed by a frozen pretrained ResNet18 and a lightweight MLP.
+            This page calls the integrated FastAPI personality module backed by the trained CNN behavior model.
           </p>
         </div>
 
@@ -631,6 +634,47 @@ const BehaviorAnalysis = () => {
                         );
                       })}
                     </div>
+                  </div>
+                )}
+
+                {result?.behavior_analysis && (
+                  <div className="pt-3">
+                    <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-200">
+                      Person, Expression & Voice Analysis
+                    </div>
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      {(() => {
+                        const frame = result.behavior_analysis.frame_analysis || {};
+                        const audio = result.behavior_analysis.audio_analysis || {};
+                        const items = [
+                          ["Person detected", frame.person_detected ? "Yes" : "No"],
+                          ["Presence quality", frame.presence_quality || "N/A"],
+                          ["Face detection rate", typeof frame.face_detection_rate !== "undefined" ? `${Math.round(frame.face_detection_rate * 100)}%` : "N/A"],
+                          ["Frames with face", frame.frames_with_face ?? "N/A"],
+                          ["Expression smile rate", typeof frame.expression_smile_rate !== "undefined" ? `${Math.round(frame.expression_smile_rate * 100)}%` : "N/A"],
+                          ["Expression pattern", frame.expression_pattern || "N/A"],
+                          ["Head motion score", frame.head_motion_score ?? "N/A"],
+                          ["Posture stability", frame.posture_stability_score ?? "N/A"],
+                          ["Visual engagement", frame.visual_engagement_score ?? "N/A"],
+                          ["Reliability score", result.behavior_analysis.reliability_score ?? "N/A"],
+                          ["Voice available", audio.voice_available ? "Yes" : "No"],
+                          ["Talking pattern", audio.talking_pattern || audio.reason || "N/A"],
+                          ["Speech rhythm", audio.speech_rhythm_score ?? "N/A"],
+                          ["Pause ratio", audio.pause_ratio ?? "N/A"],
+                        ];
+                        return items.map(([label, value]) => (
+                          <div key={label} className="rounded-xl border border-white/10 bg-black/20 px-3 py-2 text-sm">
+                            <div className="font-medium text-white">{label}</div>
+                            <div className="mt-1 text-slate-300">{value}</div>
+                          </div>
+                        ));
+                      })()}
+                    </div>
+                    {result.behavior_analysis.behavior_summary && (
+                      <p className="mt-3 rounded-xl border border-emerald-400/20 bg-emerald-400/10 px-4 py-3 text-sm leading-6 text-slate-200">
+                        {result.behavior_analysis.behavior_summary}
+                      </p>
+                    )}
                   </div>
                 )}
 

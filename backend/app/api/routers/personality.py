@@ -188,6 +188,8 @@ async def predict_personality(file: UploadFile = File(...)) -> dict:
         return prediction
     except HTTPException:
         raise
+    except ValueError as error:
+        raise HTTPException(status_code=422, detail=str(error))
     except Exception as error:
         raise HTTPException(status_code=500, detail=f"Failed to run personality inference: {error}")
     finally:
