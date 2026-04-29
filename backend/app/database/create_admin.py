@@ -12,7 +12,7 @@ from app.database import crud
 from app.core.config import settings
 from passlib.context import CryptContext
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+pwd_context = CryptContext(schemes=["pbkdf2_sha256"], deprecated="auto")
 
 def create_admin():
     """Create admin user if it doesn't exist"""

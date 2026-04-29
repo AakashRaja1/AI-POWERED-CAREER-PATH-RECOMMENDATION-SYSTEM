@@ -1,4 +1,5 @@
 from pathlib import Path
+from pydantic import field_validator
 from pydantic_settings import BaseSettings
 
 # BASE_DIR should point to the repository 'backend' directory (two levels up from this file)
@@ -24,5 +25,13 @@ class Settings(BaseSettings):
         "env_file": str(BASE_DIR / ".env"),
         "env_file_encoding": "utf-8"
     }
+
+    @field_validator("DATABASE_URL")
+    @classmethod
+    def require_postgresql(cls, value: str) -> str:
+        allowed_prefixes = ("postgresql://", "postgresql+psycopg2://")
+        if not value.startswith(allowed_prefixes):
+            raise ValueError("DATABASE_URL must use PostgreSQL, for example postgresql://user:password@localhost:5432/dbname")
+        return value
 
 settings = Settings()

@@ -98,7 +98,14 @@ def delete_prediction(session: Session, prediction_id: int) -> bool:
         logger.error(f"Error deleting prediction: {e}")
         raise
 
-def update_user(session: Session, user_id: int, full_name: str = None, email: str = None) -> Optional[User]:
+def update_user(
+    session: Session,
+    user_id: int,
+    full_name: str = None,
+    email: str = None,
+    password: str = None,
+    is_admin: bool = None,
+) -> Optional[User]:
     """Update a user"""
     try:
         user = session.get(User, user_id)
@@ -108,6 +115,10 @@ def update_user(session: Session, user_id: int, full_name: str = None, email: st
             user.full_name = full_name
         if email:
             user.email = email
+        if password:
+            user.password = password
+        if is_admin is not None:
+            user.is_admin = is_admin
         session.add(user)
         session.commit()
         session.refresh(user)

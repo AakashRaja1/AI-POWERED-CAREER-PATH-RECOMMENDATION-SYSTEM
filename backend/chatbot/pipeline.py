@@ -3,17 +3,8 @@ from .groq_client import get_groq_client
 from app.core.config import settings
 import re
 import logging
+import os
 from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeoutError
-
-try:
-    from .training_embed import embed_text
-    from .training_store import search_chunks
-    _RETRIEVAL_ENABLED = True
-except Exception as e:
-    embed_text = None
-    search_chunks = None
-    _RETRIEVAL_ENABLED = False
-    logging.getLogger(__name__).warning("Chat retrieval disabled: optional dependency missing or failed to import (%s)", e)
 
 logger = logging.getLogger(__name__)
 
@@ -22,6 +13,30 @@ MAX_CHATBOT_QUESTIONS = 5
 _MAX_CHAT_MESSAGES = 16
 _MAX_BOOK_CONTEXT_CHARS = 1200
 _LLM_EXECUTOR = ThreadPoolExecutor(max_workers=4)
+_RETRIEVAL_ENABLED = os.getenv("CHAT_RETRIEVAL_ENABLED", "0").lower() in {"1", "true", "yes"}
+_RETRIEVAL_IMPORT_ATTEMPTED = False
+_embed_text = None
+_search_chunks = None
+
+
+def _get_retrieval_helpers():
+    global _RETRIEVAL_IMPORT_ATTEMPTED, _embed_text, _search_chunks
+
+    if not _RETRIEVAL_ENABLED:
+        return None, None
+
+    if not _RETRIEVAL_IMPORT_ATTEMPTED:
+        _RETRIEVAL_IMPORT_ATTEMPTED = True
+        try:
+            from .training_embed import embed_text
+            from .training_store import search_chunks
+
+            _embed_text = embed_text
+            _search_chunks = search_chunks
+        except Exception as e:
+            logger.info("Chat retrieval unavailable; continuing without book context: %s", e)
+
+    return _embed_text, _search_chunks
 
 
 def _trim_chat_history(agent):
@@ -190,7 +205,8 @@ def chatbot_answer(user_id, message):
     _trim_chat_history(agent)
 
     # Search book knowledge
-    if _RETRIEVAL_ENABLED and embed_text and search_chunks:
+    embed_text, search_chunks = _get_retrieval_helpers()
+    if embed_text and search_chunks:
         try:
             query_emb = embed_text(message)
             results = search_chunks(query_emb, n_results=3)

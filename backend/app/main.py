@@ -16,16 +16,8 @@ app = FastAPI()
 # Initialize database tables on startup
 @app.on_event("startup")
 def on_startup():
-    try:
-        db_initialized = init_db()
-        if db_initialized:
-            logger.info("Database tables initialized successfully")
-        else:
-            logger.warning("Database initialization skipped because PostgreSQL is unavailable")
-    except Exception as e:
-        logger.error(f"Error initializing database: {e}", exc_info=True)
-        # Don't raise - allow server to start even if DB init fails
-        # This allows the server to start and show connection errors in API calls
+    init_db()
+    logger.info("PostgreSQL database tables initialized successfully")
 
 app.add_middleware(
     CORSMiddleware,

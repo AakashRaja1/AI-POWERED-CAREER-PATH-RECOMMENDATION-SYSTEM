@@ -1,7 +1,7 @@
 {
-  "python.defaultInterpreterPath": "C:/Users/aakas/OneDrive/Desktop/New folder/AI POWERED CAREER PATH RECOMMENDATION SYSTEM/venv/Scripts/python.exe",
+  "python.defaultInterpreterPath": "C:/Users/aakas/OneDrive/Desktop/ALL Files/projects/New folder/AI POWERED CAREER PATH RECOMMENDATION SYSTEM/venv/Scripts/python.exe",
   "terminal.integrated.env.windows": {
-    "VIRTUAL_ENV": "C:/Users/aakas/OneDrive/Desktop/New folder/AI POWERED CAREER PATH RECOMMENDATION SYSTEM/venv",
-    "PATH": "C:/Users/aakas/OneDrive/Desktop/New folder/AI POWERED CAREER PATH RECOMMENDATION SYSTEM/venv/Scripts;${env:PATH}"
+    "VIRTUAL_ENV": "C:/Users/aakas/OneDrive/Desktop/ALL Files/projects/New folder/AI POWERED CAREER PATH RECOMMENDATION SYSTEM/venv",
+    "PATH": "C:/Users/aakas/OneDrive/Desktop/ALL Files/projects/New folder/AI POWERED CAREER PATH RECOMMENDATION SYSTEM/venv/Scripts;${env:PATH}"
   }
 }

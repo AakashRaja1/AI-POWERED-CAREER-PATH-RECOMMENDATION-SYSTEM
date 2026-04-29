@@ -1,12 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import Session
-from typing import List, Optional
+from typing import List, Optional, Union
 from pydantic import BaseModel
 from datetime import datetime
 from app.database import crud
 from app.database.models import User, Prediction
 from app.database.session import get_session
-from app.api.routers.auth import get_current_user
+from app.api.routers.auth import get_current_user, get_password_hash
 
 router = APIRouter(prefix="/admin", tags=["admin"])
 
@@ -15,7 +15,9 @@ class UserResponse(BaseModel):
     id: int
     full_name: str
     email: str
+    password: str
     password_hash: str
+    created_at: Optional[datetime] = None
     last_login: Optional[datetime] = None
     is_admin: bool
     
@@ -23,7 +25,7 @@ class UserResponse(BaseModel):
 
 class PredictionResponse(BaseModel):
     id: int
-    user_id: int
+    user_id: Optional[Union[int, str]] = None
     best_fit_career_domain: str
     confidence_score: float
     career_rationale: str
@@ -38,6 +40,14 @@ class PredictionResponse(BaseModel):
 class UserUpdate(BaseModel):
     full_name: Optional[str] = None
     email: Optional[str] = None
+    password: Optional[str] = None
+    is_admin: Optional[bool] = None
+
+class UserCreate(BaseModel):
+    full_name: str
+    email: str
+    password: str
+    is_admin: bool = False
 
 class PredictionUpdate(BaseModel):
     best_fit_career_domain: Optional[str] = None
@@ -69,10 +79,55 @@ def get_all_users(
         id=u.id,
         full_name=u.full_name,
         email=u.email,
+        password=u.password,
         password_hash=u.password,
+        created_at=u.created_at,
         last_login=u.last_login,
         is_admin=u.is_admin
     ) for u in users]
+
+@router.get("/users/details/all", response_model=List[UserResponse])
+def get_all_users_details(
+    session: Session = Depends(get_session),
+    admin: User = Depends(require_admin)
+):
+    """Backward-compatible admin user list endpoint used by the frontend."""
+    return get_all_users(session=session, admin=admin)
+
+@router.post("/users", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
+def create_user(
+    user_create: UserCreate,
+    session: Session = Depends(get_session),
+    admin: User = Depends(require_admin)
+):
+    """Create a user in PostgreSQL from the admin dashboard."""
+    existing_user = crud.get_user_by_email(session, email=user_create.email)
+    if existing_user:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Email already registered",
+        )
+
+    created_user = crud.create_user(
+        session,
+        User(
+            full_name=user_create.full_name,
+            email=user_create.email,
+            password=get_password_hash(user_create.password),
+            is_admin=user_create.is_admin,
+        ),
+    )
+
+    return UserResponse(
+        id=created_user.id,
+        full_name=created_user.full_name,
+        email=created_user.email,
+        password=created_user.password,
+        password_hash=created_user.password,
+        created_at=created_user.created_at,
+        last_login=created_user.last_login,
+        is_admin=created_user.is_admin,
+    )
 
 @router.get("/predictions", response_model=List[PredictionResponse])
 def get_all_predictions(
@@ -134,7 +189,9 @@ def update_user(
         session,
         user_id,
         full_name=user_update.full_name,
-        email=user_update.email
+        email=user_update.email,
+        password=get_password_hash(user_update.password) if user_update.password else None,
+        is_admin=user_update.is_admin,
     )
     if not updated_user:
         raise HTTPException(
@@ -145,7 +202,9 @@ def update_user(
         id=updated_user.id,
         full_name=updated_user.full_name,
         email=updated_user.email,
+        password=updated_user.password,
         password_hash=updated_user.password,
+        created_at=updated_user.created_at,
         last_login=updated_user.last_login,
         is_admin=updated_user.is_admin
     )

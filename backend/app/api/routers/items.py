@@ -6,7 +6,9 @@ import logging
 import math
 import random
 import io
+import warnings
 from PyPDF2 import PdfReader
+from sklearn.exceptions import InconsistentVersionWarning
 
 from app.models import StudentInput, PredictionOutput
 from app.data_loader import load_dataset
@@ -37,7 +39,9 @@ def _try_load_any(dirpath: Path, names):
         candidate = dirpath / nm
         if candidate.exists():
             try:
-                obj = joblib.load(candidate)
+                with warnings.catch_warnings():
+                    warnings.filterwarnings("ignore", category=InconsistentVersionWarning)
+                    obj = joblib.load(candidate)
                 logger.info(f"Loaded artifact {candidate}")
                 return obj
             except Exception as e:

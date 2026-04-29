@@ -10,6 +10,7 @@ class User(SQLModel, table=True):
     password: str
     is_admin: bool = Field(default=False)
     last_login: Optional[datetime] = Field(default=None)
+    created_at: datetime = Field(default_factory=datetime.utcnow)
 
 
 class Prediction(SQLModel, table=True):

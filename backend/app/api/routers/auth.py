@@ -6,6 +6,7 @@ from sqlmodel import Session
 from pydantic import BaseModel
 from datetime import datetime, timedelta, timezone
 import os
+import bcrypt
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -21,7 +22,8 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 router = APIRouter()
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+# New passwords use pbkdf2_sha256 because it has no extra binary dependency.
+pwd_context = CryptContext(schemes=["pbkdf2_sha256"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 oauth2_scheme_optional = OAuth2PasswordBearer(tokenUrl="login", auto_error=False)
 
@@ -43,7 +45,22 @@ class Token(BaseModel):
     token_type: str
 
 def verify_password(plain_password, hashed_password):
-    return pwd_context.verify(plain_password, hashed_password)
+    if not hashed_password:
+        return False
+
+    if hashed_password.startswith(("$2a$", "$2b$", "$2y$")):
+        password_bytes = plain_password.encode("utf-8")
+        if len(password_bytes) > 72:
+            return False
+        try:
+            return bcrypt.checkpw(password_bytes, hashed_password.encode("utf-8"))
+        except ValueError:
+            return False
+
+    try:
+        return pwd_context.verify(plain_password, hashed_password)
+    except ValueError:
+        return False
 
 def get_password_hash(password):
     return pwd_context.hash(password)

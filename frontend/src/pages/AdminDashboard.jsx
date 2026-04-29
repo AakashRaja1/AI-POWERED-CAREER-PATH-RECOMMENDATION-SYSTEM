@@ -33,7 +33,7 @@ const AdminDashboard = () => {
     setLoading(true);
     try {
       const [usersRes, predictionsRes] = await Promise.all([
-        fetch("http://localhost:8000/admin/users/details/all", {
+        fetch("http://localhost:8000/admin/users", {
           headers: { Authorization: `Bearer ${token}` },
         }),
         fetch("http://localhost:8000/admin/predictions", {
@@ -41,14 +41,18 @@ const AdminDashboard = () => {
         }),
       ]);
 
-      if (usersRes.ok) {
-        const usersData = await usersRes.json();
-        setUsers(usersData);
+      if (!usersRes.ok || !predictionsRes.ok) {
+        const usersError = usersRes.ok ? "" : await usersRes.text();
+        const predictionsError = predictionsRes.ok ? "" : await predictionsRes.text();
+        throw new Error(usersError || predictionsError || "Failed to load admin data");
       }
-      if (predictionsRes.ok) {
-        const predictionsData = await predictionsRes.json();
-        setPredictions(predictionsData);
-      }
+
+      const [usersData, predictionsData] = await Promise.all([
+        usersRes.json(),
+        predictionsRes.json(),
+      ]);
+      setUsers(usersData);
+      setPredictions(predictionsData);
     } catch (error) {
       console.error("Error fetching data:", error);
       alert("Error loading data. Please check your connection.");
@@ -261,18 +265,18 @@ const AdminDashboard = () => {
                       <td className="p-3">{user.full_name}</td>
                       <td className="p-3">{user.email}</td>
                       <td className="p-3 font-mono text-xs">
-                        <span title={user.password} className="cursor-help hover:text-blue-600">
-                          {user.password.substring(0, 20)}...
+                        <span title={user.password_hash} className="cursor-help hover:text-blue-600">
+                          {(user.password_hash || "").substring(0, 20)}...
                         </span>
                       </td>
                       <td className="p-3 text-gray-600">
-                        {new Date(user.created_at).toLocaleDateString('en-US', {
+                        {user.created_at ? new Date(user.created_at).toLocaleDateString('en-US', {
                           year: 'numeric',
                           month: 'short',
                           day: 'numeric',
                           hour: '2-digit',
                           minute: '2-digit'
-                        })}
+                        }) : <span className="text-gray-400">Unknown</span>}
                       </td>
                       <td className="p-3 text-gray-600">
                         {user.last_login ? (
