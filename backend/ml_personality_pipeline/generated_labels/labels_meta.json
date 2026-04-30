@@ -1,0 +1,14 @@
+{
+  "trait": "extraversion",
+  "mode": "binarize",
+  "bins": 3,
+  "thresholds": [
+    0.5,
+    0.5
+  ],
+  "num_samples": 6000,
+  "classes": [
+    "low"
+  ],
+  "labels_csv": "backend\\ml_personality_pipeline\\generated_labels\\labels.csv"
+}

@@ -1,0 +1,9 @@
+{
+  "num_videos_found": 6000,
+  "num_videos_with_labels": 6000,
+  "num_frames_generated": 0,
+  "num_classes": 0,
+  "class_distribution": {},
+  "frames_root": "backend\\ml_personality_pipeline\\processed_dataset\\frames",
+  "labels_csv": "backend\\ml_personality_pipeline\\processed_dataset\\labels.csv"
+}

@@ -1,0 +1,17 @@
+{
+  "train": {
+    "status": "ok",
+    "count": 6000,
+    "reason": ""
+  },
+  "val": {
+    "status": "skipped",
+    "count": 0,
+    "reason": "File 'annotation_validation.pkl' is encrypted, password required for extraction"
+  },
+  "test": {
+    "status": "skipped",
+    "count": 0,
+    "reason": "File 'annotation_test.pkl' is encrypted, password required for extraction"
+  }
+}
