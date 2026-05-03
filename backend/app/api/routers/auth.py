@@ -110,7 +110,7 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), session: Session = D
     session.commit()
     session.refresh(user)
     access_token = create_access_token(data={"sub": user.email, "is_admin": user.is_admin})
-    return {"access_token": access_token, "token_type": "bearer", "is_admin": user.is_admin}
+    return {"access_token": access_token, "token_type": "bearer", "is_admin": user.is_admin, "full_name": user.full_name, "email": user.email}
 
 def get_current_user(token: str = Depends(oauth2_scheme), session: Session = Depends(get_session)):
     """Get the current authenticated user from the JWT token"""

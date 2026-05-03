@@ -5,7 +5,6 @@ import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
-import CareerFormPage from "./pages/CareerFormPage";
 import ResultPage from "./pages/ResultPage";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -13,8 +12,9 @@ import Chatbot from "./pages/Chatbot"; // <- import chatbot page
 import Dashboard from "./pages/Dashboard";
 import ScholarshipFinder from "./pages/ScholarshipFinder";
 import BehaviorAnalysis from "./pages/BehaviorAnalysis";
-import BehaviorCareerResult from "./pages/BehaviorCareerResult";
+import CareerPathPage from "./pages/CareerPathPage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedLayout from "./components/ProtectedLayout";
 
 const App = () => {
   const [result, setResult] = useState(null);
@@ -30,9 +30,11 @@ const App = () => {
           <Route 
             path="/dashboard" 
             element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
+              <ProtectedLayout>
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              </ProtectedLayout>
             } 
           />
 
@@ -43,27 +45,33 @@ const App = () => {
           <Route 
             path="/admin" 
             element={
-              <ProtectedRoute>
-                <AdminDashboard />
-              </ProtectedRoute>
+              <ProtectedLayout>
+                <ProtectedRoute>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              </ProtectedLayout>
             } 
           />
 
-          {/* ===== Career Recommendation Flow (Protected) ===== */}
+          {/* ===== Career Path ===== */}
           <Route 
             path="/form" 
             element={
-              <ProtectedRoute>
-                <CareerFormPage setResult={setResult} />
-              </ProtectedRoute>
+              <ProtectedLayout>
+                <ProtectedRoute>
+                  <CareerPathPage />
+                </ProtectedRoute>
+              </ProtectedLayout>
             } 
           />
           <Route 
             path="/result" 
             element={
-              <ProtectedRoute>
-                <ResultPage result={result} />
-              </ProtectedRoute>
+              <ProtectedLayout>
+                <ProtectedRoute>
+                  <CareerPathPage />
+                </ProtectedRoute>
+              </ProtectedLayout>
             } 
           />
 
@@ -71,36 +79,44 @@ const App = () => {
           <Route 
             path="/chatbot" 
             element={
-              <ProtectedRoute>
-                <Chatbot />
-              </ProtectedRoute>
+              <ProtectedLayout>
+                <ProtectedRoute>
+                  <Chatbot />
+                </ProtectedRoute>
+              </ProtectedLayout>
             } 
           />
 
           <Route 
             path="/scholarships" 
             element={
-              <ProtectedRoute>
-                <ScholarshipFinder />
-              </ProtectedRoute>
+              <ProtectedLayout>
+                <ProtectedRoute>
+                  <ScholarshipFinder />
+                </ProtectedRoute>
+              </ProtectedLayout>
             } 
           />
 
           <Route 
             path="/behavior" 
             element={
-              <ProtectedRoute>
-                <BehaviorAnalysis />
-              </ProtectedRoute>
+              <ProtectedLayout>
+                <ProtectedRoute>
+                  <BehaviorAnalysis />
+                </ProtectedRoute>
+              </ProtectedLayout>
             } 
           />
 
           <Route
             path="/behavior-career-result"
             element={
-              <ProtectedRoute>
-                <BehaviorCareerResult />
-              </ProtectedRoute>
+              <ProtectedLayout>
+                <ProtectedRoute>
+                  <CareerPathPage />
+                </ProtectedRoute>
+              </ProtectedLayout>
             }
           />
         </Routes>

@@ -1,220 +1,217 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React from "react";
 
 const MODULES = [
   {
     id: "behavior",
-    title: "Career According to Your Personality",
+    title: "Personality Analysis",
     icon: "👤",
     description:
-      "Understand your personality patterns and translate them into career directions that fit you better.",
+      "Discover your unique personality traits through video analysis. Understand your strengths, work style, and behavioral patterns.",
     action: "Start Analysis",
     href: "#/behavior",
-    accent: "from-orange-500 to-rose-500",
+    accent: "from-violet-500 via-purple-500 to-fuchsia-500",
     badge: "01",
-  },
-  {
-    id: "scholarships",
-    title: "Find Scholarship",
-    icon: "🎓",
-    description:
-      "Search opportunities by level, country, institution type, and funding to support your next step.",
-    action: "Explore Scholarships",
-    href: "#/scholarships",
-    accent: "from-emerald-500 to-cyan-500",
-    badge: "02",
+    bgAccent: "bg-violet-50",
   },
   {
     id: "career-path",
     title: "Career Path",
     icon: "🎯",
     description:
-      "Use the recommendation system to discover a career path that aligns with your interests and skills.",
-    action: "Start Assessment",
+      "Get personalized career recommendations based on your personality analysis. Explore pathways tailored to your unique profile.",
+    action: "View Career Path",
     href: "#/form",
-    accent: "from-blue-500 to-indigo-500",
+    accent: "from-blue-500 via-cyan-500 to-teal-500",
+    badge: "02",
+    bgAccent: "bg-blue-50",
+  },
+  {
+    id: "scholarships",
+    title: "Scholarship Finder",
+    icon: "🎓",
+    description:
+      "Find scholarships and funding opportunities that match your profile. Filter by level, country, and funding type.",
+    action: "Explore Scholarships",
+    href: "#/scholarships",
+    accent: "from-emerald-500 via-green-500 to-lime-500",
     badge: "03",
+    bgAccent: "bg-emerald-50",
   },
   {
     id: "assistant",
     title: "AI Assistant",
     icon: "🤖",
     description:
-      "Ask career questions anytime and get instant guidance from the built-in assistant.",
+      "Chat with our AI to get instant answers about careers, education, and your personal development journey.",
     action: "Open Assistant",
     href: "#/chatbot",
-    accent: "from-purple-500 to-fuchsia-500",
+    accent: "from-orange-500 via-amber-500 to-yellow-500",
     badge: "04",
+    bgAccent: "bg-orange-50",
   },
 ];
 
 const Dashboard = () => {
-  const [userName, setUserName] = useState("");
-  const [userEmail, setUserEmail] = useState("");
-
-  useEffect(() => {
-    const storedName = localStorage.getItem("userName");
-    const email = localStorage.getItem("userEmail") || "";
-
-    setUserEmail(email);
-
-    if (storedName && storedName !== email) {
-      setUserName(storedName);
-    } else if (email) {
-      const namePart = email.split("@")[0];
-      const formattedName = namePart
-        .replace(/[._]/g, " ")
-        .split(" ")
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-        .join(" ");
-      setUserName(formattedName);
-      localStorage.setItem("userName", formattedName);
-    } else {
-      setUserName("Guest");
-    }
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("userEmail");
-    localStorage.removeItem("userName");
-    localStorage.removeItem("cp_user_id");
-    window.location.hash = "#/";
-  };
-
-  const userInitial = useMemo(() => (userName ? userName.charAt(0).toUpperCase() : "U"), [userName]);
-
   return (
-    <div className="relative min-h-screen overflow-hidden bg-linear-to-br from-slate-50 via-sky-50 to-indigo-100 text-slate-900">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-24 -left-20 h-72 w-72 rounded-full bg-sky-300/30 blur-3xl" />
-        <div className="absolute top-32 -right-24 h-80 w-80 rounded-full bg-fuchsia-300/25 blur-3xl" />
-        <div className="absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-emerald-300/20 blur-3xl" />
+    <div className="relative min-h-screen bg-white overflow-hidden">
+      {/* Animated Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -left-40 w-96 h-96 rounded-full bg-linear-to-br from-violet-200/50 to-transparent blur-3xl" />
+        <div className="absolute top-1/4 -right-32 w-80 h-80 rounded-full bg-linear-to-bl from-blue-200/50 to-transparent blur-3xl" />
+        <div className="absolute -bottom-40 left-1/2 w-96 h-96 rounded-full bg-linear-to-tr from-emerald-200/50 to-transparent blur-3xl" />
       </div>
 
-      <div className="relative z-10 px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
-        <section className="mx-auto mb-6 max-w-7xl overflow-hidden rounded-[2rem] border border-white/70 bg-slate-950/90 text-white shadow-[0_30px_80px_-25px_rgba(15,23,42,0.65)] backdrop-blur-xl">
-          <div className="grid gap-8 px-6 py-8 sm:px-8 lg:grid-cols-[1.4fr_0.9fr] lg:px-10 lg:py-10">
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-sky-100">
-                Career dashboard
+      <div className="relative z-10">
+        {/* Hero Section */}
+        <section className="px-4 py-12 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-6xl">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-linear-to-r from-violet-100 to-purple-100 border border-violet-200 mb-6">
+                <span className="text-2xl">✨</span>
+                <span className="text-sm font-semibold text-violet-700">Welcome to Your Career Journey</span>
               </div>
-              <div className="space-y-4">
-                <h1 className="max-w-3xl text-3xl font-semibold leading-tight sm:text-4xl lg:text-5xl">
-                  Build a clear next step with a cleaner, calmer dashboard.
-                </h1>
-                <p className="max-w-2xl text-sm leading-7 text-slate-300 sm:text-base">
-                  Move through personality analysis, scholarships, career path recommendations, and AI guidance in a simple sequence that keeps the experience focused.
+              <h1 className="text-5xl sm:text-6xl font-black bg-linear-to-r from-violet-600 via-purple-600 to-fuchsia-600 bg-clip-text text-transparent mb-6 leading-tight">
+                Find Your Perfect Career
+              </h1>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Follow a guided path through personality analysis, career exploration, scholarships, and AI-powered guidance. Your personalized career journey starts here.
+              </p>
+            </div>
+
+            {/* Main Modules Grid */}
+            <div className="grid gap-6 lg:grid-cols-4 mb-12">
+              {MODULES.map((module, idx) => (
+                <div
+                  key={module.id}
+                  className="group relative"
+                >
+                  {/* Card */}
+                  <div className={`relative h-full rounded-3xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 ${module.bgAccent}`}>
+                    {/* Gradient Border */}
+                    <div className={`absolute inset-0 bg-linear-to-br ${module.accent} rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10`} />
+                    
+                    <div className="relative p-6 h-full bg-white rounded-3xl group-hover:bg-opacity-95 transition-all duration-300 flex flex-col">
+                      {/* Badge */}
+                      <div className="flex items-start justify-between mb-4">
+                        <div className={`inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-linear-to-br ${module.accent} text-white text-lg font-bold shadow-lg`}>
+                          {module.badge}
+                        </div>
+                        <span className="text-3xl">{module.icon}</span>
+                      </div>
+
+                      {/* Content */}
+                      <h3 className="text-xl font-bold text-gray-900 mb-3">
+                        {module.title}
+                      </h3>
+                      <p className="text-sm text-gray-600 leading-relaxed grow">
+                        {module.description}
+                      </p>
+
+                      {/* Button */}
+                      <button
+                        onClick={() => window.location.hash = module.href}
+                        className={`mt-6 w-full py-3 px-4 rounded-xl bg-linear-to-r ${module.accent} text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-center`}
+                      >
+                        {module.action}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Journey Steps */}
+            <div className="bg-linear-to-r from-slate-900 via-slate-800 to-slate-900 rounded-3xl p-8 sm:p-12 overflow-hidden relative">
+              <div className="absolute inset-0 opacity-10">
+                <div className="absolute inset-0 bg-grid-white/[0.02]" />
+              </div>
+
+              <div className="relative z-10">
+                <h2 className="text-3xl sm:text-4xl font-bold text-white mb-12 text-center">
+                  Your Recommended Journey
+                </h2>
+
+                <div className="grid gap-6 md:grid-cols-4">
+                  {[
+                    {
+                      step: "1",
+                      title: "Personality Analysis",
+                      desc: "Upload a video for personality assessment",
+                      icon: "👤",
+                    },
+                    {
+                      step: "2",
+                      title: "Career Path",
+                      desc: "Discover careers based on your traits",
+                      icon: "🎯",
+                    },
+                    {
+                      step: "3",
+                      title: "Scholarships",
+                      desc: "Find funding for your education",
+                      icon: "🎓",
+                    },
+                    {
+                      step: "4",
+                      title: "AI Assistant",
+                      desc: "Get ongoing guidance and support",
+                      icon: "🤖",
+                    },
+                  ].map((item, idx) => (
+                    <div key={idx} className="text-center">
+                      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-linear-to-br from-violet-500 to-fuchsia-500 text-white text-2xl font-bold mb-4 shadow-lg">
+                        {item.step}
+                      </div>
+                      <p className="text-lg font-semibold text-white">{item.title}</p>
+                      <p className="text-sm text-gray-300 mt-2">{item.desc}</p>
+                      <span className="text-3xl mt-2 block">{item.icon}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <p className="text-center text-gray-300 mt-8 text-sm">
+                  ⏱️ Estimated completion time: <span className="font-semibold">2-3 hours</span>
                 </p>
               </div>
-              <div className="flex flex-wrap gap-3 text-sm">
-                <span className="rounded-full bg-white/10 px-4 py-2 text-slate-100 ring-1 ring-white/10">Personalized</span>
-                <span className="rounded-full bg-white/10 px-4 py-2 text-slate-100 ring-1 ring-white/10">Modern UI</span>
-                <span className="rounded-full bg-white/10 px-4 py-2 text-slate-100 ring-1 ring-white/10">Fast access</span>
+            </div>
+
+            {/* Stats Section */}
+            <div className="grid gap-6 md:grid-cols-3 my-12">
+              <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 hover:shadow-xl transition-shadow">
+                <div className="text-4xl font-bold bg-linear-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent mb-2">
+                  100%
+                </div>
+                <p className="text-gray-600 font-medium">Personalized</p>
+                <p className="text-sm text-gray-500 mt-2">Each recommendation is unique to you</p>
+              </div>
+              <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 hover:shadow-xl transition-shadow">
+                <div className="text-4xl font-bold bg-linear-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent mb-2">
+                  10K+
+                </div>
+                <p className="text-gray-600 font-medium">Career Options</p>
+                <p className="text-sm text-gray-500 mt-2">Explore thousands of career paths</p>
+              </div>
+              <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 hover:shadow-xl transition-shadow">
+                <div className="text-4xl font-bold bg-linear-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent mb-2">
+                  24/7
+                </div>
+                <p className="text-gray-600 font-medium">AI Support</p>
+                <p className="text-sm text-gray-500 mt-2">Get answers anytime you need</p>
               </div>
             </div>
 
-            <div className="rounded-[1.75rem] border border-white/10 bg-white/8 p-5 shadow-2xl shadow-black/10">
-              <div className="flex items-center gap-4">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-400 via-indigo-500 to-fuchsia-500 text-2xl font-bold text-white shadow-lg shadow-sky-500/30">
-                  {userInitial}
-                </div>
-                <div className="min-w-0">
-                  <p className="text-sm uppercase tracking-[0.2em] text-sky-200">Signed in as</p>
-                  <h2 className="mt-1 truncate text-2xl font-semibold text-white">{userName}</h2>
-                  <p className="truncate text-sm text-slate-300">{userEmail || "Email not available"}</p>
-                </div>
-              </div>
-
-              <div className="mt-5 grid grid-cols-3 gap-3 text-center text-xs text-slate-300">
-                <div className="rounded-2xl bg-white/8 p-3 ring-1 ring-white/10">
-                  <div className="text-base font-semibold text-white">4</div>
-                  Modules
-                </div>
-                <div className="rounded-2xl bg-white/8 p-3 ring-1 ring-white/10">
-                  <div className="text-base font-semibold text-white">AI</div>
-                  Guided
-                </div>
-                <div className="rounded-2xl bg-white/8 p-3 ring-1 ring-white/10">
-                  <div className="text-base font-semibold text-white">24/7</div>
-                  Support
-                </div>
-              </div>
-
-              <button
-                onClick={handleLogout}
-                className="mt-5 w-full rounded-2xl border border-white/10 bg-white px-4 py-3 font-semibold text-slate-900 transition hover:-translate-y-0.5 hover:bg-slate-100"
-              >
-                Logout
-              </button>
-            </div>
-          </div>
-        </section>
-
-        <section className="mx-auto mb-6 max-w-7xl">
-          <div className="flex items-end justify-between gap-4 mb-4">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">Module sequence</p>
-              <h3 className="mt-1 text-2xl font-semibold text-slate-900">Follow the recommended flow</h3>
-            </div>
-          </div>
-
-          <div className="grid gap-5 lg:grid-cols-2 xl:grid-cols-4">
-            {MODULES.map((module) => (
-              <article
-                key={module.id}
-                className="group relative overflow-hidden rounded-[1.75rem] border border-white/80 bg-white/85 p-6 shadow-[0_20px_60px_-25px_rgba(15,23,42,0.25)] backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_70px_-28px_rgba(15,23,42,0.35)]"
-              >
-                <div className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${module.accent}`} />
-                <div className="mb-5 flex items-start justify-between gap-3">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-950 text-2xl text-white shadow-lg shadow-slate-900/15">
-                    {module.icon}
-                  </div>
-                  <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-500">
-                    {module.badge}
-                  </span>
-                </div>
-                <h4 className="text-xl font-semibold text-slate-900">{module.title}</h4>
-                <p className="mt-3 min-h-16 text-sm leading-6 text-slate-600">{module.description}</p>
-                <button
-                  onClick={() => window.location.hash = module.href}
-                  className={`mt-6 inline-flex w-full items-center justify-center rounded-2xl bg-gradient-to-r ${module.accent} px-4 py-3 text-sm font-semibold text-white transition duration-300 hover:brightness-110`}
-                >
-                  {module.action}
-                </button>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="mx-auto max-w-7xl">
-          <div className="grid gap-5 md:grid-cols-3">
-            <div className="rounded-[1.5rem] border border-white/70 bg-white/80 p-5 shadow-lg backdrop-blur-md">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">Step 1</p>
-              <p className="mt-2 text-lg font-semibold text-slate-900">Personality first</p>
-              <p className="mt-2 text-sm leading-6 text-slate-600">Start with behavior analysis to make the rest of the recommendations feel more personal and accurate.</p>
-            </div>
-            <div className="rounded-[1.5rem] border border-white/70 bg-white/80 p-5 shadow-lg backdrop-blur-md">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">Step 2</p>
-              <p className="mt-2 text-lg font-semibold text-slate-900">Funding support</p>
-              <p className="mt-2 text-sm leading-6 text-slate-600">Look for scholarships early so career planning and education planning can move together.</p>
-            </div>
-            <div className="rounded-[1.5rem] border border-white/70 bg-white/80 p-5 shadow-lg backdrop-blur-md">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">Step 3</p>
-              <p className="mt-2 text-lg font-semibold text-slate-900">Guidance loop</p>
-              <p className="mt-2 text-sm leading-6 text-slate-600">Use the career path flow and AI assistant to refine choices and stay supported.
+            {/* Footer */}
+            <div className="text-center py-8 border-t border-gray-200 mt-12">
+              <p className="text-gray-600">
+                Ready to discover your ideal career?
+                <span className="font-semibold text-transparent bg-linear-to-r from-violet-600 to-fuchsia-600 bg-clip-text"> Start with Personality Analysis</span>
+              </p>
+              <p className="text-xs text-gray-500 mt-4">
+                © 2025 AI Career Path Recommendation System | Built for Your Future 🚀
               </p>
             </div>
           </div>
         </section>
-
-        <footer className="mx-auto mt-8 max-w-7xl rounded-[1.5rem] border border-white/70 bg-white/75 p-5 text-center shadow-lg backdrop-blur-md">
-          <p className="text-sm text-slate-600">
-            Powered by <span className="font-semibold text-slate-900">AI Intelligence</span>
-          </p>
-          <p className="mt-1 text-xs text-slate-500">
-            © 2025 Final Year Project: Career Path Recommendation System.
-          </p>
-        </footer>
       </div>
     </div>
   );

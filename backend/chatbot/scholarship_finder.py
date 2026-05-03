@@ -4,7 +4,7 @@ from typing import Any
 from urllib.parse import parse_qs, unquote, urlparse
 
 import requests
-from lxml import html
+from bs4 import BeautifulSoup
 
 from app.core.config import settings
 from .groq_client import get_groq_client
@@ -29,6 +29,10 @@ NOISE_KEYWORDS = (
     "mobile app",
     "play kahoot",
 )
+
+LLM_MAX_CONTEXT_RESULTS = 2
+SEARCH_TIMEOUT_SECONDS = 10
+PAGE_TIMEOUT_SECONDS = 8
 
 
 def _searxng_instances() -> list[str]:
@@ -55,7 +59,7 @@ def _searxng_search(query: str, max_results: int = 10) -> list[dict[str, str]]:
                     "safesearch": 1,
                 },
                 headers=headers,
-                timeout=4,
+                timeout=settings.SEARXNG_REQUEST_TIMEOUT_SECONDS,
             )
             response.raise_for_status()
             payload = response.json()
@@ -77,7 +81,7 @@ def _searxng_search(query: str, max_results: int = 10) -> list[dict[str, str]]:
                 logger.info("SearxNG search succeeded using %s", base_url)
                 return parsed
         except Exception as exc:
-            logger.warning("SearxNG search failed for %s: %s", base_url, exc)
+            logger.debug("SearxNG search unavailable for %s: %s", base_url, exc)
 
     return []
 
@@ -122,10 +126,10 @@ def _is_probably_scholarship_result(title: str, snippet: str, url: str) -> bool:
 
 def _strip_html_text(page_html: str, max_chars: int = 3000) -> str:
     try:
-        doc = html.fromstring(page_html)
-        for node in doc.xpath("//script|//style|//noscript"):
-            node.drop_tree()
-        text = " ".join(doc.text_content().split())
+        soup = BeautifulSoup(page_html, "html.parser")
+        for tag in soup.find_all(["script", "style", "noscript"]):
+            tag.decompose()
+        text = " ".join(soup.get_text(" ").split())
         return text[:max_chars]
     except Exception:
         return ""
@@ -137,32 +141,27 @@ def _duckduckgo_search(query: str, max_results: int = 10) -> list[dict[str, str]
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
     }
 
-    response = requests.get(url, params={"q": query}, headers=headers, timeout=15)
+    response = requests.get(url, params={"q": query}, headers=headers, timeout=SEARCH_TIMEOUT_SECONDS)
     if response.status_code >= 300:
         return []
 
-    doc = html.fromstring(response.text)
+    soup = BeautifulSoup(response.text, "html.parser")
     results: list[dict[str, str]] = []
 
-    for node in doc.xpath('//div[contains(@class, "result")]'):
-        link_nodes = node.xpath('.//a[contains(@class, "result__a")]')
-        if not link_nodes:
+    for node in soup.select("div.result"):
+        link_node = node.select_one("a.result__a")
+        if not link_node:
             continue
 
-        link_node = link_nodes[0]
-        raw_href = link_node.get("href", "").strip()
+        raw_href = (link_node.get("href") or "").strip()
         if not raw_href:
             continue
 
-        title = " ".join(link_node.text_content().split())
+        title = " ".join(link_node.get_text(" ").split())
         source_url = _decode_duckduckgo_redirect(raw_href)
 
-        snippet_nodes = node.xpath(
-            './/a[contains(@class, "result__snippet")] | .//div[contains(@class, "result__snippet")]'
-        )
-        snippet = ""
-        if snippet_nodes:
-            snippet = " ".join(snippet_nodes[0].text_content().split())
+        snippet_node = node.select_one("a.result__snippet, div.result__snippet")
+        snippet = " ".join(snippet_node.get_text(" ").split()) if snippet_node else ""
 
         results.append(
             {
@@ -176,36 +175,30 @@ def _duckduckgo_search(query: str, max_results: int = 10) -> list[dict[str, str]
             break
 
     return results
-
-
 def _bing_search(query: str, max_results: int = 10) -> list[dict[str, str]]:
     url = "https://www.bing.com/search"
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
     }
 
-    response = requests.get(url, params={"q": query}, headers=headers, timeout=15)
+    response = requests.get(url, params={"q": query}, headers=headers, timeout=SEARCH_TIMEOUT_SECONDS)
     response.raise_for_status()
 
-    doc = html.fromstring(response.text)
+    soup = BeautifulSoup(response.text, "html.parser")
     results: list[dict[str, str]] = []
 
-    for node in doc.xpath('//li[contains(@class, "b_algo")]'):
-        link_nodes = node.xpath('.//h2/a')
-        if not link_nodes:
+    for node in soup.select("li.b_algo"):
+        link_node = node.select_one("h2 a")
+        if not link_node:
             continue
 
-        link_node = link_nodes[0]
-        source_url = (link_node.get("href") or "").strip()
-        source_url = _decode_bing_redirect(source_url)
-        title = " ".join(link_node.text_content().split())
+        source_url = _decode_bing_redirect((link_node.get("href") or "").strip())
+        title = " ".join(link_node.get_text(" ").split())
         if not source_url or not title:
             continue
 
-        snippet_nodes = node.xpath('.//div[contains(@class, "b_caption")]//p')
-        snippet = ""
-        if snippet_nodes:
-            snippet = " ".join(snippet_nodes[0].text_content().split())
+        snippet_node = node.select_one("div.b_caption p")
+        snippet = " ".join(snippet_node.get_text(" ").split()) if snippet_node else ""
 
         results.append(
             {
@@ -278,9 +271,9 @@ def _fetch_source_context(url: str) -> str:
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
     }
     try:
-        response = requests.get(url, headers=headers, timeout=12)
+        response = requests.get(url, headers=headers, timeout=PAGE_TIMEOUT_SECONDS)
         response.raise_for_status()
-        return _strip_html_text(response.text, max_chars=2400)
+        return _strip_html_text(response.text, max_chars=1200)
     except Exception as exc:
         logger.warning("Could not fetch source %s: %s", url, exc)
         return ""
@@ -440,16 +433,8 @@ def find_scholarships(
 
     queries = [
         query,
-        (
-            f"{degree_level} {field_of_study} scholarships {country} "
-            f"international students university"
-        ),
-        (
-            f"{funding_type} scholarships {country} {degree_level} "
-            f"{field_of_study} application deadline"
-        ),
-        f"DAAD {degree_level} {field_of_study} scholarships {country}",
-        f"scholarshipportal {degree_level} {field_of_study} scholarships {country}",
+        f"{degree_level} {field_of_study} scholarships {country}",
+        f"{funding_type} scholarships {country} {degree_level} {field_of_study}",
     ]
 
     search_results = _search_multiple_queries(queries=queries, max_results=max_results)
@@ -478,15 +463,18 @@ def find_scholarships(
         }
 
     source_context_blocks: list[str] = []
-    for idx, result in enumerate(search_results[: max(5, min(max_results, len(search_results)))], start=1):
-        page_context = _fetch_source_context(result["url"])
-        source_context_blocks.append(
+    for idx, result in enumerate(search_results[:LLM_MAX_CONTEXT_RESULTS], start=1):
+        source_block = (
             f"SOURCE {idx}\n"
             f"Title: {result['title']}\n"
             f"URL: {result['url']}\n"
             f"Snippet: {result['snippet']}\n"
-            f"Page Context: {page_context}\n"
         )
+        if len(search_results) <= 2 and idx == 1:
+            page_context = _fetch_source_context(result["url"])
+            if page_context:
+                source_block += f"Page Context: {page_context}\n"
+        source_context_blocks.append(source_block)
 
     llm_prompt = f"""
 You are a scholarship research assistant.
@@ -531,7 +519,6 @@ Return strict JSON with this shape:
 
 Rules:
 - Return up to {max_results} scholarships.
-- Prefer returning at least 10 scholarships when enough distinct evidence is available.
 - If a detail is not available, write "Not clearly specified".
 - Ensure source_link and application_link are valid URLs from the given sources when possible.
 """
@@ -539,12 +526,13 @@ Rules:
     try:
         client = get_groq_client()
         completion = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model=settings.GROQ_CHAT_MODEL,
             messages=[
-                {"role": "system", "content": "You produce accurate scholarship research in JSON."},
+                {"role": "system", "content": "You produce accurate scholarship research in JSON. Be concise."},
                 {"role": "user", "content": llm_prompt},
             ],
-            temperature=0.2,
+            temperature=0.1,
+            max_tokens=min(settings.GROQ_MAX_COMPLETION_TOKENS, 700),
         )
 
         response_text = completion.choices[0].message.content or "{}"

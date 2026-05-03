@@ -207,11 +207,10 @@ async def recommend_career(req: CareerRecommendationRequest) -> dict:
         additional_notes = req.additional_notes.strip() or "None"
 
         system_prompt = (
-            "You are an expert career counselor. Recommend the best career path based on the user's personality "
-            "scores and questionnaire answers. Be specific, practical, and supportive. "
-            "Return valid JSON only with these keys: career_path, rationale, best_fit_roles, skills_to_build, roadmap, confidence. "
-            "best_fit_roles and skills_to_build must be arrays of strings. roadmap must be an array of 3 to 5 short steps. "
-            "confidence must be a number between 0 and 1."
+            "You are an expert career counselor. Recommend the best career based on personality and questionnaire answers. "
+            "Be concise and practical. Return ONLY valid JSON with these keys: "
+            "career_path (string), best_fit_roles (array of 3 role names), rationale (1-2 sentences), skills_to_build (array of 5 skills), "
+            "roadmap (array of 3-4 short action steps), confidence (0-1 float). Be brief."
         )
 
         user_prompt = (

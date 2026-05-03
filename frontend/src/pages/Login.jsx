@@ -34,14 +34,15 @@ const Login = ({ setLoggedIn = () => {} }) => {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem("token", data.access_token);
-        localStorage.setItem("userName", email); // keep consistent with Home.jsx
+        localStorage.setItem("userName", data.full_name || email);
+        localStorage.setItem("userEmail", data.email || email);
         if (data.is_admin) {
           localStorage.setItem("isAdmin", "true");
         } else {
           localStorage.removeItem("isAdmin");
         }
         setLoggedIn(true);
-        window.location.hash = "#/dashboard"; // Changed from #/form to #/dashboard
+        window.location.hash = "#/dashboard";
       } else {
         let errorMessage = "Invalid credentials. Please try again.";
         try {

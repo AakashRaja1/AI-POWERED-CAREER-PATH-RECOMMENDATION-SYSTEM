@@ -1,0 +1,18 @@
+{
+  "sample_001.jpg": {
+    "face_visibility": 0.91,
+    "smile_positive_expression": 0.78,
+    "face_centering": 0.84,
+    "face_size": 0.71,
+    "head_movement": 0.22,
+    "audio_speaking_rhythm": 0.0
+  },
+  "sample_002.mp4": {
+    "face_visibility": 0.88,
+    "smile_positive_expression": 0.42,
+    "face_centering": 0.67,
+    "face_size": 0.58,
+    "head_movement": 0.49,
+    "audio_speaking_rhythm": 0.73
+  }
+}

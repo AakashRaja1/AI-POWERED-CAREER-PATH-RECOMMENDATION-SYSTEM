@@ -56,7 +56,8 @@ const AdminLogin = () => {
         if (data.is_admin) {
           localStorage.setItem("token", data.access_token);
           localStorage.setItem("isAdmin", "true");
-          localStorage.setItem("userName", "Admin");
+          localStorage.setItem("userName", data.full_name || "Admin");
+          localStorage.setItem("userEmail", data.email || email);
           alert("Admin login successful! Redirecting...");
           window.location.hash = "#/admin";
         } else {

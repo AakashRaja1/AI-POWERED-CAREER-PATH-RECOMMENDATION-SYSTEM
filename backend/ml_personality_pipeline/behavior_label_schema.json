@@ -1,0 +1,33 @@
+{
+  "version": "1.0",
+  "description": "Schema for supervised behavior cues used by ml_personality_pipeline behavior summaries",
+  "traits": {
+    "face_visibility": {
+      "range": [0.0, 1.0],
+      "definition": "How clearly and consistently the person is visible in the frame"
+    },
+    "smile_positive_expression": {
+      "range": [0.0, 1.0],
+      "definition": "Presence and intensity of a smile or other positive visible expression"
+    },
+    "face_centering": {
+      "range": [0.0, 1.0],
+      "definition": "How well the face is centered and kept in view within the frame"
+    },
+    "face_size": {
+      "range": [0.0, 1.0],
+      "definition": "How large and clearly visible the face appears in the frame"
+    },
+    "head_movement": {
+      "range": [0.0, 1.0],
+      "definition": "Amount of head motion or movement across sampled frames"
+    },
+    "audio_speaking_rhythm": {
+      "range": [0.0, 1.0],
+      "definition": "Speaking activity, pause pattern, and rhythm inferred from audio"
+    }
+  },
+  "recommended_raters": 3,
+  "normalization": "Scores should be continuous in [0,1]. Use at least 3 independent human raters and average.",
+  "required_output_format": "JSON mapping file_name -> trait map"
+}
