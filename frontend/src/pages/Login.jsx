@@ -1,4 +1,10 @@
-﻿import React, { useState } from "react";
+﻿/*
+Login page. It validates user credentials, saves authentication data locally, and sends users to the correct protected area.
+
+Presentation note: this comment is here to help explain the file quickly during viva or panel questions without changing runtime behavior.
+*/
+
+import React, { useState } from "react";
 
 const Login = ({ setLoggedIn = () => {} }) => {
   const [email, setEmail] = useState("");

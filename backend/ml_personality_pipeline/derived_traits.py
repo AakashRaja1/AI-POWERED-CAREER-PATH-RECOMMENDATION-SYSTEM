@@ -1,3 +1,9 @@
+"""
+Derived trait calculator. It turns raw model outputs into extra human-readable behavior indicators used in the result screens.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
+"""
+
 from __future__ import annotations
 
 from typing import Dict

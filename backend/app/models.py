@@ -1,3 +1,9 @@
+"""
+Request and response schemas for the career recommendation API. These Pydantic models validate incoming data and make outgoing responses predictable.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
+"""
+
 from pydantic import BaseModel, Field, field_validator
 from typing import Optional, Union, List
 

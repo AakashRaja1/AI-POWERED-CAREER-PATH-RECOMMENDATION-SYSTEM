@@ -1,0 +1,36 @@
+{
+  "label_type": "continuous_regression",
+  "value_range": [
+    0.0,
+    1.0
+  ],
+  "trait_order": [
+    "openness",
+    "conscientiousness",
+    "extraversion",
+    "agreeableness",
+    "neuroticism"
+  ],
+  "traits": {
+    "openness": {
+      "description": "Openness to new experience, curiosity, imagination, and intellectual flexibility.",
+      "higher_is": "Higher values indicate a stronger presence of this trait."
+    },
+    "conscientiousness": {
+      "description": "Organization, dependability, discipline, and goal-directed behavior.",
+      "higher_is": "Higher values indicate a stronger presence of this trait."
+    },
+    "extraversion": {
+      "description": "Sociability, assertiveness, energy, and expressive engagement.",
+      "higher_is": "Higher values indicate a stronger presence of this trait."
+    },
+    "agreeableness": {
+      "description": "Warmth, cooperation, empathy, and interpersonal trust.",
+      "higher_is": "Higher values indicate a stronger presence of this trait."
+    },
+    "neuroticism": {
+      "description": "Emotional instability, stress sensitivity, and negative affect.",
+      "higher_is": "Higher values indicate a stronger presence of this trait."
+    }
+  }
+}

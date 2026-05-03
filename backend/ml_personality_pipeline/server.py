@@ -1,3 +1,9 @@
+"""
+Small API server for personality inference experiments. It allows the model pipeline to be tested independently from the main FastAPI app.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
+"""
+
 from __future__ import annotations
 
 import os

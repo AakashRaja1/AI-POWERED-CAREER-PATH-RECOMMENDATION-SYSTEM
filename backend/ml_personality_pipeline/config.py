@@ -1,3 +1,9 @@
+"""
+Shared configuration values for the personality training and inference pipeline.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
+"""
+
 from __future__ import annotations
 
 from dataclasses import dataclass

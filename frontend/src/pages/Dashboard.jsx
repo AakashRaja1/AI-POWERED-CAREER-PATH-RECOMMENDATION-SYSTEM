@@ -1,3 +1,9 @@
+/*
+User dashboard page. It shows saved predictions and gives the user quick access to core career tools.
+
+Presentation note: this comment is here to help explain the file quickly during viva or panel questions without changing runtime behavior.
+*/
+
 import React from "react";
 
 const MODULES = [

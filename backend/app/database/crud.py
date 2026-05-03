@@ -1,3 +1,9 @@
+"""
+Database helper functions. These small operations keep route handlers readable by centralizing common create, read, update, and delete work.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
+"""
+
 from typing import List, Optional
 from sqlmodel import Session, select
 from app.database.models import User, Prediction

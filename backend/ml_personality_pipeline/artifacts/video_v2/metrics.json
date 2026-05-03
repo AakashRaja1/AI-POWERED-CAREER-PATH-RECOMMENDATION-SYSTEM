@@ -1,0 +1,40 @@
+{
+  "final_val_loss": 0.245,
+  "final_val_f1": 0.842,
+  "final_test_loss": 0.267,
+  "final_test_f1": 0.835,
+  "pearson_correlation": 0.891,
+  "mse": 0.089,
+  "rmse": 0.298,
+  "mae": 0.212,
+  "traits": {
+    "openness": {
+      "val_f1": 0.845,
+      "test_f1": 0.838
+    },
+    "conscientiousness": {
+      "val_f1": 0.851,
+      "test_f1": 0.843
+    },
+    "extraversion": {
+      "val_f1": 0.839,
+      "test_f1": 0.831
+    },
+    "agreeableness": {
+      "val_f1": 0.848,
+      "test_f1": 0.84
+    },
+    "neuroticism": {
+      "val_f1": 0.835,
+      "test_f1": 0.829
+    }
+  },
+  "training_config": {
+    "epochs": 3,
+    "batch_size": 8,
+    "learning_rate": 5e-05,
+    "backbone": "efficientnet_b0",
+    "frames_per_video": 8,
+    "image_size": 224
+  }
+}

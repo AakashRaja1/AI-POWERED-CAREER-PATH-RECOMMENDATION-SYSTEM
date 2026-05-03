@@ -1,3 +1,9 @@
+"""
+FastAPI application entry point. It starts the API, prepares database tables, enables frontend access through CORS, and connects every router used by the career recommendation system.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
+"""
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import logging

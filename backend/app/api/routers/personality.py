@@ -1,3 +1,9 @@
+"""
+Personality and career recommendation API. It accepts uploaded media, runs the trained personality model, sends structured career context to the LLM, and returns presentation-ready recommendations to the frontend.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
+"""
+
 from __future__ import annotations
 
 import json
@@ -26,8 +32,14 @@ _MODEL_PATH = Path(__file__).resolve().parents[3] / "ml_personality_pipeline" / 
 
 
 try:
+    import logging
+    logger = logging.getLogger(__name__)
     _predictor = PersonalityPredictor(model_path=_MODEL_PATH)
-except Exception:
+    logger.info(f"Personality model loaded successfully from {_MODEL_PATH}")
+except Exception as err:
+    import logging
+    logger = logging.getLogger(__name__)
+    logger.error(f"Failed to load personality model from {_MODEL_PATH}: {err}", exc_info=True)
     _predictor = None
 
 

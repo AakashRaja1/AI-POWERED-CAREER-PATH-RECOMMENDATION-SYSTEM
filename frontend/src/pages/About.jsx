@@ -1,4 +1,9 @@
-// frontend/src/pages/About.jsx
+/*
+About page. It explains the project idea, purpose, and major features in user-facing language.
+
+Presentation note: this comment is here to help explain the file quickly during viva or panel questions without changing runtime behavior.
+*/
+
 import React from 'react';
 
 const About = () => {

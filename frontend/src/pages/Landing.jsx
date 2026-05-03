@@ -1,4 +1,9 @@
-// frontend/src/pages/Landing.jsx
+/*
+React page component. It owns one full screen in the user journey. This file handles the Landing part of the project.
+
+Presentation note: this comment is here to help explain the file quickly during viva or panel questions without changing runtime behavior.
+*/
+
 import React, { useEffect } from "react";
 
 const BRAND_LOGO_SRC = "/brand-logo.svg";

@@ -1,3 +1,9 @@
+/*
+Career chatbot page. It manages the chat UI, sends messages to the backend, and renders advisor responses for the user.
+
+Presentation note: this comment is here to help explain the file quickly during viva or panel questions without changing runtime behavior.
+*/
+
 import React, { useState, useRef, useEffect } from "react";
 import { postWithFallback } from "../api/client";
 

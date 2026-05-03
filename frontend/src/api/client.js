@@ -1,3 +1,9 @@
+/*
+Frontend API helper. It tries the configured backend addresses, applies request timeouts, and gives pages a consistent way to call FastAPI.
+
+Presentation note: this comment is here to help explain the file quickly during viva or panel questions without changing runtime behavior.
+*/
+
 const API_CANDIDATES = [
   "/api",
   "http://127.0.0.1:8000",

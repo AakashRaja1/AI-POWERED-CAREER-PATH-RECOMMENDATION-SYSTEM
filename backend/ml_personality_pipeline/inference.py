@@ -1,3 +1,9 @@
+"""
+Personality inference module. It loads the trained CNN checkpoint, prepares uploaded images or videos, predicts traits, and enriches the output with readable behavior scores.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
+"""
+
 from __future__ import annotations
 
 import argparse

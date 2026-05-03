@@ -1,3 +1,9 @@
+"""
+Central configuration module. It reads environment variables once and gives the rest of the backend a single reliable place for API keys, database URLs, and model settings.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
+"""
+
 from pathlib import Path
 from pydantic import field_validator
 from pydantic_settings import BaseSettings

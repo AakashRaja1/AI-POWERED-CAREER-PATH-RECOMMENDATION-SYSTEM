@@ -1,3 +1,9 @@
+"""
+Chatbot training runner. It connects extraction, chunking, embedding, and storage into one repeatable knowledge-base build process.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
+"""
+
 import os
 from .training_extract import extract_text
 from .training_embed import embed_text

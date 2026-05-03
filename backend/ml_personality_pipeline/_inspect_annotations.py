@@ -1,3 +1,9 @@
+"""
+Personality pipeline module. It supports data preparation, model training, evaluation, or inference for behavior-based career guidance. This file handles the  inspect annotations part of the project.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
+"""
+
 import pickle, pathlib
 p=pathlib.Path('backend/ml_personality/first-impressions/annotations/train-annotation/annotation_training.pkl')
 print('exists',p.exists())

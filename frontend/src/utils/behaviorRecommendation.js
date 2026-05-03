@@ -1,3 +1,9 @@
+/*
+Rule-based behavior recommendation helper. It converts personality and behavior signals into career hints when a lightweight local recommendation is needed.
+
+Presentation note: this comment is here to help explain the file quickly during viva or panel questions without changing runtime behavior.
+*/
+
 const GENERIC_TOKENS = new Set([
   "step",
   "steps",

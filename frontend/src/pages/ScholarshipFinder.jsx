@@ -1,3 +1,9 @@
+/*
+Scholarship finder page. It collects student preferences and shows matching scholarship opportunities from the backend.
+
+Presentation note: this comment is here to help explain the file quickly during viva or panel questions without changing runtime behavior.
+*/
+
 import React, { useMemo, useState } from "react";
 import { postWithFallback } from "../api/client";
 

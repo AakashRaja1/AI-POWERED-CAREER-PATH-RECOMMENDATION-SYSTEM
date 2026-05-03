@@ -1,3 +1,9 @@
+"""
+System prompt definitions for the career chatbot. These instructions keep the assistant focused on guidance, scholarships, and project-safe answers.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
+"""
+
 SYSTEM_PROMPT = """
 You are an expert, friendly career counselor trained on the book 'What Color Is Your Parachute?'.
 

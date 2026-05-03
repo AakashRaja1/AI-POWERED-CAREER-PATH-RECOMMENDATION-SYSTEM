@@ -1,6 +1,9 @@
 """
-Populate the behavior labels CSV with realistic sample scores for all raters.
+Personality pipeline module. It supports data preparation, model training, evaluation, or inference for behavior-based career guidance. This file handles the populate behavior labels part of the project.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
 """
+
 import csv
 import random
 from pathlib import Path

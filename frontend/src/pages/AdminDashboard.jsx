@@ -1,3 +1,9 @@
+/*
+Admin dashboard page. It displays management views for users, predictions, and admin-only project data.
+
+Presentation note: this comment is here to help explain the file quickly during viva or panel questions without changing runtime behavior.
+*/
+
 import React, { useState, useEffect } from "react";
 
 const AdminDashboard = () => {

@@ -1,3 +1,9 @@
+/*
+Admin login page. It signs administrators into the admin area while keeping normal user login separate.
+
+Presentation note: this comment is here to help explain the file quickly during viva or panel questions without changing runtime behavior.
+*/
+
 import React, { useState } from "react";
 
 const API_CANDIDATES = ["/api", "http://127.0.0.1:8000", "http://localhost:8000"];

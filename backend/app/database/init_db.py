@@ -1,3 +1,9 @@
+"""
+Database initialization helper. It creates the required tables at startup so the API can run with a prepared schema.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
+"""
+
 from sqlmodel import SQLModel
 from sqlalchemy import text
 from app.database.session import engine

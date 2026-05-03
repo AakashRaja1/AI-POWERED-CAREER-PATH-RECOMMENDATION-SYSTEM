@@ -1,3 +1,9 @@
+"""
+Chatbot pipeline wrapper. It gives route handlers a simple call point for sending user messages into the career-chat agent.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
+"""
+
 from .agent import CareerChatAgent
 from .groq_client import get_groq_client
 from app.core.config import settings

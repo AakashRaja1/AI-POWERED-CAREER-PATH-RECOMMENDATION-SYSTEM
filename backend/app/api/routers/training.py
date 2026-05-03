@@ -1,7 +1,9 @@
 """
-FastAPI Training Routes
-Endpoints for model training with real-time progress
+Training API. It exposes training-run status and history so the project can show how model training jobs are tracked from the backend.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
 """
+
 import uuid
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel

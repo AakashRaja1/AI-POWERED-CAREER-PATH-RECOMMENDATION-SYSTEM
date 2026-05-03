@@ -1,3 +1,9 @@
+"""
+CNN training script for the curated 700-image subset used during faster experiment cycles.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
+"""
+
 from __future__ import annotations
 
 import argparse

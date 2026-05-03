@@ -1,7 +1,9 @@
 """
-Script to create admin user in the database.
-Run this once to create the admin account.
+Database module. It keeps persistence details separate from route handlers so the API code stays easier to explain and maintain. This file handles the create admin part of the project.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
 """
+
 import sys
 import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))

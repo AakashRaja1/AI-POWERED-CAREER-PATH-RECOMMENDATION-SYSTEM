@@ -1,3 +1,9 @@
+"""
+Database connection setup. It builds the SQLAlchemy engine and session factory used by route handlers whenever they need to read or write PostgreSQL data.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
+"""
+
 from sqlmodel import create_engine, Session
 from app.core.config import settings
 import logging

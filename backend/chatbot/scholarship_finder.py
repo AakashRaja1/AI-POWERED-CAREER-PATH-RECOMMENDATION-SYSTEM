@@ -1,3 +1,9 @@
+"""
+Scholarship matching helper. It searches scholarship data and formats relevant funding opportunities for the user.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
+"""
+
 import json
 import logging
 from typing import Any

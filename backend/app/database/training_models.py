@@ -1,3 +1,9 @@
+"""
+Database module. It keeps persistence details separate from route handlers so the API code stays easier to explain and maintain. This file handles the training models part of the project.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
+"""
+
 from __future__ import annotations
 
 from datetime import datetime

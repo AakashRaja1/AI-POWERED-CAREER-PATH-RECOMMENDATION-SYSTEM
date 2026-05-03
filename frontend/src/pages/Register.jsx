@@ -1,4 +1,9 @@
-﻿// frontend/src/pages/Register.jsx
+﻿/*
+Registration page. It collects new user details and creates an account through the backend auth API.
+
+Presentation note: this comment is here to help explain the file quickly during viva or panel questions without changing runtime behavior.
+*/
+
 import React, { useState } from "react";
 
 const Register = ({ setLoggedIn }) => {

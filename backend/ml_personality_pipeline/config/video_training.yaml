@@ -1,0 +1,13 @@
+use_subset: true
+subset_size: 1000
+random_seed: 42
+frames_per_video: 12
+img_size: 224
+train_split: 0.7
+val_split: 0.15
+test_split: 0.15
+backbone: "resnet50"
+batch_size: 16
+epochs: 10
+lr: 1e-4
+dropout: 0.4

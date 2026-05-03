@@ -1,3 +1,9 @@
+/*
+Route guard component. It checks login state before rendering protected pages and redirects unauthenticated users to the login screen.
+
+Presentation note: this comment is here to help explain the file quickly during viva or panel questions without changing runtime behavior.
+*/
+
 import React, { useEffect } from "react";
 
 const ProtectedRoute = ({ children }) => {

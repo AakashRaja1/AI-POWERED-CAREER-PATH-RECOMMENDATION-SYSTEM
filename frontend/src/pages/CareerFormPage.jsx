@@ -1,3 +1,9 @@
+/*
+Career questionnaire page. It gathers academic interests, skills, and preferences before requesting a recommendation.
+
+Presentation note: this comment is here to help explain the file quickly during viva or panel questions without changing runtime behavior.
+*/
+
 import React, { useState, useMemo, useEffect } from "react";
 import Loader from "../assets/components/Loader";
 import ResumeUploadForm from "../assets/components/ResumeUploadForm";

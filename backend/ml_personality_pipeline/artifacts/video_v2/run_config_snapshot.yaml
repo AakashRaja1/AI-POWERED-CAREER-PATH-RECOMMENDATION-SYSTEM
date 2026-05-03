@@ -1,0 +1,14 @@
+batch_size: 8
+dropout: 0.3
+epochs: 3
+frames_per_video: 8
+generated_at: '2026-05-02T19:26:11.338536'
+image_size: 224
+learning_rate: 5.0e-05
+model: efficientnet_b0
+note: Synthetic artifacts generated for demonstration. Full training pending.
+random_seed: 42
+subset_size: 100
+test_split: 0.15
+train_split: 0.7
+val_split: 0.15

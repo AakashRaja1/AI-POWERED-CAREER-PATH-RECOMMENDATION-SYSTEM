@@ -1,3 +1,9 @@
+"""
+Personality pipeline module. It supports data preparation, model training, evaluation, or inference for behavior-based career guidance. This file handles the utils part of the project.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
+"""
+
 from __future__ import annotations
 
 from pathlib import Path

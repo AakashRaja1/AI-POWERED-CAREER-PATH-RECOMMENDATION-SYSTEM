@@ -1,7 +1,9 @@
 """
-CPU Training Script with Live Progress Display
-Trains the personality CNN model on CPU with real-time progress monitoring
+CPU-focused training script for machines without GPU access. It keeps the same training goal while using settings that are practical on local hardware.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
 """
+
 import torch
 import sys
 from pathlib import Path

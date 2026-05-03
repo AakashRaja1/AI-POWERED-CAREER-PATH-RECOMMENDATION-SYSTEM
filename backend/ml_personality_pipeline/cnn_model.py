@@ -1,3 +1,9 @@
+"""
+CNN model definition for visual personality analysis. It describes the neural network layers used to convert face/video frames into trait predictions.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
+"""
+
 from __future__ import annotations
 
 import torch

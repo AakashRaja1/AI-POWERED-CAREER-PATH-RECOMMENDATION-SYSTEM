@@ -1,3 +1,9 @@
+"""
+Evaluation script for trained personality models. It measures prediction quality and writes reports that can be discussed during presentation.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
+"""
+
 from __future__ import annotations
 
 import argparse

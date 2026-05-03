@@ -1,3 +1,9 @@
+/*
+Root React router. It maps URLs to pages and wraps private pages with authentication checks so users only see screens they are allowed to access.
+
+Presentation note: this comment is here to help explain the file quickly during viva or panel questions without changing runtime behavior.
+*/
+
 import React, { useState } from "react";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 

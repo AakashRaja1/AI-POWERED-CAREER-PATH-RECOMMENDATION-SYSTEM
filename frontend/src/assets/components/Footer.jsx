@@ -1,4 +1,9 @@
-// frontend/src/assets/components/Footer.jsx
+/*
+Reusable visual component from the original frontend structure. This file handles the Footer part of the project.
+
+Presentation note: this comment is here to help explain the file quickly during viva or panel questions without changing runtime behavior.
+*/
+
 import React from 'react';
 
 const Footer = () => {

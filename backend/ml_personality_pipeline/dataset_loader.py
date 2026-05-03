@@ -1,3 +1,9 @@
+"""
+Dataset loading module for personality training. It reads labels and media paths, applies preprocessing, and returns examples in the shape expected by PyTorch.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
+"""
+
 from __future__ import annotations
 
 import json

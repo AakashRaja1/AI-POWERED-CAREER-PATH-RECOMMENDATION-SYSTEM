@@ -1,3 +1,9 @@
+"""
+Authentication API. It handles user registration, login, password verification, and token creation so protected frontend pages only open for valid users.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
+"""
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import JWTError, jwt

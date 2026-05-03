@@ -1,9 +1,15 @@
+/*
+Main authenticated navigation bar. It shows the user entry points for dashboard, analysis, chatbot, scholarships, and account actions.
+
+Presentation note: this comment is here to help explain the file quickly during viva or panel questions without changing runtime behavior.
+*/
+
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const links = [
   { to: "/dashboard", label: "Dashboard" },
-  { to: "/behavior", label: "Behavior" },
+  { to: "/behavior", label: "Personality traits" },
   { to: "/form", label: "Career" },
   { to: "/scholarships", label: "Scholarships" },
   { to: "/chatbot", label: "Chatbot" },

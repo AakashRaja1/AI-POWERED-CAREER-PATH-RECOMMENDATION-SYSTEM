@@ -1,3 +1,9 @@
+/*
+Home page for the career recommendation system. It introduces the project and routes users toward login, registration, and the main tools.
+
+Presentation note: this comment is here to help explain the file quickly during viva or panel questions without changing runtime behavior.
+*/
+
 import React, { useState, useEffect } from "react";
 
 const BRAND_LOGO_SRC = "/brand-logo.svg";

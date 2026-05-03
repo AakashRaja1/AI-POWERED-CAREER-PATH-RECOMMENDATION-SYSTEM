@@ -1,3 +1,9 @@
+/*
+React page component. It owns one full screen in the user journey. This file handles the CareerPathDisabled part of the project.
+
+Presentation note: this comment is here to help explain the file quickly during viva or panel questions without changing runtime behavior.
+*/
+
 import { useNavigate } from "react-router-dom";
 
 export default function CareerPathDisabled() {

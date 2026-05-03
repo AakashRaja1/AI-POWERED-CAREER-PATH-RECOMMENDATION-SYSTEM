@@ -1,3 +1,9 @@
+"""
+Groq client factory. It validates the API key and creates the chat client used by both the chatbot and career recommendation features.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
+"""
+
 from functools import lru_cache
 
 from groq import Groq

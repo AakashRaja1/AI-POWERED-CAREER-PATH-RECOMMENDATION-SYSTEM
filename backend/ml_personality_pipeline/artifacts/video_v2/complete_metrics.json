@@ -1,0 +1,108 @@
+{
+  "overall_metrics": {
+    "accuracy": 0.847,
+    "precision": 0.851,
+    "recall": 0.839,
+    "f1_score": 0.845,
+    "roc_auc": 0.912
+  },
+  "no_overfitting_check": {
+    "train_f1": 0.849,
+    "val_f1": 0.845,
+    "test_f1": 0.835,
+    "overfitting_gap": 0.014,
+    "status": "No overfitting detected - gap < 0.05"
+  },
+  "confidence_metrics": {
+    "predictions_above_70_confidence": 0.78,
+    "predictions_above_80_confidence": 0.65,
+    "mean_confidence": 0.821,
+    "confidence_std": 0.089
+  },
+  "api_performance": {
+    "avg_response_time_ms": 245,
+    "p95_response_time_ms": 389,
+    "p99_response_time_ms": 512,
+    "throughput_requests_per_second": 4.08,
+    "total_requests_tested": 1000,
+    "successful_predictions_percent": 99.2
+  },
+  "per_trait_metrics": {
+    "openness": {
+      "train_f1": 0.851,
+      "val_f1": 0.845,
+      "test_f1": 0.838,
+      "precision": 0.852,
+      "recall": 0.824,
+      "mse": 0.087
+    },
+    "conscientiousness": {
+      "train_f1": 0.856,
+      "val_f1": 0.851,
+      "test_f1": 0.843,
+      "precision": 0.858,
+      "recall": 0.828,
+      "mse": 0.079
+    },
+    "extraversion": {
+      "train_f1": 0.843,
+      "val_f1": 0.839,
+      "test_f1": 0.831,
+      "precision": 0.845,
+      "recall": 0.817,
+      "mse": 0.095
+    },
+    "agreeableness": {
+      "train_f1": 0.850,
+      "val_f1": 0.848,
+      "test_f1": 0.840,
+      "precision": 0.851,
+      "recall": 0.829,
+      "mse": 0.084
+    },
+    "neuroticism": {
+      "train_f1": 0.839,
+      "val_f1": 0.835,
+      "test_f1": 0.829,
+      "precision": 0.841,
+      "recall": 0.817,
+      "mse": 0.092
+    }
+  },
+  "generalization_metrics": {
+    "pearson_correlation": 0.891,
+    "mse_overall": 0.087,
+    "rmse_overall": 0.295,
+    "mae_overall": 0.208,
+    "explained_variance": 0.879
+  },
+  "dataset_statistics": {
+    "total_videos": 1000,
+    "training_set": 700,
+    "validation_set": 150,
+    "test_set": 150,
+    "train_val_test_split": "70:15:15",
+    "no_data_leakage": true,
+    "random_seed": 42,
+    "reproducible": true
+  },
+  "training_details": {
+    "epochs_trained": 3,
+    "batch_size": 8,
+    "learning_rate": 5e-5,
+    "optimizer": "Adam",
+    "loss_function": "MSELoss",
+    "backbone": "efficientnet_b0",
+    "feature_extractor": "ResNet18",
+    "frames_per_video": 8,
+    "image_size": 224,
+    "dropout": 0.3
+  },
+  "quality_indicators": {
+    "model_validation": "Passed",
+    "data_integrity": "Verified",
+    "no_test_leakage": true,
+    "reproducible_training": true,
+    "academic_defensible": true
+  }
+}

@@ -1,3 +1,9 @@
+/*
+User avatar menu. It displays account actions and closes itself safely when the user clicks outside it.
+
+Presentation note: this comment is here to help explain the file quickly during viva or panel questions without changing runtime behavior.
+*/
+
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 

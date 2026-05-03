@@ -1,3 +1,9 @@
+/*
+Frontend source module for the React career recommendation app. This file handles the App part of the project.
+
+Presentation note: styling files affect appearance only; they do not change backend prediction logic.
+*/
+
 #root {
   max-width: 1280px;
   margin: 0 auto;

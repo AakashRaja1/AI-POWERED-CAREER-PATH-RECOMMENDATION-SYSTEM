@@ -1,3 +1,9 @@
+"""
+Vector database storage helper. It saves embedded chatbot knowledge so the agent can retrieve relevant context during conversations.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
+"""
+
 import chromadb
 
 # Use the new PersistentClient format (Chroma latest version)

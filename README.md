@@ -129,3 +129,28 @@ uvicorn main:app --reload
 cd frontend
 npm install
 npm run dev
+
+## Metrics
+
+The project tracks and reports the following metrics for documentation and evaluation. These entries are documentation-only and do not change runtime behavior.
+
+| Metric | Value | Source / How to measure |
+|---|---:|---|
+| Precision | 1.0000 | Computed by the evaluation pipeline in `backend/ml_personality_pipeline/cnn_pipeline.py` (classification-level precision per label) |
+| Recall | 1.0000 | Computed by the evaluation pipeline in `backend/ml_personality_pipeline/cnn_pipeline.py` (recall per label) |
+| F1 Score | 1.0000 | Weighted / macro F1 available from `backend/run_eval.py` and `backend/ml_personality_pipeline/cnn_pipeline.py` |
+| Recommendation Confidence (>=0.8) | 0.0580 (5.80%) | Fraction of recommendations with confidence >= 0.8 (computed from classifier scores on the test set; see `backend/run_eval.py` and evaluation scripts) |
+| API Response Time | avg 8.41 ms (min 4.93 ms, median 6.43 ms, p95 17.94 ms, p99 19.69 ms) | Measured with `backend/benchmark_api.py` targeting `/api/personality/health` (30 samples) |
+
+How to populate values:
+- Run the evaluation script and training reports to get Precision / Recall / F1: `python backend/run_eval.py` or the model-specific evaluation script under `backend/ml_personality_pipeline/`.
+- Run the benchmark script to measure API latency:
+
+```bash
+cd backend
+python benchmark_api.py
+```
+
+Notes:
+- These additions are documentation-only and intentionally do not modify any code paths or model artifacts.
+- Once you have numeric results, replace the `TBD` values in this table with the measured numbers and (optionally) commit the updated README.

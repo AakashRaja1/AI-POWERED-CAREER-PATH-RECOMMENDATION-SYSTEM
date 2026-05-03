@@ -1,3 +1,9 @@
+"""
+Admin API. It gives administrators controlled access to users, predictions, and dashboard data without exposing those operations to normal users.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
+"""
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import Session
 from typing import List, Optional, Union

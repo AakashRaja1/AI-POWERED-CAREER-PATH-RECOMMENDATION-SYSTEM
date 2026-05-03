@@ -1,3 +1,9 @@
+"""
+Career chatbot orchestration module. It combines retrieved knowledge, prompt rules, and the Groq client to produce career-focused answers for users.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
+"""
+
 from .prompts import SYSTEM_PROMPT
 from .groq_client import get_groq_client
 

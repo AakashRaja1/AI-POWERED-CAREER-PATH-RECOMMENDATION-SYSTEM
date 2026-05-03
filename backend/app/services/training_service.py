@@ -1,7 +1,9 @@
 """
-Personality Model Training Service
-Integrates CPU training with FastAPI
+Training service layer. It records model training progress, metrics, and status updates so the API can report training history cleanly.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
 """
+
 import threading
 import sys
 from dataclasses import dataclass

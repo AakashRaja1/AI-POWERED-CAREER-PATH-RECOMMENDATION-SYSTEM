@@ -1,3 +1,9 @@
+"""
+Career prediction API. It receives questionnaire/profile input, loads the saved ML artifacts, and returns the predicted career result with supporting confidence data.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
+"""
+
 from fastapi import APIRouter, HTTPException, Depends, UploadFile, File
 from typing import List, Optional
 from pathlib import Path

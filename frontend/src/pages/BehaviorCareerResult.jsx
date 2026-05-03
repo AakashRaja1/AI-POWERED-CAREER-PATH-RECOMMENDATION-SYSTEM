@@ -1,5 +1,12 @@
+/*
+Behavior-based career result page. It displays the recommendation produced after personality analysis and questionnaire submission.
+
+Presentation note: this comment is here to help explain the file quickly during viva or panel questions without changing runtime behavior.
+*/
+
 import React, { useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { getCurrentUserEmail, loadCareerRecommendation } from "../utils/personalityStorage";
 
 const BehaviorCareerResult = () => {
   const navigate = useNavigate();
@@ -8,6 +15,14 @@ const BehaviorCareerResult = () => {
   const payload = useMemo(() => {
     if (location.state?.recommendation) {
       return location.state;
+    }
+
+    const currentEmail = getCurrentUserEmail();
+    if (currentEmail) {
+      const emailScopedRecommendation = loadCareerRecommendation(currentEmail);
+      if (emailScopedRecommendation) {
+        return emailScopedRecommendation;
+      }
     }
 
     try {

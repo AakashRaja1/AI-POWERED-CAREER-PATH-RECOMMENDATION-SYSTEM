@@ -1,3 +1,9 @@
+/*
+Career result display page. It presents the predicted career output in a clean format after form submission.
+
+Presentation note: this comment is here to help explain the file quickly during viva or panel questions without changing runtime behavior.
+*/
+
 import React from "react";
 
 const ResultPage = ({ result }) => {

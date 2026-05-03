@@ -1,3 +1,9 @@
+"""
+Embedding helper for chatbot knowledge. It converts text chunks into vectors that can be searched later during chat.
+
+Presentation note: explain this file as one focused responsibility in the larger system, then mention the main inputs it receives and the output it returns or prepares.
+"""
+
 from sentence_transformers import SentenceTransformer
 
 # Load a free pre-trained embedding model
