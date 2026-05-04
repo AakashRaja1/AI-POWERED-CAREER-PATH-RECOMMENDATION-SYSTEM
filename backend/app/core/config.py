@@ -16,7 +16,7 @@ DATA_PATH = BASE_DIR / "LatestCareerdataset.csv"
 
 class Settings(BaseSettings):
     DATABASE_URL: str = "postgresql://postgres:postgres@localhost:5432/career_recommendations"
-    MODEL_PATH: str = str(BASE_DIR / "model_artifacts")
+    MODEL_PATH: str = str(BASE_DIR / "ml_personality_pipeline" / "artifacts" / "personality_model.pth")
     SECRET_KEY: str = "okchanged" # Default value, will be overridden by .env
     GROQ_API_KEY: str = ""  # Add this line for Groq API integration
     GROQ_CHAT_MODEL: str = "llama-3.1-8b-instant"

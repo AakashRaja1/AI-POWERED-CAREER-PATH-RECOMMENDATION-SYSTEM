@@ -1,8 +1,0 @@
-{
-  "batch_size": 1,
-  "epochs": 1,
-  "memory_limit": 80,
-  "model_architecture": "ResNet50 + Custom DL Layers",
-  "transfer_learning": true,
-  "dataset": "First Impressions (Kaggle)"
-}

@@ -4,13 +4,23 @@ Registration page. It collects new user details and creates an account through t
 Presentation note: this comment is here to help explain the file quickly during viva or panel questions without changing runtime behavior.
 */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const Register = ({ setLoggedIn }) => {
+const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+
+  // Clear form fields when component mounts to ensure no pre-filled credentials
+  useEffect(() => {
+    setName("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+    setError("");
+  }, []);
 
   const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -22,7 +32,17 @@ const Register = ({ setLoggedIn }) => {
     setError("");
 
     if (!isValidEmail(email)) {
-      setError("Please enter a valid email address (e.g., user@example.com)");
+      setError("Please enter a valid email address");
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters long");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
       return;
     }
 
@@ -39,10 +59,15 @@ const Register = ({ setLoggedIn }) => {
         setError(data?.detail || "Registration failed");
         return;
       }
-      localStorage.setItem("userEmail", email);
+      // Do not persist email/password from the registration form.
       const userName = data?.user?.name || email.split("@")[0];
       localStorage.setItem("userName", userName);
       alert("Registration successful! Please login.");
+      // Clear form fields to avoid retaining email/password in the form state
+      setName("");
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
       window.location.hash = "#/login";
     } catch (error) {
       setError("Network error. Please check your connection.");
@@ -76,7 +101,7 @@ const Register = ({ setLoggedIn }) => {
             </div>
           )}
 
-          <form onSubmit={handleRegister} className="space-y-4">
+          <form onSubmit={handleRegister} className="space-y-4" autoComplete="off">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
                 Full Name
@@ -85,9 +110,10 @@ const Register = ({ setLoggedIn }) => {
                 id="name"
                 type="text"
                 className="w-full p-3 rounded-lg bg-white border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-                placeholder="John Doe"
+                placeholder="Full name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                autoComplete="off"
                 required
               />
             </div>
@@ -100,26 +126,46 @@ const Register = ({ setLoggedIn }) => {
                 id="email"
                 type="email"
                 className="w-full p-3 rounded-lg bg-white border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-                placeholder="you@example.com"
+                placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                autoComplete="off"
                 required
               />
             </div>
 
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Password
+                Password <span className="text-red-500">*</span>
               </label>
               <input
                 id="password"
                 type="password"
                 className="w-full p-3 rounded-lg bg-white border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-                placeholder="********"
+                placeholder="Password (min 6 characters)"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                autoComplete="new-password"
                 required
               />
+              <p className="text-xs text-gray-500 mt-1">Password must be at least 6 characters long</p>
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Confirm Password <span className="text-red-500">*</span>
+              </label>
+              <input
+                id="confirmPassword"
+                type="password"
+                className="w-full p-3 rounded-lg bg-white border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                placeholder="Confirm password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                autoComplete="new-password"
+                required
+              />
+              <p className="text-xs text-gray-500 mt-1">Passwords must match</p>
             </div>
 
             <button

@@ -12,7 +12,6 @@ const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState("users");
   const [loading, setLoading] = useState(true);
   const [editingUser, setEditingUser] = useState(null);
-  const [editingPrediction, setEditingPrediction] = useState(null);
   const [showPredictionDetails, setShowPredictionDetails] = useState(null);
   const [showCreateUserModal, setShowCreateUserModal] = useState(false);
   const [showEditUserModal, setShowEditUserModal] = useState(false);
@@ -80,7 +79,7 @@ const AdminDashboard = () => {
       } else {
         alert("Failed to delete user");
       }
-    } catch (error) {
+    } catch {
       alert("Error deleting user");
     }
   };
@@ -169,7 +168,7 @@ const AdminDashboard = () => {
       } else {
         alert("Failed to delete prediction");
       }
-    } catch (error) {
+    } catch {
       alert("Error deleting prediction");
     }
   };

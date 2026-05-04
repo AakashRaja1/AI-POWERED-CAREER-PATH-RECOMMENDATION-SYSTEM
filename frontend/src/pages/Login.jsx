@@ -4,12 +4,19 @@ Login page. It validates user credentials, saves authentication data locally, an
 Presentation note: this comment is here to help explain the file quickly during viva or panel questions without changing runtime behavior.
 */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Login = ({ setLoggedIn = () => {} }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  // Clear form fields when component mounts to ensure no pre-filled credentials
+  useEffect(() => {
+    setEmail("");
+    setPassword("");
+    setError("");
+  }, []);
 
   const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -54,7 +61,7 @@ const Login = ({ setLoggedIn = () => {} }) => {
         try {
           const errorData = await response.json();
           errorMessage = errorData.detail || errorMessage;
-        } catch (parseError) {
+        } catch {
           errorMessage = `Login failed with status ${response.status}`;
         }
         console.error("Login failed:", errorMessage);
@@ -81,7 +88,7 @@ const Login = ({ setLoggedIn = () => {} }) => {
 
       {/* Content */}
       <div className="relative z-10 min-h-screen flex items-center justify-center px-4 py-16">
-        <form onSubmit={handleLogin} className="bg-white/90 backdrop-blur-md p-8 rounded-2xl shadow-2xl w-full max-w-md space-y-4 animate-slideUp">
+        <form onSubmit={handleLogin} className="bg-white/90 backdrop-blur-md p-8 rounded-2xl shadow-2xl w-full max-w-md space-y-4 animate-slideUp" autoComplete="off">
           <h2 className="text-3xl sm:text-4xl font-extrabold bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
             Welcome Back
           </h2>
@@ -100,8 +107,9 @@ const Login = ({ setLoggedIn = () => {} }) => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="user@example.com"
+              placeholder="Email address"
               className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              autoComplete="off"
               required
             />
           </div>
@@ -114,8 +122,9 @@ const Login = ({ setLoggedIn = () => {} }) => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
+              placeholder="Password"
               className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              autoComplete="off"
               required
             />
           </div>

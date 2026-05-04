@@ -410,7 +410,7 @@ def _fallback_scholarship_entries(
                 "tuition_coverage": "Not clearly specified",
                 "deadline": "Check official source",
                 "requirements": ["Refer to official scholarship page"],
-                "documents_needed": ["CV", "Academic transcripts", "Statement of purpose"],
+                "documents_needed": ["Academic profile", "Academic transcripts", "Statement of purpose"],
                 "application_process": "Open the official link and follow the scholarship-specific process.",
                 "application_link": source_url,
                 "source_link": source_url,

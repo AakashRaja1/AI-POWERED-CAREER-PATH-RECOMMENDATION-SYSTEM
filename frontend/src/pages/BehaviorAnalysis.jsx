@@ -6,7 +6,6 @@ Presentation note: this comment is here to help explain the file quickly during 
 
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { postWithFallback } from "../api/client";
 import { getCurrentUserEmail, persistPersonalityAnalysis } from "../utils/personalityStorage";
 
 const TRAIT_LABELS = [
@@ -18,303 +17,11 @@ const TRAIT_LABELS = [
 ];
 
 const API_URL = import.meta.env.VITE_PERSONALITY_API_URL || "http://127.0.0.1:8000/personality/predict";
-const CAREER_API_PATH = "/personality/recommend-career";
-
-const CAREER_QUESTION_GROUPS = [
-  {
-    title: "Section 1 — Task Preference",
-    questions: [
-      {
-        id: "q1",
-        label: "Which activity do you enjoy the most?",
-        options: [
-          "Fixing technical problems or debugging systems",
-          "Designing visuals or creative content",
-          "Writing ideas, stories, or explanations",
-          "Organizing, planning, or managing tasks",
-        ],
-      },
-    ],
-  },
-  {
-    title: "Section 2 — Problem-Solving Style",
-    questions: [
-      {
-        id: "q2",
-        label: "When you face a difficult problem, what is your natural approach?",
-        options: [
-          "Break it into logical steps and solve systematically",
-          "Look for patterns or trends",
-          "Discuss with others and get ideas",
-          "Try different things until something works",
-        ],
-      },
-    ],
-  },
-  {
-    title: "Section 3 — Content Consumption",
-    questions: [
-      {
-        id: "q3",
-        label: "What type of content do you mostly explore online?",
-        options: [
-          "Technology, coding, gadgets",
-          "Business, finance, startups",
-          "Psychology, people, communication",
-          "Art, design, entertainment",
-        ],
-      },
-    ],
-  },
-  {
-    title: "Section 4 — Group Role",
-    questions: [
-      {
-        id: "q4",
-        label: "In a group project, what role do you usually take?",
-        options: [
-          "Leader or decision-maker",
-          "Technical/problem-solving contributor",
-          "Creative/design/presentation role",
-          "Supporter or coordinator",
-        ],
-      },
-    ],
-  },
-  {
-    title: "Section 5 — Learning Preference",
-    questions: [
-      {
-        id: "q5",
-        label: "Which type of topic is easiest for you to understand?",
-        options: [
-          "Numbers, formulas, calculations",
-          "Concepts and theories",
-          "Real-life case studies",
-          "Visuals, diagrams, designs",
-        ],
-      },
-    ],
-  },
-  {
-    title: "Section 6 — Free Time Behavior",
-    questions: [
-      {
-        id: "q6",
-        label: "If you have a completely free day, what would you most likely do?",
-        options: [
-          "Build or code something",
-          "Watch business or money-related content",
-          "Create content (videos/designs/writing)",
-          "Learn about people or psychology",
-        ],
-      },
-    ],
-  },
-  {
-    title: "Section 7 — Career Attraction",
-    questions: [
-      {
-        id: "q7",
-        label: "Which of these sounds most interesting to you?",
-        options: [
-          "Building apps or software",
-          "Running a business or managing money",
-          "Creating media or designs",
-          "Helping people solve problems",
-        ],
-      },
-    ],
-  },
-  {
-    title: "Section 8 — Work Style",
-    questions: [
-      {
-        id: "q8",
-        label: "What kind of work environment do you prefer?",
-        options: [
-          "Independent and focused",
-          "Team-based and interactive",
-          "Flexible and creative",
-          "Structured and organized",
-        ],
-      },
-    ],
-  },
-  {
-    title: "Section 9 — Decision Style",
-    questions: [
-      {
-        id: "q9",
-        label: "How do you usually make decisions?",
-        options: [
-          "Based on logic and data",
-          "Based on creativity or intuition",
-          "Based on advice from others",
-          "Based on past experience",
-        ],
-      },
-    ],
-  },
-  {
-    title: "Section 10 — Motivation",
-    questions: [
-      {
-        id: "q10",
-        label: "What motivates you the most?",
-        options: [
-          "Solving complex problems",
-          "Earning money and success",
-          "Expressing creativity",
-          "Helping others",
-        ],
-      },
-    ],
-  },
-  {
-    title: "Section 11 — Favorite Subject",
-    questions: [
-      {
-        id: "q11",
-        label: "Which subject do you like the most?",
-        options: [
-          "Mathematics",
-          "Computer Science / IT",
-          "Business / Economics",
-          "Biology / Health Sciences",
-          "Arts / Design",
-          "Social Studies / Psychology",
-        ],
-      },
-    ],
-  },
-  {
-    title: "Section 12 — Strongest Subject",
-    questions: [
-      {
-        id: "q12",
-        label: "In which subject do you perform the best?",
-        options: [
-          "Mathematics",
-          "Computer Science / IT",
-          "Business / Economics",
-          "Biology / Health Sciences",
-          "Arts / Design",
-          "Social Studies / Psychology",
-        ],
-      },
-    ],
-  },
-  {
-    title: "Section 13 — Scenario: School Project",
-    questions: [
-      {
-        id: "q13",
-        label: "You are assigned a project. What part do you choose?",
-        options: [
-          "Coding or technical implementation",
-          "Designing slides or visuals",
-          "Researching and writing content",
-          "Managing team and deadlines",
-        ],
-      },
-    ],
-  },
-  {
-    title: "Section 14 — Scenario: Startup Idea",
-    questions: [
-      {
-        id: "q14",
-        label: "If you start a small project/startup, what would you focus on?",
-        options: [
-          "Building the product (technical side)",
-          "Marketing and selling it",
-          "Designing the user experience",
-          "Managing operations and planning",
-        ],
-      },
-    ],
-  },
-  {
-    title: "Section 15 — Scenario: Problem Situation",
-    questions: [
-      {
-        id: "q15",
-        label: "A system/app is not working. What do you do first?",
-        options: [
-          "Debug and find the root cause",
-          "Look for similar solutions online",
-          "Ask someone experienced",
-          "Try quick fixes",
-        ],
-      },
-    ],
-  },
-  {
-    title: "Section 16 — Scenario: Event Management",
-    questions: [
-      {
-        id: "q16",
-        label: "You are organizing an event. What role do you take?",
-        options: [
-          "Planning and coordination",
-          "Promotion and communication",
-          "Designing posters/content",
-          "Handling technical setup",
-        ],
-      },
-    ],
-  },
-  {
-    title: "Section 17 — Scenario: Learning Something New",
-    questions: [
-      {
-        id: "q17",
-        label: "How do you prefer to learn a new skill?",
-        options: [
-          "Practice and hands-on work",
-          "Watching tutorials",
-          "Reading and understanding theory",
-          "Learning with others",
-        ],
-      },
-    ],
-  },
-  {
-    title: "Section 18 — Scenario: Career Choice Thought",
-    questions: [
-      {
-        id: "q18",
-        label: "Which situation sounds more exciting to you?",
-        options: [
-          "Solving a complex technical problem",
-          "Closing a big business deal",
-          "Creating something visually appealing",
-          "Helping someone improve their life",
-        ],
-      },
-    ],
-  },
-];
-
-const QUESTION_COUNT = 18;
-
 const toTitle = (key) =>
   String(key)
     .split("_")
     .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
     .join(" ");
-
-const buildInitialCareerForm = () => {
-  const entries = {};
-  CAREER_QUESTION_GROUPS.forEach((group) => {
-    group.questions.forEach((question) => {
-      entries[question.id] = "";
-    });
-  });
-  entries.additional_notes = "";
-  return entries;
-};
 
 const BehaviorAnalysis = () => {
   const navigate = useNavigate();
@@ -323,11 +30,6 @@ const BehaviorAnalysis = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [result, setResult] = useState(null);
-  const [showCareerForm, setShowCareerForm] = useState(false);
-  const [careerForm, setCareerForm] = useState(buildInitialCareerForm);
-  const [careerLoading, setCareerLoading] = useState(false);
-  const [careerError, setCareerError] = useState("");
-  const [careerResult, setCareerResult] = useState(null);
 
   const isVideo = useMemo(() => {
     if (!file) {
@@ -336,13 +38,6 @@ const BehaviorAnalysis = () => {
     return file.type.startsWith("video/");
   }, [file]);
 
-  const requiredAnswers = useMemo(
-    () =>
-      CAREER_QUESTION_GROUPS.flatMap((group) => group.questions).filter((question) =>
-        String(careerForm[question.id] || "").trim().length > 0,
-      ).length,
-    [careerForm],
-  );
 
   useEffect(() => {
     return () => {
@@ -356,10 +51,6 @@ const BehaviorAnalysis = () => {
     const selectedFile = event.target.files?.[0] || null;
     setError("");
     setResult(null);
-    setShowCareerForm(false);
-    setCareerForm(buildInitialCareerForm());
-    setCareerResult(null);
-    setCareerError("");
 
     if (previewUrl) {
       URL.revokeObjectURL(previewUrl);
@@ -429,64 +120,6 @@ const BehaviorAnalysis = () => {
       setError(predictionError.message || "Unable to analyze the file.");
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleCareerFieldChange = (fieldId, value) => {
-    setCareerForm((current) => ({
-      ...current,
-      [fieldId]: value,
-    }));
-  };
-
-  const handleCareerSubmit = async (event) => {
-    event.preventDefault();
-
-    if (!result) {
-      setCareerError("Run personality analysis first.");
-      return;
-    }
-
-    const requiredValues = CAREER_QUESTION_GROUPS.flatMap((group) => group.questions.map((question) => careerForm[question.id]));
-    if (requiredValues.some((value) => !String(value || "").trim())) {
-      setCareerError("Please answer all 18 career questions before submitting.");
-      return;
-    }
-
-    setCareerLoading(true);
-    setCareerError("");
-    setCareerResult(null);
-
-    try {
-      const payload = {
-        personality_score: result,
-        questionnaire_responses: CAREER_QUESTION_GROUPS.reduce((accumulator, group) => {
-          group.questions.forEach((question) => {
-            accumulator[question.label] = careerForm[question.id];
-          });
-          return accumulator;
-        }, {}),
-        additional_notes: careerForm.additional_notes,
-      };
-
-      const data = await postWithFallback(CAREER_API_PATH, payload, { timeoutMs: 60000 });
-      const recommendation = data?.recommendation || null;
-      setCareerResult(recommendation);
-
-      const resultPayload = {
-        recommendation,
-        personality_score: result,
-        questionnaire_responses: payload.questionnaire_responses,
-        additional_notes: payload.additional_notes,
-        generated_at: new Date().toISOString(),
-      };
-
-      localStorage.setItem("behavior_career_result", JSON.stringify(resultPayload));
-      navigate("/behavior-career-result", { state: resultPayload });
-    } catch (recommendationError) {
-      setCareerError(recommendationError.message || "Unable to generate career recommendation.");
-    } finally {
-      setCareerLoading(false);
     }
   };
 

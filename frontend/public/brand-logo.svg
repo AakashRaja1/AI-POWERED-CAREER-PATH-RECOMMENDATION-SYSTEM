@@ -1,18 +1,125 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 640" role="img" aria-labelledby="title desc">
+  <title id="title">AI Career Path</title>
+  <desc id="desc">AI Career Path logo with a human head, neural brain, upward career arrows, and the subtitle Powered by Behaviour Analysis.</desc>
   <defs>
-    <linearGradient id="grad" x1="0" y1="64" x2="64" y2="0" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#2563EB" />
-      <stop offset="0.5" stop-color="#7C3AED" />
-      <stop offset="1" stop-color="#EC4899" />
+    <linearGradient id="tealHead" x1="275" y1="132" x2="446" y2="355" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#11c9a4"/>
+      <stop offset="0.45" stop-color="#04879a"/>
+      <stop offset="1" stop-color="#053b65"/>
     </linearGradient>
+    <linearGradient id="pathTeal" x1="310" y1="410" x2="560" y2="170" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#057b70"/>
+      <stop offset="1" stop-color="#16d0b0"/>
+    </linearGradient>
+    <linearGradient id="pathBlue" x1="405" y1="430" x2="650" y2="145" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0667a9"/>
+      <stop offset="1" stop-color="#26a9e0"/>
+    </linearGradient>
+    <linearGradient id="pathGreen" x1="520" y1="432" x2="790" y2="235" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#18833c"/>
+      <stop offset="1" stop-color="#7cc943"/>
+    </linearGradient>
+    <linearGradient id="personGrad" x1="435" y1="322" x2="515" y2="420" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0aa28d"/>
+      <stop offset="1" stop-color="#044a76"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="9" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.04 0 0 0 0 0.78 0 0 0 0 0.66 0 0 0 0.55 0"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="shadow" x="-20%" y="-20%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0b4160" flood-opacity="0.18"/>
+    </filter>
   </defs>
-  <rect width="64" height="64" rx="14" fill="black" opacity="0.6" />
-  <circle cx="32" cy="32" r="28" stroke="url(#grad)" stroke-width="3" fill="none" opacity="0.5" />
-  <circle cx="16" cy="40" r="3" fill="#ffffff" />
-  <circle cx="28" cy="28" r="3" fill="#ffffff" />
-  <circle cx="40" cy="20" r="3" fill="#ffffff" />
-  <circle cx="48" cy="12" r="2.5" fill="#ffffff" />
-  <path d="M16 40 L28 28 L40 20 L48 12" stroke="url(#grad)" stroke-width="2.5" stroke-linecap="round" fill="none" />
-  <path d="M22 44 C30 36, 36 30, 48 24" stroke="url(#grad)" stroke-width="3" stroke-linecap="round" fill="none" />
-  <path d="M46 20 L52 22 L48 24" fill="url(#grad)" />
+  <g transform="translate(0 -12)" filter="url(#shadow)">
+    <path d="M329 404 C375 312 445 238 553 192 L582 246 C501 286 440 350 402 426 Z" fill="url(#pathTeal)"/>
+    <path d="M441 427 C489 319 558 232 653 150 L672 204 C596 268 544 345 514 427 Z" fill="url(#pathBlue)"/>
+    <path d="M575 426 C628 328 695 272 781 232 L795 291 C725 327 678 374 646 426 Z" fill="url(#pathGreen)"/>
+
+    <path d="M590 232 L648 194 L657 276 Z" fill="#0bb89d"/>
+    <path d="M656 156 L702 107 L724 214 Z" fill="#238fd1"/>
+    <path d="M771 234 L830 198 L814 289 Z" fill="#68bd44"/>
+  </g>
+
+  <g transform="translate(0 -12)" filter="url(#glow)">
+    <path d="M374 153
+      C327 164 302 202 303 244
+      C303 285 326 305 348 325
+      C360 336 361 351 352 367
+      C382 367 409 361 427 344
+      C450 322 467 287 462 244
+      C454 180 410 145 374 153 Z" fill="url(#tealHead)"/>
+
+    <path d="M362 186
+      C392 162 440 178 450 220
+      C456 250 439 279 409 286
+      C383 292 351 279 338 254
+      C326 231 336 207 362 186 Z"
+      fill="none" stroke="#e7fff8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g stroke="#e7fff8" stroke-width="3" stroke-linecap="round" opacity="0.98">
+      <path d="M354 228 L386 205 L420 214 L439 244 L411 266 L373 257 Z"/>
+      <path d="M386 205 L390 239 L411 266"/>
+      <path d="M420 214 L390 239 L373 257"/>
+      <path d="M354 228 L390 239 L439 244"/>
+      <path d="M376 184 L386 205"/>
+      <path d="M420 214 L431 187"/>
+      <path d="M439 244 L459 235"/>
+      <path d="M373 257 L362 284"/>
+    </g>
+    <g fill="#ffffff">
+      <circle cx="354" cy="228" r="7"/>
+      <circle cx="386" cy="205" r="7"/>
+      <circle cx="420" cy="214" r="7"/>
+      <circle cx="439" cy="244" r="9"/>
+      <circle cx="411" cy="266" r="7"/>
+      <circle cx="373" cy="257" r="7"/>
+      <circle cx="390" cy="239" r="10"/>
+      <circle cx="376" cy="184" r="6"/>
+      <circle cx="431" cy="187" r="6"/>
+      <circle cx="459" cy="235" r="6"/>
+      <circle cx="362" cy="284" r="6"/>
+    </g>
+  </g>
+
+  <g transform="translate(0 -12)" fill="none" stroke="#149e9a" stroke-width="5" stroke-linecap="round" opacity="0.92">
+    <path d="M453 190 C495 166 532 159 574 162"/>
+    <path d="M462 218 C510 214 556 198 599 171"/>
+    <path d="M468 244 C523 247 568 241 622 218"/>
+    <path d="M503 188 L503 160"/>
+    <path d="M542 163 L542 135"/>
+    <path d="M574 162 L596 138"/>
+    <path d="M599 171 L625 155"/>
+  </g>
+  <g transform="translate(0 -12)" fill="#18aaa0">
+    <circle cx="503" cy="160" r="8"/>
+    <circle cx="542" cy="135" r="10"/>
+    <circle cx="596" cy="138" r="12"/>
+    <circle cx="625" cy="155" r="10"/>
+    <circle cx="574" cy="162" r="8"/>
+    <circle cx="622" cy="218" r="9"/>
+  </g>
+
+  <g transform="translate(0 -12)" filter="url(#shadow)">
+    <circle cx="449" cy="305" r="16" fill="#0a9f8c"/>
+    <path d="M446 321 C437 344 434 368 431 398" stroke="url(#personGrad)" stroke-width="14" stroke-linecap="round"/>
+    <path d="M452 326 L478 368" stroke="url(#personGrad)" stroke-width="12" stroke-linecap="round"/>
+    <path d="M441 356 L421 386" stroke="url(#personGrad)" stroke-width="11" stroke-linecap="round"/>
+    <path d="M438 398 L416 443" stroke="url(#personGrad)" stroke-width="13" stroke-linecap="round"/>
+    <path d="M450 397 L488 438" stroke="url(#personGrad)" stroke-width="13" stroke-linecap="round"/>
+  </g>
+
+  <path transform="translate(0 -12)" d="M701 111 L713 140 L744 140 L719 158 L729 188 L701 170 L674 188 L684 158 L659 140 L690 140 Z" fill="#16975c"/>
+  <path transform="translate(0 -12)" d="M721 368 L747 350 L751 382 L783 390 L754 404 L756 437 L732 413 L701 424 L718 396 Z" fill="#05759c"/>
+
+  <text x="512" y="498" text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif" font-size="62" font-weight="800"
+        letter-spacing="1" fill="#073b63">AI CAREER PATH</text>
+  <text x="512" y="542" text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="400"
+        letter-spacing="1" fill="#415866">Powered by Behaviour Analysis</text>
 </svg>

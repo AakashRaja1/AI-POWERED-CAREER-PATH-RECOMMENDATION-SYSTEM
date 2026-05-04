@@ -38,7 +38,6 @@ const NavBar = () => {
     localStorage.removeItem("behavior_analysis_timestamp");
     
     // Clear user-specific data last so email-based keys stay intact
-    const userEmail = localStorage.getItem("userEmail");
     localStorage.removeItem("userName");
     localStorage.removeItem("userEmail");
     
@@ -49,8 +48,7 @@ const NavBar = () => {
     <header className="w-full sticky top-0 bg-linear-to-r from-white via-slate-50 to-white/80 border-b shadow-md backdrop-blur">
       <div className="max-w-full mx-auto px-4 py-2 flex items-center gap-4">
         <div className="flex items-center gap-3 min-w-0">
-          <img src="/brand-logo.svg" alt="logo" className="h-9 w-9 object-contain rounded-md" />
-          <div className="ml-2 text-sm font-semibold text-gray-800 truncate">AI Career by Personality</div>
+          <img src="/brand-logo.svg" alt="AI Career Path logo" className="h-14 w-40 object-contain" />
         </div>
 
         <nav className="flex-1">

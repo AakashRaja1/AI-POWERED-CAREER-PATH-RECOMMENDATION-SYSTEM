@@ -44,7 +44,7 @@ const Landing = () => {
           <img
             src={BRAND_LOGO_SRC}
             alt="AI Career Path Logo"
-            className="w-20 h-20 sm:w-24 sm:h-24 drop-shadow-xl"
+            className="w-80 max-w-full h-auto object-contain drop-shadow-xl"
             loading="eager"
             decoding="async"
           />

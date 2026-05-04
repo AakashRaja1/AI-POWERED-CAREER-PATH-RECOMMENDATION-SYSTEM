@@ -62,7 +62,7 @@ export default function CareerPathPage() {
         setBehavior(null);
         setShowTest(Boolean(location.state?.autoStart));
       }
-    } catch (e) {
+    } catch {
       setBehavior(null);
     }
   }, [location.state]);
@@ -140,7 +140,7 @@ export default function CareerPathPage() {
           </div>
           <div className="flex items-center gap-3">
             <button onClick={() => navigate("/behavior")} className="px-4 py-2 rounded-lg bg-gray-200 text-gray-900 hover:bg-gray-300 font-medium transition">Back to Behavior</button>
-            <button onClick={() => { try { localStorage.setItem("behavior_analysis_result", JSON.stringify(behavior || {})); } catch(e){}; setShowTest(true); }} className="px-4 py-2 rounded-lg bg-linear-to-r from-blue-500 to-cyan-500 text-white font-semibold shadow-lg hover:shadow-xl transition">Use Latest Personality Traits</button>
+            <button onClick={() => { try { localStorage.setItem("behavior_analysis_result", JSON.stringify(behavior || {})); } catch { /* Ignore storage failures. */ } setShowTest(true); }} className="px-4 py-2 rounded-lg bg-linear-to-r from-blue-500 to-cyan-500 text-white font-semibold shadow-lg hover:shadow-xl transition">Use Latest Personality Traits</button>
           </div>
         </header>
 

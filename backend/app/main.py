@@ -7,7 +7,6 @@ Presentation note: explain this file as one focused responsibility in the larger
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import logging
-from app.api.routers.items import router as items_router
 from app.api.routers.auth import router as auth_router
 from app.api.routers.admin import router as admin_router
 from app.api.routers.personality import router as personality_router
@@ -41,14 +40,12 @@ app.add_middleware(
 )
 
 # Include routers
-app.include_router(items_router)
 app.include_router(auth_router)
 app.include_router(admin_router)
 app.include_router(personality_router)
 app.include_router(chatbot_router, prefix="/chatbot")
 
 # Backward-compatible API aliases used by tests/frontend clients.
-app.include_router(items_router, prefix="/api")
 app.include_router(auth_router, prefix="/api")
 app.include_router(admin_router, prefix="/api")
 app.include_router(personality_router, prefix="/api")

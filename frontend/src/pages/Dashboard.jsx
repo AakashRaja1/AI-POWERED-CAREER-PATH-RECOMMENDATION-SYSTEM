@@ -86,7 +86,7 @@ const Dashboard = () => {
 
             {/* Main Modules Grid */}
             <div className="grid gap-6 lg:grid-cols-4 mb-12">
-              {MODULES.map((module, idx) => (
+              {MODULES.map((module) => (
                 <div
                   key={module.id}
                   className="group relative"

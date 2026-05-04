@@ -4,14 +4,13 @@ Root React router. It maps URLs to pages and wraps private pages with authentica
 Presentation note: this comment is here to help explain the file quickly during viva or panel questions without changing runtime behavior.
 */
 
-import React, { useState } from "react";
+import React from "react";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 
 // ===== Pages =====
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
-import ResultPage from "./pages/ResultPage";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import Chatbot from "./pages/Chatbot"; // <- import chatbot page
@@ -23,8 +22,6 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import ProtectedLayout from "./components/ProtectedLayout";
 
 const App = () => {
-  const [result, setResult] = useState(null);
-
   return (
     <Router>
       <div className="bg-white text-gray-900 font-poppins min-h-screen">
@@ -70,17 +67,6 @@ const App = () => {
               </ProtectedLayout>
             } 
           />
-          <Route 
-            path="/result" 
-            element={
-              <ProtectedLayout>
-                <ProtectedRoute>
-                  <CareerPathPage />
-                </ProtectedRoute>
-              </ProtectedLayout>
-            } 
-          />
-
           {/* ===== Chatbot Page ===== */}
           <Route 
             path="/chatbot" 
