@@ -14,6 +14,8 @@ from pathlib import Path
 
 import numpy as np
 import torch
+import hashlib
+import logging
 
 try:
     import cv2
@@ -41,6 +43,14 @@ except ImportError:
     from feature_extractor import ResNet18FeatureExtractor
     from preprocessing import build_transforms
     from utils import build_model_from_checkpoint, clamp_traits, load_checkpoint
+
+
+logger = logging.getLogger(__name__)
+if not logger.handlers:
+    handler = logging.StreamHandler()
+    handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(name)s: %(message)s"))
+    logger.addHandler(handler)
+logger.setLevel(logging.INFO)
 
 
 class PersonalityPredictor:
@@ -280,6 +290,15 @@ class PersonalityPredictor:
         if not path.exists():
             raise FileNotFoundError(f"Media file not found: {path}")
 
+        # Debug: compute a quick checksum for the uploaded media so we can
+        # trace whether different uploads reach the predictor as different files.
+        try:
+            file_size = path.stat().st_size
+            file_hash = hashlib.md5(path.read_bytes()).hexdigest() if file_size > 0 else None
+        except Exception:
+            file_hash = None
+        logger.info(f"predict_enriched called for {path} size={file_size} md5={file_hash}")
+
         if path.suffix.lower() in VIDEO_EXTENSIONS:
             frames = load_media_frames(path, max_frames=self.video_frames)
             source_type = "video"
@@ -303,6 +322,26 @@ class PersonalityPredictor:
                 values_per_frame = self.model(features)
             averaged_values = values_per_frame.mean(dim=0).tolist()
             variability_values = values_per_frame.std(dim=0, unbiased=False).tolist()
+
+        # Debug: log per-frame checksums and model outputs to help diagnose
+        # why different inputs might yield identical predictions.
+        try:
+            frame_hashes = []
+            for image in frames:
+                try:
+                    arr = np.array(image)
+                    frame_hashes.append(hashlib.md5(arr.tobytes()).hexdigest())
+                except Exception:
+                    frame_hashes.append(None)
+            logger.info(f"frame_hashes={frame_hashes}")
+        except Exception:
+            logger.debug("Failed to compute frame hashes for debug")
+
+        try:
+            logger.info(f"averaged_values={averaged_values}")
+            logger.info(f"variability_values={variability_values}")
+        except Exception:
+            logger.debug("Failed to log model output vectors")
 
         all_traits = {
             trait: score
@@ -345,6 +384,7 @@ class PersonalityPredictor:
                 "trait_order": list(self.trait_order),
                 "model_architecture": self.architecture,
                 "trait_variability": trait_variability,
+                "media_signature": file_hash,
                 "derived_note": "Derived scores are heuristic composites based on Big Five outputs.",
             },
         }

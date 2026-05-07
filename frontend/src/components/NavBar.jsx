@@ -45,7 +45,7 @@ const NavBar = () => {
   };
 
   return (
-    <header className="w-full sticky top-0 bg-linear-to-r from-white via-slate-50 to-white/80 border-b shadow-md backdrop-blur">
+    <header className="w-full sticky top-0 z-50 bg-linear-to-r from-white via-slate-50 to-white/80 border-b shadow-md backdrop-blur">
       <div className="max-w-full mx-auto px-4 py-2 flex items-center gap-4">
         <div className="flex items-center gap-3 min-w-0">
           <img src="/brand-logo.svg" alt="AI Career Path logo" className="h-14 w-40 object-contain" />

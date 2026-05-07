@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Clear Local Storage & Cookies</title>
+    <style>
+      body{font-family:Inter,Arial,Helvetica,sans-serif;background:#f7fafc;color:#111;padding:2rem}
+      .card{max-width:700px;margin:2rem auto;padding:2rem;border-radius:12px;background:#fff;box-shadow:0 6px 24px rgba(2,6,23,0.08)}
+      button{background:#4f46e5;color:#fff;padding:0.75rem 1.25rem;border:0;border-radius:8px;cursor:pointer}
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>Clear site storage and cookies</h1>
+      <p>This page will attempt to clear localStorage, sessionStorage and cookies for this origin (127.0.0.1 or localhost). After clearing it will redirect to the app.</p>
+      <p>If your browser blocks cookie deletion for other ports/domains then open an InPrivate window and navigate to <strong>http://127.0.0.1:5174/</strong>.</p>
+      <div style="margin-top:1rem;display:flex;gap:1rem">
+        <button id="clearBtn">Clear & Open App</button>
+        <button id="showBtn" style="background:#e2e8f0;color:#111">Show Cookies</button>
+      </div>
+      <pre id="out" style="margin-top:1rem;background:#0f172a;color:#fff;padding:1rem;border-radius:8px;display:none;white-space:pre-wrap"></pre>
+    </div>
+
+    <script>
+      function clearCookies() {
+        const cookies = document.cookie.split(';');
+        for (let c of cookies) {
+          const eqPos = c.indexOf('=');
+          const name = eqPos > -1 ? c.substr(0, eqPos).trim() : c.trim();
+          if (!name) continue;
+          // expire cookie for current path and root path
+          document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
+          document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=localhost';
+          document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=127.0.0.1';
+        }
+      }
+
+      function showCookies(){
+        const out = document.getElementById('out');
+        out.style.display = 'block';
+        out.textContent = 'document.cookie:\n' + document.cookie + '\n\nlocalStorage keys:\n' + Object.keys(localStorage).join('\n');
+      }
+
+      document.getElementById('showBtn').addEventListener('click', showCookies);
+      document.getElementById('clearBtn').addEventListener('click', () => {
+        try{
+          localStorage.clear();
+          sessionStorage.clear();
+          clearCookies();
+        }catch(e){console.warn(e)}
+        // small delay to let browser update
+        setTimeout(()=>{
+          window.location.href = '/';
+        },500);
+      });
+
+      // Auto-run on load to help quickly
+      window.addEventListener('load', ()=>{
+        // do not auto-navigate until user interacts; show cookies instead
+        showCookies();
+      });
+    </script>
+  </body>
+</html>

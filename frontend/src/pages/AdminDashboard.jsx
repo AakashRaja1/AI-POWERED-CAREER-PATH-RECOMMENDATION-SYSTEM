@@ -221,16 +221,7 @@ const AdminDashboard = () => {
         >
           Users ({users.length})
         </button>
-        <button
-          onClick={() => setActiveTab("predictions")}
-          className={`px-8 py-4 font-semibold ${
-            activeTab === "predictions"
-              ? "bg-gray-100 text-blue-600 border-b-2 border-blue-600"
-              : "text-gray-500 hover:text-gray-900"
-          }`}
-        >
-          Predictions ({predictions.length})
-        </button>
+
       </div>
 
       {/* Content */}
@@ -326,82 +317,7 @@ const AdminDashboard = () => {
           </div>
         )}
 
-        {activeTab === "predictions" && (
-          <div className="bg-gray-100 rounded-lg p-6">
-            <h2 className="text-2xl font-bold mb-4">All Predictions</h2>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm">
-                <thead>
-                  <tr className="border-b border-gray-200">
-                    <th className="p-3">ID</th>
-                    <th className="p-3">User ID</th>
-                    <th className="p-3">Career Domain</th>
-                    <th className="p-3">Confidence</th>
-                    <th className="p-3">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {predictions.map((pred) => (
-                    <tr key={pred.id} className="border-b border-gray-200">
-                      <td className="p-3">{pred.id}</td>
-                      <td className="p-3">{pred.user_id}</td>
-                      <td className="p-3">{pred.best_fit_career_domain}</td>
-                      <td className="p-3">{(pred.confidence_score * 100).toFixed(1)}%</td>
-                      <td className="p-3">
-                        <div className="flex gap-2">
-                          <button
-                            onClick={() => setShowPredictionDetails(showPredictionDetails === pred.id ? null : pred.id)}
-                            className="bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded text-sm text-white"
-                          >
-                            {showPredictionDetails === pred.id ? "Hide" : "View"}
-                          </button>
-                          <button
-                            onClick={() => handleDeletePrediction(pred.id)}
-                            className="bg-red-500 hover:bg-red-600 px-3 py-1 rounded text-sm text-white"
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              
-              {/* Prediction Details Modal */}
-              {showPredictionDetails && predictions.find(p => p.id === showPredictionDetails) && (
-                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-                  <div className="bg-white rounded-lg p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto">
-                    <h3 className="text-xl font-bold mb-4">Prediction Details</h3>
-                    {(() => {
-                      const pred = predictions.find(p => p.id === showPredictionDetails);
-                      return (
-                        <div className="space-y-3 text-sm">
-                          <p><strong>ID:</strong> {pred.id}</p>
-                          <p><strong>User ID:</strong> {pred.user_id}</p>
-                          <p><strong>Career Domain:</strong> {pred.best_fit_career_domain}</p>
-                          <p><strong>Confidence:</strong> {(pred.confidence_score * 100).toFixed(1)}%</p>
-                          <p><strong>Rationale:</strong> {pred.career_rationale}</p>
-                          <p><strong>Growth Roadmap:</strong> {pred.growth_roadmap}</p>
-                          <p><strong>Skill Gap:</strong> {pred.skill_gap_analysis}</p>
-                          <p><strong>Courses:</strong> {pred.recommended_courses}</p>
-                          <p><strong>Backup Option:</strong> {pred.backup_career_option}</p>
-                          <p><strong>Behavioral Insight:</strong> {pred.behavioral_insight}</p>
-                        </div>
-                      );
-                    })()}
-                    <button
-                      onClick={() => setShowPredictionDetails(null)}
-                      className="mt-4 bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded text-gray-900"
-                    >
-                      Close
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
+
       </div>
 
       {/* Create User Modal */}

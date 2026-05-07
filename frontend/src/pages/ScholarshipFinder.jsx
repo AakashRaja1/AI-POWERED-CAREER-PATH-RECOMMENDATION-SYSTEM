@@ -185,8 +185,29 @@ const ScholarshipFinder = () => {
             )}
 
             {loading && (
-              <div className="animate-pulse text-gray-700">
-                Searching live web sources and preparing an AI response...
+              <div className="flex flex-col items-center justify-center py-12">
+                <div className="mb-6 inline-block">
+                  <div className="relative w-16 h-16">
+                    <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-emerald-600 border-r-cyan-600 animate-spin"></div>
+                    <div className="absolute inset-2 rounded-full border-4 border-transparent border-t-cyan-600 border-r-emerald-600 animate-spin" style={{ animationDirection: "reverse", animationDuration: "2s" }}></div>
+                    <div className="absolute inset-4 rounded-full bg-linear-to-r from-emerald-500 to-cyan-500 flex items-center justify-center">
+                      <div className="text-white text-lg animate-pulse">🔍</div>
+                    </div>
+                  </div>
+                </div>
+                <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                  <span className="bg-linear-to-r from-emerald-600 to-cyan-600 bg-clip-text text-transparent">
+                    Searching Scholarships
+                  </span>
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  Searching live web sources and preparing an AI response...
+                </p>
+                <div className="flex gap-1 mt-4">
+                  <div className="w-2 h-2 bg-emerald-600 rounded-full animate-bounce" style={{ animationDelay: "0s" }}></div>
+                  <div className="w-2 h-2 bg-cyan-600 rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></div>
+                  <div className="w-2 h-2 bg-emerald-600 rounded-full animate-bounce" style={{ animationDelay: "0.4s" }}></div>
+                </div>
               </div>
             )}
 

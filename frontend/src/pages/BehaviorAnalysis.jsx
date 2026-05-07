@@ -22,6 +22,7 @@ const toTitle = (key) =>
     .split("_")
     .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
     .join(" ");
+const formatScore = (value) => Number(value ?? 0).toFixed(2);
 
 const BehaviorAnalysis = () => {
   const navigate = useNavigate();
@@ -142,7 +143,7 @@ const BehaviorAnalysis = () => {
             Upload an image or video and get rich personality insights.
           </h1>
           <p className="mt-4 max-w-2xl text-sm leading-6 text-gray-600 sm:text-base">
-            Discover your unique personality traits through video analysis. Understand your strengths, work style, and behavioral patterns powered by advanced CNN behavior model.
+            Discover your unique personality traits through video analysis. The scores below come from the current upload and are shown to two decimal places for readability.
           </p>
         </div>
 
@@ -187,11 +188,6 @@ const BehaviorAnalysis = () => {
               </p>
             )}
 
-            <div className="mt-6 rounded-2xl border border-gray-200 bg-gray-50 p-4 text-xs leading-5 text-gray-600">
-              <p className="font-semibold text-gray-900">FastAPI service</p>
-              <p className="mt-1 break-all">POST {API_URL}</p>
-              <p className="mt-2">Start your backend FastAPI server before using this page.</p>
-            </div>
           </form>
 
           <div className="rounded-3xl border border-blue-200 bg-white p-6 shadow-2xl sm:p-8">
@@ -228,7 +224,7 @@ const BehaviorAnalysis = () => {
                     <div key={key} className="rounded-2xl bg-linear-to-br from-blue-50 to-cyan-50 p-4 border border-blue-100">
                       <div className="mb-2 flex items-center justify-between text-sm">
                         <span className="font-semibold text-gray-900">{label}</span>
-                        <span className="text-gray-600 font-medium">{value.toFixed(2)}</span>
+                        <span className="text-gray-600 font-medium">{formatScore(value)}</span>
                       </div>
                       <div className="h-2 rounded-full bg-gray-200">
                         <div
@@ -252,7 +248,7 @@ const BehaviorAnalysis = () => {
                           <div key={key} className="rounded-2xl bg-linear-to-br from-fuchsia-50 to-pink-50 p-4 border border-fuchsia-100">
                             <div className="mb-2 flex items-center justify-between text-sm">
                               <span className="font-semibold text-gray-900">{toTitle(key)}</span>
-                              <span className="text-gray-600 font-medium">{value.toFixed(2)}</span>
+                              <span className="text-gray-600 font-medium">{formatScore(value)}</span>
                             </div>
                             <div className="h-2 rounded-full bg-gray-200">
                               <div
@@ -280,7 +276,7 @@ const BehaviorAnalysis = () => {
                           <div key={key} className="rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm">
                             <div className="font-medium text-gray-900">{toTitle(key)}</div>
                             <div className="mt-1 text-gray-600">
-                              {value.toFixed(2)}
+                              {formatScore(value)}
                               {level ? ` (${level})` : ""}
                             </div>
                           </div>
