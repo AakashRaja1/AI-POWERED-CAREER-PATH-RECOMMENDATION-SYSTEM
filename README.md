@@ -1,5 +1,9 @@
 # AI Powered Career Path Recommendation System
 
+## License & Usage
+
+This repository is provided for viewing, learning, and non-commercial research only. It is NOT licensed for production deployment or commercial use. See [LICENSE](LICENSE) and [TERMS.md](TERMS.md) for full details and restrictions.
+
 This repository implements a production-grade system that recommends career paths by combining behavior analysis, personality inference, and curated datasets. It contains a backend (FastAPI) that exposes REST endpoints, ML pipelines for training and inference, and a frontend (Vite + React) for user interaction.
 
 This README documents the full project: architecture, components, data flow, developer setup, testing, training pipelines, CI/CD, deployment options, and troubleshooting.
