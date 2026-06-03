@@ -25,6 +25,19 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: Debug runner environment (temporary)
+      run: |
+        echo "--- Runner info ---"
+        uname -a || true
+        echo "--- Python ---"
+        python --version || true
+        echo "--- Pip ---"
+        pip --version || true
+        echo "--- Workspace listing ---"
+        ls -la || true
+        echo "--- backend listing ---"
+        ls -la backend || true
+      shell: bash
     
     - name: Set up Python
       uses: actions/setup-python@v4
